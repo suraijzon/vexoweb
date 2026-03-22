@@ -7,9 +7,6 @@ const Hero = () => {
     <section className="hero-section" aria-label="Hero">
       <div className="hero-inner">
         <div className="hero-copy">
-          <h1 className="hero-title">
-            We Build Digital Solutions That Work for You
-          </h1>
 
           <div className="hero-sub">
             <p>Outdated website? No online visibility? Struggling to keep up with AI trends?</p>

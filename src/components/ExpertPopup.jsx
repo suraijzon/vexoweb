@@ -6,6 +6,7 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
   const [budget, setBudget] = useState(5000);
   const [selectedService, setSelectedService] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
 
   const [submitStatus, setSubmitStatus] = useState('');
   
@@ -36,6 +37,7 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
     });
   };
 
+<<<<<<< HEAD
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,6 +94,53 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
           setSubmitStatus('');
         }, 5000);
       });
+=======
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+  const data = {
+    ...formData,
+    message: formData.project,   // 🔥 FIX HERE
+    service: selectedService,
+    budget: budget
+  };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        setSubmitStatus("success");
+      
+        setFormData({
+          name: "",
+          company: "",
+          phone: "",
+          email: "",
+          project: ""
+        });
+        setSelectedService("");
+        setBudget(5000);
+          // ✅ ADD HERE
+        setTimeout(() => {
+        onClose();
+        setSubmitStatus("");
+        }, 2500);
+      } else {
+        setSubmitStatus("error");
+      }
+    }catch (error) {
+        setSubmitStatus("error");
+    }
+
+    setIsSubmitting(false);
+>>>>>>> 3ea4a8c (Updated UI sections and menus)
   };
 
   if (!open) return null;
@@ -108,7 +157,6 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
         </button>
 
 
-        {/* LEFT PANEL */}
         <div className="popup-left">
           <div className="popup-left-top">
             <h3>Speak to Our Experts</h3>
@@ -138,13 +186,13 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
           </div>
         </div>
 
-        {/* RIGHT PANEL */}
         <div className="popup-right">
           <h2>Let's Build Something Incredible Together</h2>
           <p className="popup-subtext">
             Tell us what you're looking for and our experts will get back to you.
           </p>
 
+<<<<<<< HEAD
 
           {/* Success/Error Messages */}
           {submitStatus === 'success' && (
@@ -152,6 +200,21 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
               ✓ Thank you! Your message has been sent successfully. We'll contact you soon!
             </div>
           )}
+=======
+            {/* Success / Error Messages */}
+            {submitStatus === "success" && (
+              <div className="alert alert-success">
+                ✓ Message sent successfully! We'll contact you soon.
+              </div>
+            )}
+            {submitStatus === "error" && (
+              <div className="alert alert-error">
+                ✗ Failed to send message. Please try again.
+              </div>
+            )}
+
+          <form className="popup-form" onSubmit={handleSubmit}>
+>>>>>>> 3ea4a8c (Updated UI sections and menus)
 
           {submitStatus === 'error' && (
             <div className="alert alert-error">
@@ -170,16 +233,28 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
                 required
                 disabled={isSubmitting}
               />
+<<<<<<< HEAD
               <input 
                 type="text" 
+=======
+
+              <input
+                type="text"
+>>>>>>> 3ea4a8c (Updated UI sections and menus)
                 name="company"
                 placeholder="Company / Organization" 
                 value={formData.company}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
               />
+<<<<<<< HEAD
               <input 
                 type="tel" 
+=======
+
+              <input
+                type="tel"
+>>>>>>> 3ea4a8c (Updated UI sections and menus)
                 name="phone"
                 placeholder="Phone Number*" 
                 value={formData.phone}
@@ -187,8 +262,14 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
                 required
                 disabled={isSubmitting}
               />
+<<<<<<< HEAD
               <input 
                 type="email" 
+=======
+
+              <input
+                type="email"
+>>>>>>> 3ea4a8c (Updated UI sections and menus)
                 name="email"
                 placeholder="Email*" 
                 value={formData.email}
@@ -200,7 +281,6 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
             </div>
 
             <select
-              name="Interested Service"
               value={selectedService}
               onChange={(e) => setSelectedService(e.target.value)}
               required
@@ -211,7 +291,7 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
               <option value="">You are interested in</option>
               <option value="Website Development">Website Development</option>
               <option value="SEO">SEO</option>
-              <option value="Get a Free Website Growth Audit">Get a Free Website Growth Audit</option>
+              <option value="Website Growth Audit">Website Growth Audit</option>
               <option value="AI Solutions">AI Solutions</option>
               <option value="UI/UX Design">UI/UX Design</option>
             </select>
@@ -219,6 +299,7 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
             <label className="budget-label">
               Estimated Budget (USD): ${budget.toLocaleString()}
             </label>
+
             <input
               type="range"
               min="5000"
@@ -250,6 +331,7 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
                 Cancel
               </button>
 
+<<<<<<< HEAD
               <button 
                 type="submit" 
                 className="submit-btn"
@@ -257,8 +339,13 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
               >
                 {isSubmitting ? 'SENDING...' : 'Submit'}
 
+=======
+              <button type="submit" className="submit-btn">
+                {isSubmitting ? "SENDING..." : "Submit"}
+>>>>>>> 3ea4a8c (Updated UI sections and menus)
               </button>
             </div>
+
           </form>
         </div>
       </div>

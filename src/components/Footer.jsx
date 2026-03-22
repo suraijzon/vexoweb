@@ -128,7 +128,11 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="footer-bottom-container">
           <p className="copyright">
+<<<<<<< HEAD
             Zonzoctech © 2020–2025
+=======
+            Zonzoctech© 2026
+>>>>>>> 3ea4a8c (Updated UI sections and menus)
           </p>
 
           <div className="social-icons">

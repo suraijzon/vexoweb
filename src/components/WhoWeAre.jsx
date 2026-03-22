@@ -181,7 +181,7 @@ const WhoWeAreSection = () => {
         <div className="tech-rows-container">
           {rows.map((row, rowIndex) => {
             // Duplicate cards in each row for infinite scroll
-            const duplicatedRow = [...row, ...row];
+            const duplicatedRow = Array(6).fill(row).flat();
             
             return (
               <div key={rowIndex} className="tech-scroll-row">

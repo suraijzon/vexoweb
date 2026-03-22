@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
 import '../styles/contact.css';
 
 const ContactSection = () => {
@@ -21,58 +20,48 @@ const ContactSection = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitStatus('');
 
+<<<<<<< HEAD
     // EmailJS configuration
     const serviceID = 'service_6u3xgr9'; // Replace with your EmailJS service ID
     const templateID = 'template_aj95hns'; // Replace with your EmailJS template ID
     const publicKey = 'r3l8L0Rdu85cn7oZc'; // Replace with your EmailJS public key
+=======
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+>>>>>>> 3ea4a8c (Updated UI sections and menus)
 
-    // Prepare template parameters
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      phone: formData.phone,
-      company: formData.company,
-      message: formData.message,
-      to_email: 'info@zonzoctech.com',
-    };
+    if (res.ok) {
+      setSubmitStatus('success');
 
-    // Send email using EmailJS
-    emailjs.send(serviceID, templateID, templateParams, publicKey)
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        setSubmitStatus('success');
-        setIsSubmitting(false);
-        
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          company: '',
-          message: '',
-        });
-
-        // Clear success message after 5 seconds
-        setTimeout(() => {
-          setSubmitStatus('');
-        }, 5000);
-      })
-      .catch((error) => {
-        console.error('FAILED...', error);
-        setSubmitStatus('error');
-        setIsSubmitting(false);
-
-        // Clear error message after 5 seconds
-        setTimeout(() => {
-          setSubmitStatus('');
-        }, 5000);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        message: '',
       });
-  };
+    } else {
+      setSubmitStatus('error');
+    }
+
+  } catch (error) {
+    console.error(error);
+    setSubmitStatus('error');
+  }
+
+  setIsSubmitting(false);
+};
 
   const steps = [
     { number: '01', text: 'Share your requirements' },

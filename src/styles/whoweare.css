@@ -58,11 +58,21 @@
 
 /* Individual Scroll Row */
 .tech-scroll-row {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
   width: 100%;
+
+  scroll-behavior: smooth;
+
+  /* hide scrollbar */
+  scrollbar-width: none;
+
   mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+}
+.tech-scroll-row::-webkit-scrollbar {
+  display: none;
 }
 
 /* Cards Track - This moves with animation */
@@ -74,19 +84,19 @@
 
 /* Different animation speeds for each row */
 .tech-cards-track-1 {
-  animation: scroll-cards 40s linear infinite;
+  animation: scroll-cards 115s linear infinite;
 }
 
 .tech-cards-track-2 {
-  animation: scroll-cards 45s linear infinite;
+  animation: scroll-cards 110s linear infinite;
 }
 
 .tech-cards-track-3 {
-  animation: scroll-cards 50s linear infinite;
+  animation: scroll-cards 120s linear infinite;
 }
 
 .tech-cards-track-4 {
-  animation: scroll-cards 42s linear infinite;
+  animation: scroll-cards 105s linear infinite;
 }
 
 /* Pause animation on hover */
@@ -109,7 +119,7 @@
   background: white;
   border-radius: 16px;
   border: 1px solid rgb(101, 204, 255);
-  padding: 28px 24px;
+  padding: 18px 20px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
   flex-shrink: 0;

@@ -29,11 +29,11 @@
 }
 
 .rating-number {
-  font-size: 13rem;
+  font-size: 15rem;
   font-weight: 800;
   color: #0066ff;
   line-height: 1;
-  margin: 0 10px;
+  margin: 15px 20px;
   font-family: 'Poppins', sans-serif;
   letter-spacing: -0.05em;
 }
@@ -41,7 +41,7 @@
 .rating-stars-large {
   display: flex;
   gap: 8px;
-  margin-left: 10px;
+  margin-left: 50px;
 }
 
 .star-icon {
@@ -180,13 +180,15 @@
   margin-left: -60px;
 }
 .rating-number {
-  font-size: 15rem;
+  font-size: 18rem;
   font-weight: 800;
   color: #0066ff;
   line-height: 1;
   margin: 0;
   font-family: 'Poppins', sans-serif;
   letter-spacing: -0.05em;
+  margin-left: -20px;
+  margin-top: 10px;
 }  
 }
 @media (max-width: 1200px) {

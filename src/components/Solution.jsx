@@ -14,105 +14,105 @@ const SolutionSection = () => {
   };
 
   const tabs = [
-    { id: 'ai', label: 'AI & Technology' },
-    { id: 'ux', label: 'UX & Interactive' },
-    { id: 'seo', label: 'SEO Services' }
+    { id: 'ai', label: 'Software Development' },
+    { id: 'ux', label: 'Website Development' },
+    { id: 'seo', label: 'SEO Marketing' }
   ];
 
   const services = {
     seo: [
       {
-        title: 'Organic Search & SEO Strategy',
+        title: 'SEO Strategy & Planning',
         items: [
-          'SEO Strategy & Consulting',
-          'Keyword Research & Mapping',
-          'Competitor & Market Analysis',
-          'On-Page & Content Optimization',
-          'Enterprise SEO Solutions',
+          'Competitor Analysis',
+          'SEO Audit & Website Analysis',
+          'Keyword Research & Planning',
+          'Technical SEO Assessment',
+          'SEO Roadmap & Strategy',
         ]
       },
       {
-        title: 'SEO Analytics & Platforms',
+        title: 'On-Page & Technical SEO',
         items: [
-          'Google Search Console Setup & Insights',
-          'Google Analytics & GA4 Tracking',
-          'Rank Tracking & Performance Monitoring',
-          'Google Merchant Center Management',
-          'Google Ads & Search Campaign Support'
+          'On-Page Optimization',
+          'Schema Markup Implementation',
+          'Core Web Vitals Optimization',
+          'Internal Linking Structure',
+          'Technical SEO Fixes & Enhancements'
         ]
       },
       {
-        title: 'Ecommerce SEO & Growth',
+        title: 'Off-Page & Authority Building',
         items: [
-          'Ecommerce SEO Strategy',
-          'Product & Shopping Feed Optimization',
-          'Shopping Feed Automation',
-          'Ecommerce PPC Management',
-          'Conversion Rate Optimization (CRO)'
+          'Guest Posting & Outreach',
+          'Brand Mentions & Citations',
+          'Reputation Management',
+          'Link Building & Backlink Strategy',
+          'Local SEO & Google Business Profile'
         ]
       }
     ],
     ux: [
       {
-        title: 'UI/UX Strategy & Design',
+        title: 'Business & Corporate Websites',
         items: [
-          'User Interface (UI) Design',
-          'User Experience (UX) Design',
-          'Wireframing & Prototyping',
-          'Design Systems & Style Guides',
-          'Usability & User Testing',
+          'Landing Page Design',
+          'Website Redesign & Modernization',
+          'Portfolio & Personal Websites',
+          'Corporate Website Development',
+          'Startup & Small Business Websites',
         ]
       },
       {
-        title: 'Web Development Services',
+        title: 'E-Commerce Development',
         items: [
-          'Frontend Development',
-          'Backend Development',
-          'Full Stack Development',
-          'Web Application Development',
-          'API & Third-Party Integration',
+          'Custom E-Commerce Solutions',
+          'Payment Gateway Integration',
+          'Product & Inventory Management',
+          'Conversion Optimization',
+          'Shopify & WooCommerce Development',
         ]
       },
       {
-        title: 'Interactive & Experience Design',
+        title: 'UI Development & Performance',
         items: [
-          'Animation & Motion Design',
-          'Micro-Interactions',
-          'Responsive & Mobile-First Design',
-          'Accessibility & WCAG Compliance',
-          'Performance-Focused UX',
+          'Responsive Web Design',
+          'React / Next.js Development',
+          'Website Speed Optimization',
+          'SEO-Friendly Development',
+          'HTML, CSS, JavaScript Development',
         ]
       }
     ],
     ai: [
       {
-        title: 'AI Development Services',
+        title: 'Custom Software Development',
         items: [
-          'Machine Learning Solutions',
-          'Custom AI Model Development',
-          'Computer Vision',
-          'Predictive & Smart Analytics',
-          'Natural Language Processing (NLP)',
+          'Enterprise Software Solutions',
+          'SaaS Product Development',
+          'API Development & Integration',
+          'Legacy System Modernization',
+          'Custom Web Applications',
         ]
       },
       {
-        title: 'AI Integration & Systems',
+        title: 'Web & Mobile Applications',
         items: [
-          'LLM & AI API Integration',
-          'AI Agents & Autonomous Systems',
-          'AI-Powered Search',
-          'Recommendation Systems',
-          'Chatbot & Virtual Assistant Development',
+          'Progressive Web Apps (PWA)',
+          'Android & iOS Development',
+          'Cross-Platform Apps ',
+          'UI/UX Design & Prototyping',
+          'Scalable App Architecture',
         ]
       },
       {
-        title: 'Automation Solutions',
+        title: 'Cloud, Backend & DevOps',
         items: [
-          'Business Process Automation',
-          'Marketing Automation',
-          'Data Processing Automation',
-          'Workflow Optimization',
-          'Smart Scheduling & Reporting',
+          'Backend Development',
+          'Database Design & Optimization',
+          'DevOps & CI/CD Pipelines',
+          'Cloud Infrastructure(AWS,Azure)',
+          'Microservices Architecture',
         ]
       }
     ]

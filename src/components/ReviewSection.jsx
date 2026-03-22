@@ -42,17 +42,6 @@ const ReviewsSection = () => {
             </div>
           </div>
           
-          <div className="reviews-count-badge">
-            <span className="reviews-count">
-              <CountUp 
-                start={0} 
-                end={875} 
-                duration={2} 
-                separator="," 
-              /> + <span className="reviews-label"> Reviews</span>
-            </span>
-            
-          </div>
         </div>
 
         {/* Right Side - Header & Cards */}
