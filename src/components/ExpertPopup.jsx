@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import emailjs from '@emailjs/browser';
 import "../styles/ExpertPopup.css";
 
 const ExpertPopup = ({ open, onClose, preSelectedService }) => {
@@ -8,15 +7,12 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
 
-  const [submitStatus, setSubmitStatus] = useState('');
-  
   const [formData, setFormData] = useState({
-    name: '',
-    company: '',
-    phone: '',
-    email: '',
-    project: ''
-
+    name: "",
+    company: "",
+    phone: "",
+    email: "",
+    project: ""
   });
 
   useEffect(() => {
@@ -37,64 +33,6 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
     });
   };
 
-<<<<<<< HEAD
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('');
-
-    // EmailJS configuration 
-    const serviceID = 'service_nq9sanx';        // ✅ Your Service ID
-    const templateID = 'template_ae2jgo2'; // 📝 PASTE YOUR TEMPLATE ID HERE
-    const publicKey = 'r3l8L0Rdu85cn7oZc';   // 📝 PASTE YOUR PUBLIC KEY HERE
-
-    // Prepare template parameters
-    const templateParams = {
-      from_name: formData.name,
-      company: formData.company,
-      phone: formData.phone,
-      from_email: formData.email,
-      service: selectedService,
-      budget: `$${budget.toLocaleString()}`,
-      project: formData.project,
-    };
-
-    // Send email using EmailJS
-    emailjs.send(serviceID, templateID, templateParams, publicKey)
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        setSubmitStatus('success');
-        setIsSubmitting(false);
-        
-        // Reset form
-        setFormData({
-          name: '',
-          company: '',
-          phone: '',
-          email: '',
-          project: ''
-        });
-        setSelectedService('');
-        setBudget(5000);
-
-        // Close popup after 2 seconds
-        setTimeout(() => {
-          setSubmitStatus('');
-          onClose();
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error('FAILED...', error);
-        setSubmitStatus('error');
-        setIsSubmitting(false);
-
-        // Clear error after 5 seconds
-        setTimeout(() => {
-          setSubmitStatus('');
-        }, 5000);
-      });
-=======
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -140,7 +78,6 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
     }
 
     setIsSubmitting(false);
->>>>>>> 3ea4a8c (Updated UI sections and menus)
   };
 
   if (!open) return null;
@@ -151,11 +88,7 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
   return (
     <div className="popup-overlay" onClick={onClose}>
       <div className="popup-container" onClick={(e) => e.stopPropagation()}>
-
-        <button className="popup-close" onClick={onClose}>
-          ×
-        </button>
-
+        <button className="popup-close" onClick={onClose}>×</button>
 
         <div className="popup-left">
           <div className="popup-left-top">
@@ -192,15 +125,6 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
             Tell us what you're looking for and our experts will get back to you.
           </p>
 
-<<<<<<< HEAD
-
-          {/* Success/Error Messages */}
-          {submitStatus === 'success' && (
-            <div className="alert alert-success">
-              ✓ Thank you! Your message has been sent successfully. We'll contact you soon!
-            </div>
-          )}
-=======
             {/* Success / Error Messages */}
             {submitStatus === "success" && (
               <div className="alert alert-success">
@@ -214,69 +138,41 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
             )}
 
           <form className="popup-form" onSubmit={handleSubmit}>
->>>>>>> 3ea4a8c (Updated UI sections and menus)
 
-          {submitStatus === 'error' && (
-            <div className="alert alert-error">
-              ✗ Something went wrong. Please try again or email us at info@zonzoctech.com
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="popup-form">
             <div className="form-grid">
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="name"
-                placeholder="Your Name*" 
+                placeholder="Your Name*"
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                disabled={isSubmitting}
               />
-<<<<<<< HEAD
-              <input 
-                type="text" 
-=======
 
               <input
                 type="text"
->>>>>>> 3ea4a8c (Updated UI sections and menus)
                 name="company"
-                placeholder="Company / Organization" 
+                placeholder="Company / Organization"
                 value={formData.company}
                 onChange={handleInputChange}
-                disabled={isSubmitting}
               />
-<<<<<<< HEAD
-              <input 
-                type="tel" 
-=======
 
               <input
                 type="tel"
->>>>>>> 3ea4a8c (Updated UI sections and menus)
                 name="phone"
-                placeholder="Phone Number*" 
+                placeholder="Phone Number*"
                 value={formData.phone}
                 onChange={handleInputChange}
                 required
-                disabled={isSubmitting}
               />
-<<<<<<< HEAD
-              <input 
-                type="email" 
-=======
 
               <input
                 type="email"
->>>>>>> 3ea4a8c (Updated UI sections and menus)
                 name="email"
-                placeholder="Email*" 
+                placeholder="Email*"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                disabled={isSubmitting}
-
               />
             </div>
 
@@ -284,9 +180,6 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
               value={selectedService}
               onChange={(e) => setSelectedService(e.target.value)}
               required
-
-              disabled={isSubmitting}
-
             >
               <option value="">You are interested in</option>
               <option value="Website Development">Website Development</option>
@@ -307,42 +200,23 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
               style={{ background: sliderBackground }}
-              disabled={isSubmitting}
             />
 
-
-            <textarea 
+            <textarea
               name="project"
-              placeholder="Tell us about the project" 
+              placeholder="Tell us about the project"
               value={formData.project}
               onChange={handleInputChange}
               required
-              disabled={isSubmitting}
-
             />
 
             <div className="popup-actions">
-              <button 
-                type="button" 
-                className="cancel-btn" 
-                onClick={onClose}
-                disabled={isSubmitting}
-              >
+              <button type="button" className="cancel-btn" onClick={onClose}>
                 Cancel
               </button>
 
-<<<<<<< HEAD
-              <button 
-                type="submit" 
-                className="submit-btn"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'SENDING...' : 'Submit'}
-
-=======
               <button type="submit" className="submit-btn">
                 {isSubmitting ? "SENDING..." : "Submit"}
->>>>>>> 3ea4a8c (Updated UI sections and menus)
               </button>
             </div>
 

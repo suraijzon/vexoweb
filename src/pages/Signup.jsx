@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../styles/AuthFigma.css';
-import loginBg from '../assets/icons/signup-bg.jpg';
+import loginBg from '../assets/icons/login-bg.png';
 import GoogleIcon from '../assets/icons/google-icon-logo.svg';
 import AppleIcon from '../assets/icons/apple-logo.svg';
 
@@ -137,11 +137,8 @@ const Signup = () => {
             <div className="terms-checkbox">
               <input type="checkbox" id="terms" required />
               <label htmlFor="terms">
-                By logging in, I agree to our{' '}
-                <Link to="/terms" className="text-link">Terms of use</Link>{' '}
-                and{' '}
-                <Link to="/privacy-policy" className="text-link">Privacy Policy</Link>
-                </label>
+                By creating an account, I agree to our <a href="#">Terms of use</a> and <a href="#">Privacy Policy</a>
+              </label>
             </div>
 
             <button type="submit" className="login-btn-figma" disabled={loading}>

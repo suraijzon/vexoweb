@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { adminAPI } from "../utils/api";
-import "../styles/AdminDashboard.css";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { adminAPI } from '../utils/api';
+import '../styles/AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -10,12 +10,13 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   
-  const { logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Check if user is admin
     if (!isAdmin) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
@@ -25,48 +26,51 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      setError("");
-
+      setError('');
+      
+      // Fetch users
       const usersResponse = await adminAPI.getAllUsers();
       setUsers(usersResponse.data);
 
+      // Fetch contacts
       const contactsResponse = await adminAPI.getAllContacts();
       setContacts(contactsResponse.data);
+
+      setLoading(false);
     } catch (err) {
-      console.error("Error fetching data:", err);
-      setError(err.response?.data?.msg || "Failed to load data");
-    } finally {
+      console.error('Error fetching data:', err);
+      setError(err.response?.data?.msg || 'Failed to load data');
       setLoading(false);
     }
   };
 
   const handleDeleteUser = async (userId) => {
-    if (!window.confirm("Are you sure you want to delete this user?")) return;
-
-    try {
-      await adminAPI.deleteUser(userId);
-      setUsers((prev) => prev.filter((u) => u._id !== userId));
-      alert("User deleted successfully");
-    } catch {
-      alert("Failed to delete user");
+    if (window.confirm('Are you sure you want to delete this user?')) {
+      try {
+        await adminAPI.deleteUser(userId);
+        setUsers(users.filter(u => u._id !== userId));
+        alert('User deleted successfully');
+      } catch (err) {
+        alert('Failed to delete user');
+      }
     }
   };
 
   const handleDeleteContact = async (contactId) => {
-    if (!window.confirm("Are you sure you want to delete this contact message?")) return;
-
-    try {
-      await adminAPI.deleteContact(contactId);
-      setContacts((prev) => prev.filter((c) => c._id !== contactId));
-      alert("Contact message deleted successfully");
-    } catch {
-      alert("Failed to delete contact message");
+    if (window.confirm('Are you sure you want to delete this contact message?')) {
+      try {
+        await adminAPI.deleteContact(contactId);
+        setContacts(contacts.filter(c => c._id !== contactId));
+        alert('Contact message deleted successfully');
+      } catch (err) {
+        alert('Failed to delete contact message');
+      }
     }
   };
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate('/login');
   };
 
   if (loading) {
@@ -77,13 +81,12 @@ const AdminDashboard = () => {
     <div className="admin-dashboard">
       <div className="admin-header">
         <h1>Admin Dashboard</h1>
-        <button onClick={handleLogout} className="logout-btn">
-          Logout
-        </button>
+        <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
 
       {error && <div className="error-message">{error}</div>}
 
+      {/* Stats Cards */}
       <div className="stats-container">
         <div className="stat-card">
           <h3>Total Users</h3>
@@ -96,12 +99,12 @@ const AdminDashboard = () => {
         <div className="stat-card">
           <h3>Admin Users</h3>
           <p className="stat-number">
-            {users.filter((u) => u.role === "admin").length}
+            {users.filter(u => u.role === 'admin').length}
           </p>
         </div>
       </div>
 
-      {/* Users */}
+      {/* Registered Users Section */}
       <div className="section">
         <h2>Registered Users</h2>
         {users.length === 0 ? (
@@ -120,22 +123,22 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((u) => (
-                  <tr key={u._id}>
-                    <td>{u.name}</td>
-                    <td>{u.email}</td>
-                    <td>{u.phone || "N/A"}</td>
+                {users.map(user => (
+                  <tr key={user._id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone || 'N/A'}</td>
                     <td>
-                      <span className={`role-badge ${u.role}`}>
-                        {u.role}
+                      <span className={`role-badge ${user.role}`}>
+                        {user.role}
                       </span>
                     </td>
-                    <td>{new Date(u.createdAt).toLocaleDateString()}</td>
+                    <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                     <td>
                       <button
-                        onClick={() => handleDeleteUser(u._id)}
+                        onClick={() => handleDeleteUser(user._id)}
                         className="delete-btn"
-                        disabled={u.role === "admin"}
+                        disabled={user.role === 'admin'}
                       >
                         Delete
                       </button>
@@ -148,7 +151,7 @@ const AdminDashboard = () => {
         )}
       </div>
 
-      {/* Contacts */}
+      {/* Contact Messages Section */}
       <div className="section">
         <h2>Contact Messages</h2>
         {contacts.length === 0 ? (
@@ -166,15 +169,15 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {contacts.map((c) => (
-                  <tr key={c._id}>
-                    <td>{c.name}</td>
-                    <td>{c.email}</td>
-                    <td className="message-cell">{c.message}</td>
-                    <td>{new Date(c.createdAt).toLocaleDateString()}</td>
+                {contacts.map(contact => (
+                  <tr key={contact._id}>
+                    <td>{contact.name}</td>
+                    <td>{contact.email}</td>
+                    <td className="message-cell">{contact.message}</td>
+                    <td>{new Date(contact.createdAt).toLocaleDateString()}</td>
                     <td>
                       <button
-                        onClick={() => handleDeleteContact(c._id)}
+                        onClick={() => handleDeleteContact(contact._id)}
                         className="delete-btn"
                       >
                         Delete

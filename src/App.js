@@ -36,7 +36,7 @@ import ContactPage from './pages/ContactPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import WebsiteMaintenance from './pages/WebsiteMaintenance';
-import WebsiteGrowthSlider from './components/WebsiteGrowthSlider';
+import SoftwareDevelopment from './pages/SoftwareDevelopment';
 
 // ================= HOME PAGE =================
 const HomePage = () => {
@@ -50,7 +50,6 @@ const HomePage = () => {
     <>
       <Navbar />
       <Hero />
-      <WebsiteGrowthSlider />
       <Solution />
       <SuccessSection />
       <ProcessSection />
@@ -93,6 +92,7 @@ function App() {
           <Route path="/website-maintenance-performance-security" element={<WebsiteMaintenance />} />
           <Route path="/seo-services" element={<SEOServices />} />
           <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/software-development" element={<SoftwareDevelopment />} />
 
           {/* Pages */}
           <Route path="/about" element={<AboutUs />} />

@@ -1,13 +1,9 @@
 import React from "react";
 import "../styles/ContactUs.css";
 import astronaut from "../assets/icons/astronaut.png";
-import Navbar from "../components/Navbar";
 
 const ContactUs = () => {
-  
   return (
-    <>
-  <Navbar />
     <div className="contactus-page">
       {/* Background glow circles */}
       <div className="cu-glow cu-glow-1"></div>
@@ -59,7 +55,6 @@ const ContactUs = () => {
         </div>
       </div>
     </div>
-    </>
   );
 };
 

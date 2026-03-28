@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import siteLogo from "../assets/icons/zonzoclogo3-bg.png";
+
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/navbar.css";
 import logo from "../assets/icons/logo.png";
+import siteLogo from "../assets/icons/site_logo_2.svg";
 import phoneIcon from "../assets/icons/phone-call-icon.svg";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -14,33 +14,113 @@ const DESKTOP_BREAKPOINT = 1024;
 const CLOSE_DELAY_MS = 180;
 
 const Navbar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [mobileDropdown, setMobileDropdown] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const navRef = useRef(null);
+  const closeTimerRef = useRef(null);
+
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleNav = (path) => {
-    navigate(path);
-    setMobileOpen(false);
+    const isDesktop = () => window.innerWidth > DESKTOP_BREAKPOINT;
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+   const openDropdown = (id) => {
+    if (!isDesktop()) return;
+    clearCloseTimer();
+    setActiveDropdown(id);
+  };
+
+  const scheduleCloseDropdown = () => {
+    if (!isDesktop()) return;
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, CLOSE_DELAY_MS);
+  };
+
+  const toggleMobileDropdown = (id) => {
+     if (isDesktop()) return;
+    setMobileDropdown((prev) => (prev === id ? null : id));
+  };
+
+  const handleDropdownButtonClick = (id) => {
+   if (isDesktop()) {
+      clearCloseTimer();
+      setActiveDropdown((prev) => (prev === id ? null : id));
+    } else {
+      toggleMobileDropdown(id);
+    }
+  };
+
+  const handleClientLogin = () => {
+    logout();
+    navigate("/login");
+  };
+
+  const handleLogoClick = () => {
+    navigate("/");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+   if (!isDesktop()) return;
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    const handleResize = () => {
+      if (isDesktop()) {
+        setMobileDropdown(null);
+      } else {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("resize", handleResize);
+      clearCloseTimer();
+    };
+  }, []);
+
+
+  const dropdownHoverProps = (id) => ({
+    onMouseEnter: () => openDropdown(id),
+    onMouseLeave: scheduleCloseDropdown,
+  });
+
+  const dropdownContentHoverProps = {
+    onMouseEnter: clearCloseTimer,
+    onMouseLeave: scheduleCloseDropdown,
+  };
+
+
   return (
     <header className="navbar">
-      <div className="navbar-container">
-        {/* Logo */}
-        <Link to="/" className="navbar-logo" onClick={() => setMobileOpen(false)}>
-          <img src={siteLogo} alt="ZonzocTech Logo" />
-        </Link>
-
-        {/* Desktop Links */}
-        <nav className="navbar-links">
-          <button onClick={() => handleNav("/")}>Home</button>
-          <button onClick={() => handleNav("/services")}>Services</button>
-          <button onClick={() => handleNav("/about")}>About</button>
-          <button onClick={() => handleNav("/contact-us")} className="cta-btn">
-            Contact
+      <div className="top-badge">
+        <div className="top-badge-left">
+          <span>PROJECTS COMPLETED</span>
+          <span className="highlight">150+</span>
+        </div>
+        
+        <div className="top-badge-right">
+          <button onClick={handleClientLogin} className="client-login">
+            Client Login
           </button>
-<<<<<<< HEAD
-=======
           
           <div className="contact-proposal">
             <img src={emailnav} alt="phone" />
@@ -82,13 +162,13 @@ const Navbar = () => {
               onClick={() => handleDropdownButtonClick(3)}
               aria-expanded={activeDropdown === 3 || mobileDropdown === 3}
             >
-              SOFTWARE DEVELOPMENT ▾
+              SOFTWARE DEV ▾
             </button>
 
             <div className="dropdown-content" {...dropdownContentHoverProps}>
               <div className="dropdown-column">
                 <h4>Custom Software Development</h4>
-                <a href="/ai-website-design-development">Enterprise Software Solutions</a>
+                <a href="/software-development">Enterprise Software Solutions</a>
                 <a href="/ai-seo">SaaS Product Development</a>
                 <a href="/ai-software-development">Legacy System Modernization</a>
                 <a href="/ai-web-application-development">API Development & Integration</a>
@@ -296,28 +376,17 @@ const Navbar = () => {
               Client Login
             </button>
           )}
->>>>>>> 3ea4a8c (Updated UI sections and menus)
         </nav>
+        
+        <ExpertPopup 
+        open={isPopupOpen} onClose={() => setIsPopupOpen(false)}/>
 
-        {/* Mobile Toggle */}
-        <button
-          className="mobile-menu-btn"
-          aria-label="Toggle navigation"
-          onClick={() => setMobileOpen((prev) => !prev)}
-        >
-          ☰
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="mobile-menu">
-          <button onClick={() => handleNav("/")}>Home</button>
-          <button onClick={() => handleNav("/services")}>Services</button>
-          <button onClick={() => handleNav("/about")}>About</button>
-          <button onClick={() => handleNav("/contact-us")}>Contact</button>
+        <div className="hamburger" onClick={() => setOpen((s) => !s)}>
+          <span className={open ? "bar rotate1" : "bar"}></span>
+          <span className={open ? "bar hide" : "bar"}></span>
+          <span className={open ? "bar rotate2" : "bar"}></span>
         </div>
-      )}
+      </div>
     </header>
   );
 };

@@ -25,12 +25,6 @@ const handleSubmit = async (e) => {
   setIsSubmitting(true);
   setSubmitStatus('');
 
-<<<<<<< HEAD
-    // EmailJS configuration
-    const serviceID = 'service_6u3xgr9'; // Replace with your EmailJS service ID
-    const templateID = 'template_aj95hns'; // Replace with your EmailJS template ID
-    const publicKey = 'r3l8L0Rdu85cn7oZc'; // Replace with your EmailJS public key
-=======
   try {
     const res = await fetch("/api/contact", {
       method: "POST",
@@ -39,7 +33,6 @@ const handleSubmit = async (e) => {
       },
       body: JSON.stringify(formData)
     });
->>>>>>> 3ea4a8c (Updated UI sections and menus)
 
     if (res.ok) {
       setSubmitStatus('success');

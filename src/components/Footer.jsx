@@ -1,12 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/footer.css';
-import siteLogo from '../assets/icons/zonzoclogo3-bg.png';
+import siteLogo from '../assets/icons/logo.png';
 
 const Footer = () => {
   const navigate = useNavigate();
 
-
+  const handleContactUsClick = () => {
+    navigate('/contact-us');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const servicesLinks = [
     { label: 'AI Web Application Development', path: '/ai-web-application-development' },
@@ -47,13 +50,31 @@ const Footer = () => {
   return (
     <footer className="footer">
 
+      {/* TOP SECTION */}
+      <div className="footer-top">
+        <div className="footer-top-container">
+
+          {/* LEFT SIDE — STATS + BUTTON */}
+         
+
+            {/* BUTTON UNDER BOTH */}
+            
+
+          {/* RIGHT SIDE — CTA BOX */}
+         </div>
+        
+        {/* Full-width line */}
+        
+      </div>
+
+      {/* MAIN FOOTER CONTENT */}
       <div className="footer-main">
         <div className="footer-container">
 
           {/* Branding */}
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src={siteLogo} alt="ZonzocTech Logo" className="logo-text-img" />
+              <img src={siteLogo} alt="techco" className="logo-text-img" />
             </div>
 
             <div className="footer-contact-box">
@@ -121,25 +142,27 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Full-width line before footer bottom */}
       <div className="line">
-        <hr />
+        <hr style={{
+          border: 'none',
+          borderTop: '1px solid rgba(255, 255, 255, 1)',
+          margin: '20px 0',
+          width: '100%'
+        }} />
       </div>
 
+      {/* Footer Bottom */}
       <div className="footer-bottom">
         <div className="footer-bottom-container">
           <p className="copyright">
-<<<<<<< HEAD
-            Zonzoctech © 2020–2025
-=======
             Zonzoctech© 2026
->>>>>>> 3ea4a8c (Updated UI sections and menus)
           </p>
-
           <div className="social-icons">
-            <a href="https://twitter.com/yourhandle" className="social-icon">
+            <a href="#" className="social-icon">
               <i className="fa-brands fa-twitter"></i>
             </a>
-            <a href="https://twitter.com/yourhandle" className="social-icon">
+            <a href="#" className="social-icon">
               <i className="fa-brands fa-linkedin"></i>
             </a>
           </div>

@@ -628,14 +628,14 @@
   font-size: 1.15rem;
   transition: all 0.3s;
 }
-/*this is about us page*/
+
 .abt__cta_primary {
   background: #ffffff;
   color: #004880;
   border: 2px solid #004880;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
-/*new update*/
+
 .abt__cta_primary:hover {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
