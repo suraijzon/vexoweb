@@ -16,7 +16,7 @@ const ContactUs = () => {
           <h1>
             Get in <span>touch</span>
           </h1>
-          <p>Reach out, and let's create a universe of possibilities together!</p>
+          <p>Reach out, and let's create a universe ofpossibilities together!</p>
         </div>
 
         <div className="contactus-card">
