@@ -14,6 +14,7 @@ import ContactSection from "./components/ContactSection";
 import ReviewSection from "./components/ReviewSection";
 import Footer from "./components/Footer";
 import ExpertPopup from "./components/ExpertPopup";
+import WhatsappFloat from "./components/WhatsappFloat";
 
 // Import pages
 import GoogleSearchConsole from './pages/GoogleSearchConsole';
@@ -105,6 +106,11 @@ function App() {
           <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
+
+
+         {/* Floating */}
+          <WhatsappFloat />
+          
       </Router>
     </AuthProvider>
   );

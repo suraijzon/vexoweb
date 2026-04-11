@@ -162,7 +162,7 @@ const Navbar = () => {
               onClick={() => handleDropdownButtonClick(3)}
               aria-expanded={activeDropdown === 3 || mobileDropdown === 3}
             >
-              SOFTWARE DEV ▾
+              SOFTWARE DEVELOPMENT ▾
             </button>
 
             <div className="dropdown-content" {...dropdownContentHoverProps}>
@@ -359,7 +359,6 @@ const Navbar = () => {
               <div className="dropdown-column">
                 <h4>Who We Are</h4>
                 <a href="/about">About Us</a>
-                <a href="/contact-us">Careers</a>
                 <a href="/contact">Contact Info</a>
               </div>
 
