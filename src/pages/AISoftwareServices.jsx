@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/AISoftwareServices.css';
+import Breadcrumb from "../components/Breadcrumb";
 
 const AISoftwareServices = () => {
   const targetAudience = [
@@ -104,6 +105,7 @@ const AISoftwareServices = () => {
   return (
     <div className="aiss__wrapper">
       <Navbar />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <section className="aiss__hero">

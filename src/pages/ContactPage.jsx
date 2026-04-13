@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/ContactPage.css';
+import Breadcrumb from "../components/Breadcrumb";
 
 const ContactPage = () => {
   const services = [
@@ -40,6 +41,7 @@ const ContactPage = () => {
   return (
     <div className="cp__wrapper">
       <Navbar />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <section className="cp__hero">

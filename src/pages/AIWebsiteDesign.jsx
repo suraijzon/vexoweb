@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/AIWebsiteDesign.css';
+import Breadcrumb from "../components/Breadcrumb";
 
 const AIWebsiteDesign = () => {
   const targetAudience = [
@@ -105,6 +106,7 @@ const AIWebsiteDesign = () => {
   return (
     <div className="aiwd__wrapper">
       <Navbar />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <section className="aiwd__hero">

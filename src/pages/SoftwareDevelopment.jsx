@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/softwareDevelopment.css';
+import Breadcrumb from "../components/Breadcrumb";
 
 const sections = [
   {
@@ -53,6 +54,8 @@ const SoftwareDevelopment = () => {
   return (
     <>
     <Navbar />
+    <Breadcrumb />
+    
     <div className="software-page">
        
       {/* HERO */}

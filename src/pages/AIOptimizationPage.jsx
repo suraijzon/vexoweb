@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/AIOptimizationPage.css';
+import Breadcrumb from "../components/Breadcrumb";
 
 const AISearchOptimization = () => {
   const focusAreas = [
@@ -140,6 +141,7 @@ const AISearchOptimization = () => {
   return (
     <div className="aiso__wrapper">
       <Navbar />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <section className="aiso__hero">

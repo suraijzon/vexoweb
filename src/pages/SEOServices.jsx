@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/SEOServices.css';
+import Breadcrumb from '../components/Breadcrumb';
 
 const SEOServices = () => {
   const builtFor = [
@@ -112,6 +113,7 @@ const SEOServices = () => {
   return (
     <div className="seos__wrapper">
       <Navbar />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <section className="seos__hero">

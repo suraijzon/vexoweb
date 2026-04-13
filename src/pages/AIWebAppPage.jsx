@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/AIWebAppPage.css';
+import Breadcrumb from "../components/Breadcrumb";
 
 const AIWebAppDev = () => {
   const targetAudience = [
@@ -125,6 +126,7 @@ const AIWebAppDev = () => {
   return (
     <div className="aiwa__wrapper">
       <Navbar />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <section className="aiwa__hero">

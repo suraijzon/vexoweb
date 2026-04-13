@@ -21,7 +21,7 @@
     var(--primary) 0%,
     var(--primary-light) 100%
   );
-  padding: 10rem 2rem 5rem;
+  padding: 5rem 2rem 5rem;
   overflow: hidden;
   min-height: 700px;
   display: flex;

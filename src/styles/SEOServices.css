@@ -12,7 +12,7 @@
 .seos__hero {
   position: relative;
   background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
-  padding: 10rem 2rem 3rem;
+  padding: 5rem 2rem 3rem;
   overflow: hidden;
   min-height: 700px;
   display: flex;

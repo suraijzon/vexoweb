@@ -15,6 +15,8 @@ import ReviewSection from "./components/ReviewSection";
 import Footer from "./components/Footer";
 import ExpertPopup from "./components/ExpertPopup";
 import WhatsappFloat from "./components/WhatsappFloat";
+import Breadcrumb from "./components/Breadcrumb";
+
 
 // Import pages
 import GoogleSearchConsole from './pages/GoogleSearchConsole';
@@ -74,6 +76,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <Breadcrumb />
         <Routes>
           <Route path="/" element={<HomePage />} />
 
@@ -82,7 +85,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
 
           {/* Services */}
-          <Route path="/google-search---console" element={<GoogleSearchConsole />} />
+          <Route path="/google-search-console" element={<GoogleSearchConsole />} />
           <Route path="/ai-seo" element={<AiSeoServices />} />
           <Route path="/ai-software-development" element={<AISoftwareServices />} />
           <Route path="/full-stack-web-development" element={<FullStackWebDev />} />
@@ -110,7 +113,7 @@ function App() {
 
          {/* Floating */}
           <WhatsappFloat />
-          
+
       </Router>
     </AuthProvider>
   );

@@ -203,14 +203,14 @@ const Navbar = () => {
                 <a href="/ai-web-application-development">System Monitoring & Updates</a>
               </div>
 
-              <div className="dropdown-column-last">
+              {/*<div className="dropdown-column-last">
                 <span className="last-column3">Insights & Resources</span><br />
                 <span className="last-column-text3">SEO Marketing Strategies & Growth Tips</span>
                 <span className="last-column-text3">Software Development Trends & Best Practices</span>
                 <span className="last-column-text3">Website Development Guides & Case Studies</span>
                 <span className="last-column-text3">Technology Updates & Industry News</span>
                 <span className="last-column-text3">SEO Marketing Strategies & Insights</span>
-              </div>
+              </div>*/}
             </div>
           </div>
 
@@ -235,7 +235,7 @@ const Navbar = () => {
                 <a href="/seo-services">Landing Page Design</a>           
                 <a href="/ai-web-application-development">Website Redesign & Modernization</a>                
                 <a href="/full-stack-web-development">Portfolio & Personal Websites</a>
-                <a href="/contact-us">Corporate Website Development</a>
+                <a href="//ecommerce-development-optimization">Corporate Website Development</a>
                 <a href="/full-stack-web-development">Startup & Small Business Websites</a>
               </div>
 
@@ -266,14 +266,14 @@ const Navbar = () => {
                 <a href="/seo-services">Headless CMS Solutions</a>  
               </div>
 
-              <div className="dropdown-column-last">
+              {/*<div className="dropdown-column-last">
                 <span className="last-column3">Problems We Solve</span><br />
                 <span className="last-column-text3">Low ROI Marketing</span>  
                 <span className="last-column-text3">Poor User Experience & Engagement</span>
                 <span className="last-column-text3">Declining Traffic & Search Rankings</span>
                 <span className="last-column-text3">Low Website Conversions & Lead Generation Issues</span>
                 <span className="last-column-text3">Lack of Visibility on Google & Search Platforms</span>
-              </div>
+              </div>*/}
             </div>
           </div>
 
@@ -329,14 +329,14 @@ const Navbar = () => {
                 <a href="/seo-services">SEO Performance Tracking</a>
               </div>
 
-              <div className="dropdown-column-last">
+              {/*<div className="dropdown-column-last">
                 <span className="last-column3">Proof & Insights</span><br />
                 <span className="last-column-text3">GEO & Search Trends</span>
                 <span className="last-column-text3">SEO Case Studies & Proven Results</span>
                 <span className="last-column-text3">Client Success Stories & Outcomes</span>
                 <span className="last-column-text3">SEO Experiments & Key Learnings</span>
                 <span className="last-column-text3">AI SEO vs Traditional SEO Insights</span>
-              </div>
+              </div>*/}
             </div>
           </div>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components//Navbar';
 import Footer from '../components/Footer';
 import '../styles/EcommercePage.css';
+import Breadcrumb from "../components/Breadcrumb";
 
 const EcommerceDev = () => {
   const targetAudience = [
@@ -106,6 +107,8 @@ const EcommerceDev = () => {
   return (
     <div className="ecd__wrapper">
       <Navbar />
+      <Breadcrumb />
+
 
       {/* Hero Section */}
       <section className="ecd__hero">

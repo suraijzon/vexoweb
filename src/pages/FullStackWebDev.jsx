@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/FullStackWebDev.css';
+import Breadcrumb from '../components/Breadcrumb';
 
 const FullStackWebDev = () => {
   const services = [
@@ -128,6 +129,7 @@ const FullStackWebDev = () => {
   return (
     <div className="fswd__page_wrapper">
       <Navbar />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <section className="fswd__hero_section">
