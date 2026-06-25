@@ -1,106 +1,119 @@
 import React from 'react';
-import '../styles/WhyChoose.css';
-
-// Import your images
-import blackHandImage from '../assets/icons/future-empower.png';
+import heroImage from '../assets/icons/why-choose-vexoweb.png';
 import growthLineImage from '../assets/icons/earning-line.png';
+
+const BENEFITS = [
+  {
+    text: 'Free Project Consultation',
+    label: 'Popular',
+    labelClass: 'label-blue',
+    theme: 'blue',
+    desc: 'Expert advice before you commit',
+  },
+  {
+    text: 'Fast Project Delivery',
+    label: 'On-Time',
+    labelClass: 'label-green',
+    theme: 'green',
+    desc: 'Agile sprints with clear milestones',
+  },
+  {
+    text: 'Affordable Packages',
+    label: 'Best Value',
+    labelClass: 'label-purple',
+    theme: 'purple',
+    desc: 'Transparent pricing for every budget',
+  },
+  {
+    text: 'No Hidden Charges',
+    label: 'Verified',
+    labelClass: 'label-amber',
+    theme: 'amber',
+    desc: 'What we quote is what you pay',
+  },
+];
+
+const CheckIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+    <path
+      d="M8 12l3 3 5-6"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const WhyChooseSection = () => {
   return (
     <section className="why-choose-section">
       <div className="why-choose-container">
-        
-        {/* Left Content */}
         <div className="why-choose-left">
-          <p className="section-subtitle">Building Future-Ready IT Systems</p>
-          <h1 className="section-title">
-            Why Choose <span className="highlight-text">Zonzoctech?</span>
-          </h1>
-          <p className="section-description">
-            At Zonzoctech, we don't just build solutions — we predict tomorrow's 
-            success with AI-powered innovation
-          </p>
+          <div className="why-choose-left-panel">
+            <span className="why-choose-tag">Why Partner With Us</span>
 
-          {/* Benefits List */}
-          <ul className="benefits-list">
-  <li className="benefit-item">
-    <div className="benefit-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-        <path d="M8 12l3 3 5-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </div>
-    <span>Free Project Consultation</span>
-  </li>
-  <li className="benefit-item">
-    <div className="benefit-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-        <path d="M8 12l3 3 5-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </div>
-    <span>Fast Project Delivery</span>
-  </li>
-  <li className="benefit-item">
-    <div className="benefit-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-        <path d="M8 12l3 3 5-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </div>
-    <span>Affordable Packages</span>
-  </li>
-  <li className="benefit-item">
-    <div className="benefit-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-        <path d="M8 12l3 3 5-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </div>
-    <span>No Hidden Charges</span>
-  </li>
-</ul>
+            <h2 className="why-choose-title">
+              Why Choose <span className="highlight-text">Vexoweb?</span>
+            </h2>
+
+            <p className="why-choose-description">
+              At Vexoweb, we don&apos;t just build software systems — we architect tomorrow&apos;s
+              digital success structures using{' '}
+              <span className="colorful-accent-text">intelligent development frameworks.</span>
+            </p>
+
+            <ul className="benefits-list">
+              {BENEFITS.map((benefit) => (
+                <li
+                  key={benefit.text}
+                  className={`benefit-item benefit-item--${benefit.theme}`}
+                >
+                  <div className="benefit-icon-box">
+                    <CheckIcon />
+                  </div>
+                  <div className="benefit-copy">
+                    <span className="benefit-text">{benefit.text}</span>
+                    <span className="benefit-desc">{benefit.desc}</span>
+                  </div>
+                  <span className={`benefit-label ${benefit.labelClass}`}>{benefit.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        {/* Right Content */}
         <div className="why-choose-right">
-          
-          {/* Notification Card */}
-          <div className="notification-card">
-            <div className="notification-header">
-              <span className="notification-badge">Recently Project Delivered!</span>
+          <div className="hero-image-wrapper">
+            <div className="notification-card">
+              <span className="notification-badge">Project Delivered Successfully</span>
+              <p className="notification-title">Enterprise Platform Live</p>
             </div>
-            <div className="notification-content">
-              <p className="notification-title">Web Development completed</p>
-            
-            </div>
-          </div>
 
-          {/* Stats Card */}
-          <div className="stats-card">
-            <div className="stats-header">
-              <h3>Client Growth Stats Last Year</h3>
-            </div>
-            <div className="stats-chart">
-              <img src={growthLineImage} alt="Growth Chart" className="growth-line" />
-            </div>
-            <div className="stats-info">
-              <h2 className="stats-number">Clients Served: 120</h2>
-              <div className="stats-growth">
-                <span className="growth-arrow">↑</span>
-                <span className="growth-text">35% Growth Last Year</span>
+            <div className="stats-card">
+              <div className="stats-header">
+                <h3>Annual Client Performance Growth</h3>
+              </div>
+              <div className="stats-chart">
+                <img src={growthLineImage} alt="Growth Chart" className="growth-line" />
+              </div>
+              <div className="stats-info">
+                <h4 className="stats-number">120+ Systems Deployed</h4>
+                <div className="stats-growth">
+                  <span className="growth-arrow">▲</span>
+                  <span className="growth-text">35% Efficiency Spike</span>
+                </div>
               </div>
             </div>
+
+            <img
+              src={heroImage}
+              alt="Vexoweb digital intelligence and software development"
+              className="hero-main-image"
+            />
           </div>
-
-          {/* Main Hero Image */}
-          <img 
-            src={blackHandImage} 
-            alt="Future Empower" 
-            className="hero-main-image"
-          />
         </div>
-
       </div>
     </section>
   );

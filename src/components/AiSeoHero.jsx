@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import '../styles/aiSeoHero.css';
 
 const AiSeoHero = () => {
   const canvasRef = useRef(null);

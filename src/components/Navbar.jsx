@@ -1,30 +1,34 @@
-
+'use client';
 import React, { useEffect, useRef, useState } from "react";
-import "../styles/navbar.css";
-import logo from "../assets/icons/logo.png";
-import siteLogo from "../assets/icons/site_logo_2.svg";
-import phoneIcon from "../assets/icons/phone-call-icon.svg";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { usePathname } from "next/navigation"; // Next.js route hook
+import Image from "next/image";
+import Link from "next/link";
 import ExpertPopup from "./ExpertPopup";
-import emailnav from "../assets/icons/navmail.png";
-
+import { FaPaperPlane } from "react-icons/fa";
+import logo from "../assets/logonew.png";
 
 const DESKTOP_BREAKPOINT = 1024;
 const CLOSE_DELAY_MS = 180;
+const CONTACT_EMAIL = "info@vexoweb.lk";
+const CONTACT_PHONE = "+94 74 030 9534";
+const CONTACT_PHONE_HREF = "tel:+94740309534";
+const WHATSAPP_HREF = "https://wa.me/94740309534";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [mobileDropdown, setMobileDropdown] = useState(null);
-  const [activeDropdown, setActiveDropdown] = useState(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [open, setOpen] = useState(false); // Mobile menu drawer toggle
+  const [mobileDropdown, setMobileDropdown] = useState(null); // Mobile accordion toggle
+  const [activeDropdown, setActiveDropdown] = useState(null); // Desktop dropdown active state
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // Proposal popup state
+  const [isMobileView, setIsMobileView] = useState(false); // Track mobile view for inline styles
   const navRef = useRef(null);
+  const headerRef = useRef(null);
   const closeTimerRef = useRef(null);
 
-  const { logout } = useAuth();
-  const navigate = useNavigate();
+  // Hook to detect current active route pathname
+  const pathname = usePathname(); 
+  const isHomePage = pathname === "/"; // True if on home page root
 
-    const isDesktop = () => window.innerWidth > DESKTOP_BREAKPOINT;
+  const isDesktop = () => typeof window !== "undefined" && window.innerWidth > DESKTOP_BREAKPOINT;
 
   const clearCloseTimer = () => {
     if (closeTimerRef.current) {
@@ -33,7 +37,7 @@ const Navbar = () => {
     }
   };
 
-   const openDropdown = (id) => {
+  const openDropdown = (id) => {
     if (!isDesktop()) return;
     clearCloseTimer();
     setActiveDropdown(id);
@@ -48,12 +52,12 @@ const Navbar = () => {
   };
 
   const toggleMobileDropdown = (id) => {
-     if (isDesktop()) return;
+    if (isDesktop()) return;
     setMobileDropdown((prev) => (prev === id ? null : id));
   };
 
   const handleDropdownButtonClick = (id) => {
-   if (isDesktop()) {
+    if (isDesktop()) {
       clearCloseTimer();
       setActiveDropdown((prev) => (prev === id ? null : id));
     } else {
@@ -61,31 +65,35 @@ const Navbar = () => {
     }
   };
 
-  const handleClientLogin = () => {
-    logout();
-    navigate("/login");
-  };
-
   const handleLogoClick = () => {
-    navigate("/");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.href = "/";
   };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-   if (!isDesktop()) return;
+      if (!isDesktop()) return;
       if (navRef.current && !navRef.current.contains(e.target)) {
         setActiveDropdown(null);
       }
     };
 
     const handleResize = () => {
+      setIsMobileView(window.innerWidth <= DESKTOP_BREAKPOINT);
       if (isDesktop()) {
         setMobileDropdown(null);
       } else {
         setActiveDropdown(null);
       }
+      if (headerRef.current) {
+        document.documentElement.style.setProperty(
+          "--mobile-nav-drawer-top",
+          `${headerRef.current.offsetHeight}px`
+        );
+      }
     };
+
+    // Set initial state on mount to avoid SSR mismatch
+    handleResize();
 
     document.addEventListener("mousedown", handleClickOutside);
     window.addEventListener("resize", handleResize);
@@ -97,7 +105,24 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header || typeof ResizeObserver === "undefined") return undefined;
 
+    const syncDrawerTop = () => {
+      document.documentElement.style.setProperty(
+        "--mobile-nav-drawer-top",
+        `${header.offsetHeight}px`
+      );
+    };
+
+    syncDrawerTop();
+    const observer = new ResizeObserver(syncDrawerTop);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
+  // Hover triggers for desktop
   const dropdownHoverProps = (id) => ({
     onMouseEnter: () => openDropdown(id),
     onMouseLeave: scheduleCloseDropdown,
@@ -108,39 +133,100 @@ const Navbar = () => {
     onMouseLeave: scheduleCloseDropdown,
   };
 
-
   return (
-    <header className="navbar">
-      <div className="top-badge">
-        <div className="top-badge-left">
-          <span>PROJECTS COMPLETED</span>
-          <span className="highlight">150+</span>
-        </div>
-        
-        <div className="top-badge-right">
-          <button onClick={handleClientLogin} className="client-login">
-            Client Login
-          </button>
-          
-          <div className="contact-proposal">
-            <img src={emailnav} alt="phone" />
-            <a href="mailto:Info@zonzoctech.com?subject=New Project Inquiry&body=Hi ZonzocTech Team,%0D%0A%0D%0AI would like to discuss a project with you.%0D%0A%0D%0AThanks," className="email-link">
-              info@zonzoctech.com
+    <header className="navbar-wrapper" ref={headerRef}>
+      
+    {/* 1. TOPBAR SECTION (Blue contact strip) */}
+      <div className="topbar">
+        <div className="topbar-inner">
+          <div className="topbar-left">
+            <span className="topbar-left-content">
+              <span className="topbar-tagline-row1">
+                <svg 
+                  width="14" 
+                  height="14" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  className="topbar-globe-icon"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+
+                <span className="topbar-tagline-line1">
+                  <span>Webdesign &amp; Software Development in </span>
+                  <span className="sky-blue">Batticaloa</span>
+                  <span className="topbar-inline-divider" aria-hidden="true">|</span>
+                </span>
+              </span>
+              <span className="topbar-tagline-line2">Eastern Province&apos;s Digital Partner</span>
+            </span>
+          </div>
+
+          <div className="topbar-right">
+            <a href={CONTACT_PHONE_HREF} className="topbar-link topbar-phone" title="Call Us">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              <span>{CONTACT_PHONE}</span>
+            </a>
+
+            <span className="topbar-divider" aria-hidden="true">|</span>
+
+            <a href={`mailto:${CONTACT_EMAIL}`} className="topbar-link topbar-email" title="Email Us">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>{CONTACT_EMAIL}</span>
+            </a>
+
+            <span className="topbar-divider" aria-hidden="true">|</span>
+
+            <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" className="topbar-link wa-btn" title="Chat on WhatsApp">
+              <svg 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
+                fill="currentColor" 
+                className="wa-icon"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.456h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              <span>WhatsApp Us</span>
             </a>
           </div>
         </div>
       </div>
-
+      {/* 2. NAVIGATION BAR SECTION */}
       <div className="nav-container" ref={navRef}>
-         <div style={{ display: "flex", alignItems: "center" }}>
-          <div
-            className="nav-logo"
-            onClick={handleLogoClick}
-            style={{ cursor: "pointer" }}
-          >
-            <img src={logo} alt="Zonzoctech Logo" className="logo-desktop" />
-            <img src={logo} alt="Zonzoctech Logo" className="logo-mobile" />
-          </div>
+        <div className="nav-brand">
+         {/* Inside your JSX */}
+<div className="nav-logo" onClick={handleLogoClick}>
+  <Image
+    src={logo}
+    alt="Vexoweb Logo"
+    width={280}
+    height={145}
+    className="logo-desktop"
+    priority
+  />
+  <Image
+    src={logo}
+    alt="Vexoweb Logo"
+    width={200}
+    height={100}
+    className="logo-mobile"
+    priority
+  />
+</div>
+
+          <span className="nav-brand-separator" aria-hidden="true" />
 
           <div className="nav-tagline">
             <div>Web Intelligences</div>
@@ -149,12 +235,56 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* 3. NAVIGATION MENUS LIST */}
+        <div className="nav-actions">
         <nav className={`nav-links ${open ? "open" : ""}`}>
-          {/* Dropdown: AI & Technology (id: 3) */}
+          {/* 
+             Conditional "Home" Button 
+             - Renders as an unlinked <span> when on the Home page (/).
+             - Renders as a clickable Next.js <Link> when on any other subpage.
+             - Includes a responsive inline SVG Home Icon.
+          */}
+          {isHomePage ? (
+            <span className="nav-home-btn active">
+              <svg 
+                width="15" 
+                height="15" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                style={{ marginRight: '6px', display: 'inline-block', verticalAlign: 'middle' }}
+              >
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              Home
+            </span>
+          ) : (
+            <Link href="/" className="nav-home-btn">
+              <svg 
+                width="15" 
+                height="15" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                style={{ marginRight: '6px', display: 'inline-block', verticalAlign: 'middle' }}
+              >
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              Home
+            </Link>
+          )}
+          
+          {/* Dropdown 1: SOFTWARE DEV (id: 3 - WIDE) */}
           <div
-            className={`dropdown ${mobileDropdown === 3 ? "open" : ""} ${
-              activeDropdown === 3 ? "active" : ""
-            }`}
+            className={`dropdown dropdown-wide ${mobileDropdown === 3 ? "open" : ""} ${activeDropdown === 3 ? "active" : ""}`}
             {...dropdownHoverProps(3)}
           >
             <button
@@ -162,63 +292,33 @@ const Navbar = () => {
               onClick={() => handleDropdownButtonClick(3)}
               aria-expanded={activeDropdown === 3 || mobileDropdown === 3}
             >
-              SOFTWARE DEVELOPMENT ▾
+              SOFTWARE DEV <span className="arrow-indicator">▾</span>
             </button>
 
             <div className="dropdown-content" {...dropdownContentHoverProps}>
               <div className="dropdown-column">
                 <h4>Custom Software Development</h4>
-                <a href="/software-development">Enterprise Software Solutions</a>
-                <a href="/ai-seo">SaaS Product Development</a>
-                <a href="/ai-software-development">Legacy System Modernization</a>
-                <a href="/ai-web-application-development">API Development & Integration</a>
-                <a href="/website-maintenance-performance-security">Custom Web Application Development</a>
+                <Link href="/software-development">Enterprise Software Solutions</Link>
+                <Link href="/full-stack-web-development">Custom Web Application Development</Link>
               </div>
 
               <div className="dropdown-column">
-                <h4>Web & Mobile Experiences</h4>
-                <a href="/seo-ai-search-optimization">Progressive Web Apps (PWA)</a> 
-                <a href="/seo-services">Android & iOS App Development</a>  
-                <a href="/ai-software-development">Responsive Website Development</a>
-                <a href="/seo-services">Cross-Platform Apps (Flutter / React Native)</a>
-                <a href="/seo-services">UI/UX Design & Prototyping</a>
+                <h4>Web &amp; Mobile Experiences</h4>
+                <Link href="/seo-services">Android &amp; iOS App Development</Link>  
+                <Link href="/ai-software-development">Responsive Website Development</Link>
               </div>
 
               <div className="dropdown-column">
-                <h4>Cloud, Backend & DevOps</h4>
-                <a href="/full-stack-web-development">Microservices & Scalable Architecture</a>
-                <a href="/full-stack-web-development">Database Design & Optimization</a> 
-                <a href="/ai-website-design-development">DevOps & Deployment Automation</a>   
-                <a href="/ai-web-application-development">Cloud Solutions</a><br />
-                <a href="/seo-services">Backend Development</a><br />
-                
+                <h4>Cloud, Backend &amp; DevOps</h4> 
+                <Link href="/full-stack-web-development">DevOps &amp; Deployment Automation</Link>   
+                <Link href="/ai-software-development">Cloud Solutions</Link>
               </div>
-
-              <div className="dropdown-column">
-                <h4>Support, QA & Optimization</h4>
-                <a href="/ai-software-development">Bug Fixing & Troubleshooting</a>
-                <a href="/ai-software-development">System Monitoring & Updates</a>
-                <a href="/ai-software-development">Performance & Security Testing</a>
-                <a href="/ai-software-development">Ongoing Maintenance & Support</a>
-                <a href="/ai-web-application-development">System Monitoring & Updates</a>
-              </div>
-
-              {/*<div className="dropdown-column-last">
-                <span className="last-column3">Insights & Resources</span><br />
-                <span className="last-column-text3">SEO Marketing Strategies & Growth Tips</span>
-                <span className="last-column-text3">Software Development Trends & Best Practices</span>
-                <span className="last-column-text3">Website Development Guides & Case Studies</span>
-                <span className="last-column-text3">Technology Updates & Industry News</span>
-                <span className="last-column-text3">SEO Marketing Strategies & Insights</span>
-              </div>*/}
             </div>
           </div>
 
-          {/* Dropdown: UX & Interactive (id: 2) */}
+          {/* Dropdown 2: WEBSITE DEVELOPMENT (id: 2 - WIDE) */}
           <div
-            className={`dropdown ${mobileDropdown === 2 ? "open" : ""} ${
-              activeDropdown === 2 ? "active" : ""
-            }`}
+            className={`dropdown dropdown-wide ${mobileDropdown === 2 ? "open" : ""} ${activeDropdown === 2 ? "active" : ""}`}
             {...dropdownHoverProps(2)}
           >
             <button
@@ -226,62 +326,34 @@ const Navbar = () => {
               onClick={() => handleDropdownButtonClick(2)}
               aria-expanded={activeDropdown === 2 || mobileDropdown === 2}
             >
-              WEBSITE DEVELOPMENT ▾
+              WEBSITE DEVELOPMENT <span className="arrow-indicator">▾</span>
             </button>
 
             <div className="dropdown-content" {...dropdownContentHoverProps}>
               <div className="dropdown-column">
-                <h4>Business & Corporate Websites</h4>  
-                <a href="/seo-services">Landing Page Design</a>           
-                <a href="/ai-web-application-development">Website Redesign & Modernization</a>                
-                <a href="/full-stack-web-development">Portfolio & Personal Websites</a>
-                <a href="//ecommerce-development-optimization">Corporate Website Development</a>
-                <a href="/full-stack-web-development">Startup & Small Business Websites</a>
+                <h4>Business &amp; Corporate Websites</h4>  
+                <Link href="/seo-services">Landing Page Design</Link>           
+                <Link href="/contact-us">Corporate Website Development</Link>
+                <Link href="/full-stack-web-development">Startup &amp; Small Business Websites</Link>
               </div>
 
               <div className="dropdown-column">
                 <h4>E-Commerce Development</h4>               
-                <a href="/website-maintenance-performance-security">Conversion Optimization</a>
-                <a href="/seo-services">Payment Gateway Integration</a>
-                <a href="/ai-website-design-development">Shopify & WooCommerce Development</a>
-                <a href="/ecommerce-development-optimization">Custom E-Commerce Solutions</a>
-                <a href="/full-stack-web-development">Product & Inventory Management</a>  
+                <Link href="/seo-services">Payment Gateway Integration</Link>
+                <Link href="/full-stack-web-development">Product &amp; Inventory Management</Link>  
               </div>
 
               <div className="dropdown-column">
-                <h4>UI Development & Performance</h4>
-                <a href="/ai-web-application-development">Responsive Web Design</a>                
-                <a href="/ecommerce-development-optimization">React / Next.js Development</a>
-                <a href="/ai-software-development">Website Speed Optimization</a>               
-                <a href="/full-stack-web-development">HTML, CSS, JavaScript Development</a>
-                <a href="/ai-software-development">SEO-Friendly Development</a>
+                <h4>UI Development &amp; Performance</h4>
+                <Link href="/ai-software-development">Website Speed Optimization</Link>               
+                <Link href="/full-stack-web-development">HTML, CSS, JavaScript Development</Link>
               </div>
-
-              <div className="dropdown-column">
-                <h4>CMS & Maintenance</h4><br />
-                <a href="/website-maintenance-performance-security">WordPress Development</a>                                
-                <a href="/seo-services">Security Updates & Backups</a>
-                <a href="/website-maintenance-performance-security">Content Management Setup</a>
-                <a href="/full-stack-web-development">Website Maintenance & Support</a>
-                <a href="/seo-services">Headless CMS Solutions</a>  
-              </div>
-
-              {/*<div className="dropdown-column-last">
-                <span className="last-column3">Problems We Solve</span><br />
-                <span className="last-column-text3">Low ROI Marketing</span>  
-                <span className="last-column-text3">Poor User Experience & Engagement</span>
-                <span className="last-column-text3">Declining Traffic & Search Rankings</span>
-                <span className="last-column-text3">Low Website Conversions & Lead Generation Issues</span>
-                <span className="last-column-text3">Lack of Visibility on Google & Search Platforms</span>
-              </div>*/}
             </div>
           </div>
 
-          {/* Dropdown: SEO & Lead Generation (id: 1) */}
+          {/* Dropdown 3: SEO MARKETING (id: 1 - COMPACT) */}
           <div
-             className={`dropdown ${mobileDropdown === 1 ? "open" : ""} ${
-              activeDropdown === 1 ? "active" : ""
-            }`}
+            className={`dropdown dropdown-compact ${mobileDropdown === 1 ? "open" : ""} ${activeDropdown === 1 ? "active" : ""}`}
             {...dropdownHoverProps(1)}
           >
             <button
@@ -289,62 +361,20 @@ const Navbar = () => {
               onClick={() => handleDropdownButtonClick(1)}
               aria-expanded={activeDropdown === 1 || mobileDropdown === 1}
             >
-              SEO MARKETING ▾
+              SEO MARKETING <span className="arrow-indicator">▾</span>
             </button>
 
             <div className="dropdown-content" {...dropdownContentHoverProps}>
               <div className="dropdown-column">
-                <h4>SEO Strategy, Audits & Planning</h4>
-                <a href="/seo-services">Competitor Analysis</a>
-                <a href="/seo-services">SEO Audit & Website Analysis</a>
-                <a href="/seo-services">Keyword Research & Planning</a>               
-                <a href="/seo-services">Technical SEO Analysis & Assessment</a>
-                <a href="/seo-ai-search-optimization">SEO Roadmap & Strategy</a>
-              </div>
-
-              <div className="dropdown-column">
-                <h4>On-Page Optimization & Technical SEO</h4>
-                <a href="/seo-services">On-Page Optimization</a>
-                <a href="/seo-services">Technical SEO Enhancements & Fixes</a>
-                <a href="/seo-services">Schema Markup Implementation</a>
-                <a href="/seo-services">Mobile & Core Web Vitals Optimization</a>
-                <a href="/seo-services">Internal Linking Structure</a>
-              </div>
-
-              <div className="dropdown-column">
-                <h4>Off-Page & Authority Building</h4>
-                <a href="/ecommerce-development-optimization">Guest Posting & Outreach</a>
-                <a href="/ecommerce-development-optimization">Link Building & Backlink Strategy</a>                
-                <a href="/ecommerce-development-optimization">Local SEO & Google Business Optimization</a>
-                <a href="/seo-services">Brand Mentions & Citations</a>
-                <a href="/seo-services">Reputation Management</a>
-              </div>
-
-              <div className="dropdown-column">
-                <h4>Analytics & Growth Optimization</h4>
-                <a href="/seo-services">Conversion Tracking</a> 
-                <a href="/website-maintenance-performance-security">Google Analytics & Search Console Setup</a>                
-                <a href="/seo-services">Monthly Reporting & Insights</a>
-                <a href="/seo-services">Continuous Optimization & Scaling</a>
-                <a href="/seo-services">SEO Performance Tracking</a>
-              </div>
-
-              {/*<div className="dropdown-column-last">
-                <span className="last-column3">Proof & Insights</span><br />
-                <span className="last-column-text3">GEO & Search Trends</span>
-                <span className="last-column-text3">SEO Case Studies & Proven Results</span>
-                <span className="last-column-text3">Client Success Stories & Outcomes</span>
-                <span className="last-column-text3">SEO Experiments & Key Learnings</span>
-                <span className="last-column-text3">AI SEO vs Traditional SEO Insights</span>
-              </div>*/}
+                <Link href="/ecommerce-development-optimization">Local SEO &amp; Google Business Optimization</Link>
+                <Link href="/seo-services">Brand Mentions &amp; Citations</Link>
+              </div> 
             </div>
           </div>
 
-          {/* Dropdown: Who We Are (id: 4) */}
+          {/* Dropdown 4: WHO WE ARE (id: 4 - COMPACT) */}
           <div
-            className={`dropdown ${mobileDropdown === 4 ? "open" : ""} ${
-              activeDropdown === 4 ? "active" : ""
-            }`}
+            className={`dropdown dropdown-compact ${mobileDropdown === 4 ? "open" : ""} ${activeDropdown === 4 ? "active" : ""}`}
             {...dropdownHoverProps(4)}
           >
             <button
@@ -352,34 +382,49 @@ const Navbar = () => {
               onClick={() => handleDropdownButtonClick(4)}
               aria-expanded={activeDropdown === 4 || mobileDropdown === 4}
             >
-              WHO WE ARE ▾
+              WHO WE ARE <span className="arrow-indicator">▾</span>
             </button>
 
-            <div className="dropdown-content">
+            <div className="dropdown-content" {...dropdownContentHoverProps}>
               <div className="dropdown-column">
-                <h4>Who We Are</h4>
-                <a href="/about">About Us</a>
-                <a href="/contact">Contact Info</a>
+                <Link href="/about">About Us</Link>
+                <Link href="/contact-us">Careers</Link>
+                <Link href="/contact">Contact Info</Link>
               </div>
-
             </div>
           </div>
 
-          <button className="contact-btn" onClick={() => setIsPopupOpen(true)}>
-             Get a Proposal
-          </button>
-
-
-          {open && (
-            <button className="mobile-client-login-inside" onClick={handleClientLogin}>
-              Client Login
-            </button>
-          )}
+          {/* New Mail Contact Button (visible only in mobile drawer instead of Proposal) */}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="mobile-mail-btn">
+            <svg 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              style={{ marginRight: '8px', display: 'inline-block', verticalAlign: 'middle' }}
+            >
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            Mail Us
+          </a>
         </nav>
         
-        <ExpertPopup 
-        open={isPopupOpen} onClose={() => setIsPopupOpen(false)}/>
+        {/* Proposal button */}
+        <button className="contact-btn" onClick={() => setIsPopupOpen(true)}>
+          <FaPaperPlane className="contact-btn-icon" aria-hidden="true" />
+          Get a Proposal
+        </button>
+        </div>
 
+        {/* Modal Popup Connection */}
+        <ExpertPopup open={isPopupOpen} onClose={() => setIsPopupOpen(false)}/>
+
+        {/* Mobile Hamburger toggle bars */}
         <div className="hamburger" onClick={() => setOpen((s) => !s)}>
           <span className={open ? "bar rotate1" : "bar"}></span>
           <span className={open ? "bar hide" : "bar"}></span>

@@ -1,7 +1,11 @@
 // client/src/utils/api.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = `${
+  process.env.NEXT_PUBLIC_API_URL ||
+  process.env.REACT_APP_API_URL ||
+  'http://localhost:5000'
+}/api`;
 
 // Create axios instance
 const api = axios.create({
@@ -14,6 +18,10 @@ const api = axios.create({
 // Add token to requests if it exists
 api.interceptors.request.use(
   (config) => {
+    if (typeof window === 'undefined') {
+      return config;
+    }
+
     const token = localStorage.getItem('token');
     if (token) {
       config.headers['x-auth-token'] = token;

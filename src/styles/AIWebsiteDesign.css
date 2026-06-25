@@ -20,7 +20,7 @@
     var(--primary) 0%,
     var(--primary-light) 100%
   );
-  padding: 5rem 2rem;
+  padding: 6rem 2rem;
   overflow: hidden;
 }
 

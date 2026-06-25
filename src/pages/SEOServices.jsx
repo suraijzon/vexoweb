@@ -1,162 +1,411 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import '../styles/SEOServices.css';
-import Breadcrumb from '../components/Breadcrumb';
+import ContactSection from '../components/ContactSection';
+import HeroTrustText from '../components/HeroTrustText';
+import TechnologyStackSection from '../components/TechnologyStackSection';
+import { SERVICE_CONTACT } from '../content/serviceContactContent';
+import { SERVICE_TECH_STACK } from '../content/serviceTechStackContent';
+import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
 
 const SEOServices = () => {
-  const builtFor = [
-    { icon: "🔍", text: "Search engines" },
-    { icon: "👥", text: "Real users" },
-    { icon: "📊", text: "Measurable business outcomes" }
+  const [faqOpenIndex, setFaqOpenIndex] = useState(null);
+
+  // 2. Brutalist Gallery Stats
+  const brutalistStats = [
+    { value: "+145%", label: "Organic Search Growth", color: "var(--color-burgundy)" },
+    { value: "3.2x", label: "Lead Conversion Lift", color: "var(--color-pink)" },
+    { value: "+88%", label: "Topical Authority Score", color: "var(--color-orange-coral)" }
   ];
 
-  const whoNeeds = [
-    "Businesses not ranking on Google",
-    "Websites experiencing traffic drops",
-    "Companies relying on organic leads",
-    "E-commerce stores competing in search",
-    "Service businesses targeting local or global customers"
+  // 3. Staircase Target Audience
+  const staircaseAudience = [
+    { number: "01", title: "Invisible Brands", text: "Businesses struggling to gain traction or rank on competitive search pages.", color: "var(--color-pink)" },
+    { number: "02", title: "Traffic Drop Recovery", text: "Sites suffering sudden drop-offs from algorithms or core indexing changes.", color: "var(--color-orange-coral)" },
+    { number: "03", title: "Conversion Mismatch", text: "Websites capturing clicks but failing to convert visitors into qualified leads.", color: "var(--color-burgundy)" },
+    { number: "04", title: "E-commerce Competitors", text: "Online retailers looking to scale organic sales via automated schema channels.", color: "var(--color-rose)" },
+    { number: "05", title: "Local Service Providers", text: "Businesses targeting high-intent localized search queries in specific regions.", color: "var(--color-warm-yellow)" }
   ];
 
-  const problems = [
-    { icon: "📉", text: "Poor keyword rankings" },
-    { icon: "🚫", text: "Low organic traffic" },
-    { icon: "⚠️", text: "Technical website issues" },
-    { icon: "📝", text: "Weak content performance" },
-    { icon: "💔", text: "Low conversion from search traffic" },
-    { icon: "🚨", text: "SEO penalties or visibility loss" }
+  // 4. Problems Solved (3D Perspective Deck)
+  const problemsDeck = [
+    { icon: "📉", tag: "RANK_LEAK", title: "Poor Rankings", text: "Failing to appear in valuable high-intent user query slots.", color: "var(--color-burgundy)" },
+    { icon: "🚫", tag: "NO_TRAFFIC", title: "Low Organic Traffic", text: "Unoptimized search footprint driving zero transactional volume.", color: "var(--color-orange-coral)" },
+    { icon: "⚠️", tag: "TECH_ERR", title: "Technical Issues", text: "Crawl blocks, duplicate indexing paths, and broken server webhooks.", color: "var(--color-pink)" },
+    { icon: "📝", tag: "WEAK_CONTENT", title: "Thin Performance", text: "Content that fails to satisfy algorithmic search intent guidelines.", color: "var(--color-rose)" },
+    { icon: "💔", tag: "CONV_LEAK", title: "Zero Lead Conversions", text: "Capturing bulk unqualified traffic that immediately bounces.", color: "var(--color-warm-yellow)" },
+    { icon: "🚨", tag: "PENALTY_RISK", title: "Algorithmic Penalty", text: "Loss of visibility due to unoptimized manual action updates.", color: "var(--color-pink)" }
   ];
 
-  const services = [
-    "SEO Audits & Strategy",
-    "Technical SEO Optimization",
-    "On-Page SEO & Content Optimization",
-    "Keyword Research & Search Intent Mapping",
-    "Local SEO (Google Business Profile Optimization)",
-    "E-commerce SEO",
-    "Site Structure & Internal Linking",
-    "Page Speed & Core Web Vitals Optimization",
-    "SEO Reporting & Performance Tracking"
-  ];
-
-  const comparison = [
-    { traditional: "Google rankings", ai: "AI answers & visibility" },
-    { traditional: "Keywords & pages", ai: "Entities & understanding" },
-    { traditional: "Click-based traffic", ai: "Brand presence" },
-    { traditional: "Long-term growth", ai: "Future-proofing" }
-  ];
-
-  const processSteps = [
-    {
-      number: "1",
-      title: "SEO Audit & Benchmarking",
-      description: "We analyze technical health, competitors, and opportunities."
+  // 5. Capabilities Bento Services (Asymmetric Comic Strip Grid)
+  const bentoServices = [
+    { 
+      size: "bento-large", 
+      num: "01", 
+      title: "Custom Technical SEO Audits & Strategy", 
+      desc: "We perform a thorough diagnostic evaluation of your website backend crawl topology. This includes optimizing raw sitemap routing, resolving rendering leaks, auditing indexation flags, and mapping high-speed API performance layers to secure search visibility.", 
+      category: "TECHNICAL ENGINEERING", 
+      accent: "var(--color-warm-yellow)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="service-svg">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="2" y1="12" x2="22" y2="12" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+      )
     },
-    {
-      number: "2",
-      title: "Strategy & Keyword Planning",
-      description: "We map keywords to search intent and business goals."
+    { 
+      size: "bento-small-top", 
+      num: "02", 
+      title: "On-Page SEO & Topical Content", 
+      desc: "Optimizing content layout structure and mapping structured semantic entities.", 
+      category: "SEMANTIC LAYERS", 
+      accent: "var(--color-pink)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="service-svg">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+      )
     },
-    {
-      number: "3",
-      title: "Technical & On-Page Optimization",
-      description: "We fix issues and optimize content and structure."
+    { 
+      size: "bento-small-bottom", 
+      num: "03", 
+      title: "Core Web Vitals Optimization", 
+      desc: "Resolving layout shifts, caching payloads, and boosting page speed.", 
+      category: "PERFORMANCE", 
+      accent: "var(--color-rose)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="service-svg">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+      )
     },
-    {
-      number: "4",
-      title: "Content & Authority Growth",
-      description: "We strengthen topical authority and relevance."
+    { 
+      size: "bento-wide-top", 
+      num: "04", 
+      title: "Keyword Intent & Entity Mapping", 
+      desc: "Analyzing user intents and structuring keyword matrices designed to capture qualified prospects across transaction funnels.", 
+      category: "AUDIENCE TARGETING", 
+      accent: "var(--color-burgundy)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="service-svg">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+          <path d="M12 6V12L16 14" />
+        </svg>
+      )
     },
-    {
-      number: "5",
-      title: "Tracking & Optimization",
-      description: "We monitor rankings, traffic, and conversions."
+    { 
+      size: "bento-wide-bottom", 
+      num: "05", 
+      title: "Local & E-commerce Schema Markup", 
+      desc: "Deploying automated structured JSON-LD data sitemaps and localized Google Business Profile synchronization paths.", 
+      category: "DATA ENHANCEMENT", 
+      accent: "var(--color-orange-coral)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="service-svg">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+        </svg>
+      )
     }
   ];
 
-  const tools = [
-    "Google Search Console",
-    "Google Analytics",
-    "Keyword & rank tracking tools",
-    "Technical SEO audit tools",
-    "Performance monitoring systems"
+  // 6. Tools Supported (Pipeline train nodes)
+  const toolsPipeline = [
+    { title: "Search Console", desc: "Google monitoring index and crawl diagnostics.", tag: "INDEXING", color: "var(--color-burgundy)" },
+    { title: "Google Analytics", desc: "Tracking traffic paths, active goals, and behaviors.", tag: "BEHAVIORS", color: "var(--color-orange-coral)" },
+    { title: "Technical Crawlers", desc: "Performing automated architecture health scans.", tag: "TECHNICAL", color: "var(--color-pink)" },
+    { title: "Rank Tracking", desc: "Real-time visibility index reporting updates.", tag: "METRICS", color: "var(--color-warm-yellow)" }
   ];
 
-  const whyChoose = [
-    "Strong technical SEO foundation",
-    "Business-focused keyword strategy",
-    "Transparent reporting",
-    "No black-hat tactics",
-    "SEO aligned with AI search evolution"
+  // 7. Comparison Side-By-Side Data
+  const comparison = [
+    { basic: "Targeting simple rank positions", optimized: "Focused on AI answers & global search footprints" },
+    { basic: "Pruning isolated keyword strings", optimized: "Structuring semantic entities & topical coverage" },
+    { basic: "Chasing click volume alone", optimized: "Fusing search intent with lead capture flows" },
+    { basic: "Short-term ad campaigns", optimized: "Continuous long-term visibility infrastructure" }
   ];
 
+  // 8. Process Timeline (Alternating Industrial Track)
+  const processSteps = [
+    {
+      number: "1",
+      title: "Crawl Diagnostics",
+      description: "Evaluating database index health, server responses, and technical sitemaps.",
+      color: "var(--color-warm-yellow)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      )
+    },
+    {
+      number: "2",
+      title: "Topical Strategy",
+      description: "Mapping keyword intent matrices to solve consumer search needs.",
+      color: "var(--color-burgundy)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <line x1="9" y1="3" x2="9" y2="21" />
+          <line x1="15" y1="3" x2="15" y2="21" />
+        </svg>
+      )
+    },
+    {
+      number: "3",
+      title: "On-Page refactoring",
+      description: "Optimizing content structural loops and cleaning HTML payload scripts.",
+      color: "var(--color-pink)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+      )
+    },
+    {
+      number: "4",
+      title: "Topical Authority",
+      description: "Executing link earning architectures and strengthening index relevance.",
+      color: "var(--color-rose)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="m9 11 2 2 4-4" />
+        </svg>
+      )
+    },
+    {
+      number: "5",
+      title: "Goal Tracking",
+      description: "Continuous rank, crawl budget, and transactional monitoring.",
+      color: "var(--color-orange-coral)",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5" />
+          <path d="M12 12l9-9-3 12-3-3-3 3-3-3z" />
+        </svg>
+      )
+    }
+  ];
+
+  // 9. Why Choose Mosaic Data
+  const whyChooseMosaic = [
+    { size: "why-bento-large", num: "01", title: "Strong Technical Foundation", desc: "We focus our optimizations on resolving rendering scripts and database query bottlenecks to guarantee clean indexation parameters.", color: "var(--color-pink)" },
+    { size: "why-bento-small", num: "02", title: "Intent Mapping", desc: "No vanity metrics. Every query we target is aligned with active purchase actions.", color: "var(--color-orange-coral)" },
+    { size: "why-bento-small", num: "03", title: "AI Search Alignment", desc: "Structuring schema data to ensure visibility inside cognitive platforms.", color: "var(--color-burgundy)" },
+    { size: "why-bento-medium", num: "04", title: "White-Hat Integrity", desc: "We use Best-Practice standards that build long-term value and resist indexing drops.", color: "var(--color-rose)" },
+    { size: "why-bento-wide", num: "05", title: "Transparent Metrics", desc: "Direct dashboard access tracking crawl, sitemap, and organic revenue metrics.", color: "var(--color-warm-yellow)" }
+  ];
+
+  // 10. FAQ Louver Dataset
   const faqs = [
     {
-      question: "How long does SEO take?",
-      answer: "SEO is a long-term strategy. Initial improvements may appear in weeks, but strong results typically take 3–6 months."
+      question: "How long does SEO take to show results?",
+      answer: "SEO is an incremental growth framework. Initial technical upgrades can improve sitemap indexation in weeks, but major competitive rankings typically require 3 to 6 months."
     },
     {
-      question: "Do you guarantee rankings?",
-      answer: "No ethical SEO provider can guarantee rankings. We guarantee best-practice execution and transparency."
+      question: "Do you guarantee search engine rankings?",
+      answer: "Ethical SEO providers cannot guarantee specific search positions due to continuous ranking updates. We guarantee structured, best-practice technical implementation and performance transparency."
     },
     {
-      question: "Is SEO still worth it with AI search?",
-      answer: "Yes. SEO remains critical and works alongside AI search optimization."
+      question: "Is SEO still relevant with the evolution of AI search?",
+      answer: "Yes. Algorithmic search models rely heavily on crawl structures, JSON-LD schemas, and entity authority to generate and source answers. Optimization remains critical for brand presence."
     },
     {
-      question: "Do you offer local and e-commerce SEO?",
-      answer: "Yes. We provide both local SEO and e-commerce SEO services."
+      question: "Do you offer localized and e-commerce SEO optimizations?",
+      answer: "Yes. We design and integrate structured local Google Business Profile schemas and optimize massive product catalogs for scalable commerce engines."
     }
   ];
 
   return (
     <div className="seos__wrapper">
       <Navbar />
-      <Breadcrumb />
 
-      {/* Hero Section */}
-      <section className="seos__hero">
-        <div className="seos__hero_elements">
-          <div className="seos__hero_circle seos__circle_1"></div>
-          <div className="seos__hero_circle seos__circle_2"></div>
-          <div className="seos__hero_circle seos__circle_3"></div>
-        </div>
-        <div className="seos__hero_container">
-          <div className="seos__hero_tag">
-            <span className="seos__tag_icon">🔍</span>
-            SEO Services
+      {/* HERO SECTION */}
+      <section 
+        className="ecd__hero_centered_layout"
+        style={{
+          paddingTop: "190px", // Offsets the fixed header on both desktop and mobile
+          position: "relative"
+        }}
+      >
+        <div className="ecd__hero_overlay_centered"></div>
+        <div className="ecd__hero_container_centered">
+          
+          {/* Local SEO Eyebrow */}
+          <div className="ecd__badge_pill_centered">
+            <span className="badge_dot_indicator">●</span>
+            <span className="hero-badge-text">
+              <span className="hero-badge-accent">Local SEO Services</span>
+              <span className="hero-badge-light"> — Eastern Province, Sri Lanka</span>
+            </span>
           </div>
-          <h1 className="seos__hero_title">
-            SEO Services That Increase Visibility, Traffic & Qualified Leads
+
+          <h1 className="seos__h1">
+            SEO Services for Businesses in{" "}
+            <span className="highlight-text">Eastern Province</span>
           </h1>
-          <p className="seos__hero_text">
-            We provide professional SEO services designed to help businesses rank higher on Google, 
-            attract qualified traffic, and generate consistent leads. Our approach combines technical 
-            SEO, content optimization, and data-driven strategy to deliver long-term, sustainable results.
+
+          {/* Localized Subtitle */}
+          <p className="ecd__hero_text_centered">
+            We help businesses in Kattankudy and across Eastern Province rank higher on Google — 
+            so local customers find you first, not your competitors. Our data-driven approach 
+            turns search visibility into consistent local leads.
           </p>
-          <a href="#contact" className="seos__hero_btn">
-             Get a Free SEO Audit
-          </a>
+
+          {/* Buttons */}
+          <div className="ecd__hero_buttons_centered">
+            <a href="#audit" className="ecd__btn_primary_centered">
+              Get Free SEO Audit
+            </a>
+            <a href="#work" className="ecd__btn_secondary_centered">
+              See Local Results ↓
+            </a>
+          </div>
+
+          <HeroTrustText text={HERO_TRUST_TEXT.seo} />
+
         </div>
       </section>
 
-      {/* What Are SEO Services */}
-      <section className="seos__what_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">What Are SEO Services?</h2>
-          <p className="seos__description">
-            SEO services focus on optimizing your website so it ranks higher in search engines for 
-            relevant keywords your customers are actively searching for. Unlike short-term ads, SEO 
-            builds long-term visibility and trust that compounds over time.
+      {/* 2. OVERVIEW: THE BRUTALIST GALLERY BLOCK (White Theme) */}
+      <section className="fswd__section_wrapper ecd-bg-white ecd-brutalist-section">
+        <div className="ecd-brutalist-ticker">
+          <div className="ticker-wrapper">
+            <span>INDEX MATRICES ● ORGANIC TRAFFIC GROWTH ● SEMANTIC ENTITIES ● CORE PERFORMANCE SCHEMAS ● </span>
+            <span>INDEX MATRICES ● ORGANIC TRAFFIC GROWTH ● SEMANTIC ENTITIES ● CORE PERFORMANCE SCHEMAS ● </span>
+          </div>
+        </div>
+        <div className="ecd-brutalist-content">
+          <span className="fswd__label" style={{ color: "var(--color-burgundy)" }}>Audits</span>
+          <h2 className="seos__h2">What Are SEO Services?</h2>
+          <p className="ecd-brutalist-lead-desc">
+            SEO services optimize your codebase and database schema structures so your site ranks higher in organic search pipelines. Unlike temporary PPC models, our indexing setups build sustainable visibility that compounds over time.
           </p>
-          <div className="seos__built_for">
-            <h3>Our SEO strategies are built for:</h3>
-            <div className="seos__built_grid">
-              {builtFor.map((item, index) => (
-                <div key={index} className="seos__built_item">
-                  <span className="seos__built_icon">{item.icon}</span>
-                  <span className="seos__built_text">{item.text}</span>
+          
+          <div className="ecd-brutalist-stats-row">
+            {brutalistStats.map((stat, index) => (
+              <div key={index} className="ecd-brutalist-stat-panel" style={{ "--panel-accent": stat.color }}>
+                <span className="panel-stat-val">{stat.value}</span>
+                <span className="panel-stat-label">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. TARGET AUDIENCE: THE STEPPED SLANTED COLUMNS (Light Gray Theme) */}
+      <section className="fswd__section_wrapper ecd-bg-gray">
+        <div className="ecd-stepped-audience-layout">
+          <div className="ecd-stepped-intro">
+            <span className="fswd__label" style={{ color: "var(--color-pink)" }}>Target Profiles</span>
+            <h2 className="seos__h2">Who Is This Service For?</h2>
+            
+            <div className="ecd-audience-stairs">
+              {staircaseAudience.map((audience, index) => (
+                <div key={index} className="staircase-step" style={{ "--step-index": index, "--step-accent": audience.color }}>
+                  <div className="staircase-num">{audience.number}</div>
+                  <div className="staircase-text">
+                    <h4 className="seos__h4">{audience.title}</h4>
+                    <p>{audience.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="ecd-stepped-warning-col">
+            <div className="staircase-static-terminal">
+              <div className="terminal-header">
+                <span className="terminal-dot"></span>
+                <span>CRAWL_DIAGNOSTIC_ALERT</span>
+              </div>
+              <div className="terminal-body">
+                <p className="warn-title">CRAWL PENALTY DETECTED:</p>
+                <p className="warn-text">If your website has experienced traffic drops, unoptimized schema paths, or broken internal link hierarchies, technical optimization is required immediately.</p>
+                <span className="terminal-cursor">_</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. PROBLEMS WE SOLVE: THE 3D LAYERED PERSPECTIVE DECK (Dark Theme) */}
+      <section className="fswd__section_wrapper ecd-bg-dark">
+        <div className="ecd-isometric-problems-layout">
+          <div className="section-header-centered">
+            <span className="fswd__label" style={{ color: "var(--color-pink)" }}>Crawl Friction Points</span>
+            <h2 className="seos__h2">Problems We Solve</h2>
+          </div>
+          
+          <div className="ecd-isometric-deck">
+            {problemsDeck.map((problem, index) => (
+              <div key={index} className="ecd-isometric-deck-card" style={{ "--glow-accent": problem.color }}>
+                <div className="card-isometric-meta">
+                  <span className="problem-label" style={{ backgroundColor: problem.color, color: '#ffffff' }}>
+                    {problem.tag}
+                  </span>
+                  <div className="ecd__isometric_icon">{problem.icon}</div>
+                </div>
+                <h3 className="seos__h3">{problem.title}</h3>
+                <p>{problem.text}</p>
+              </div>
+            ))}
+          </div>
+          
+          <div className="ecd-problems-deck-statement">
+            <p>We fix what is holding your site back — technically and strategically.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. CAPABILITIES BENTO SERVICES: THE ASYMMETRIC COMIC STRIP (White Theme) */}
+      <section className="fswd__section_wrapper ecd-bg-white">
+        <div className="bento-comic-strip-container">
+          <div className="section-header-centered">
+            <span className="fswd__label" style={{ color: "var(--color-warm-yellow)" }}>Capabilities Bento</span>
+            <h2 className="seos__h2">Our SEO Services</h2>
+          </div>
+
+          <div className="bento-comic-grid">
+            {bentoServices.map((service, index) => (
+              <div key={index} className={`comic-bento-card ${service.size}`} style={{ "--card-accent": service.accent }}>
+                <div className="card-top-header">
+                  <div className="card-icon-frame" style={{ color: service.accent }}>{service.icon}</div>
+                  <span className="service-badge-tag">{service.category}</span>
+                </div>
+                <h3 className="seos__h3">{service.title}</h3>
+                <p>{service.desc}</p>
+                <div className="bento-oversized-index">{service.num}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. PLATFORMS SUPPORTED: THE HORIZONTAL PIPELINE STRIP (Soft Blue Theme) */}
+      <section className="fswd__section_wrapper ecd-bg-soft-blue">
+        <div className="ecd-platforms-strip-container">
+          <div className="section-header-centered">
+            <span className="fswd__label" style={{ color: "var(--color-rose)" }}>Integrations</span>
+            <h2 className="seos__h2">Tools & Platforms We Use</h2>
+          </div>
+
+          <div className="ecd-pipeline-strip-flow">
+            <div className="ecd-pipeline-vector-line"></div>
+            
+            <div className="ecd-pipeline-rail">
+              {toolsPipeline.map((plat, index) => (
+                <div key={index} className="ecd-pipeline-node" style={{ "--plat-color": plat.color }}>
+                  <div className="pipeline-dot">
+                    <span className="pipeline-dot-inner"></span>
+                  </div>
+                  <span className="pipeline-tag" style={{ backgroundColor: plat.color }}>{plat.tag}</span>
+                  <h4 className="seos__h4">{plat.title}</h4>
+                  <p>{plat.desc}</p>
                 </div>
               ))}
             </div>
@@ -164,163 +413,145 @@ const SEOServices = () => {
         </div>
       </section>
 
-      {/* Who Needs */}
-      <section className="seos__audience_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">Who Needs SEO Services?</h2>
-          <p className="seos__subtitle">This service is ideal for:</p>
-          <div className="seos__audience_list">
-            {whoNeeds.map((item, index) => (
-              <div key={index} className="seos__audience_item">
-                <span className="seos__audience_dot"></span>
-                <span>{item}</span>
-              </div>
-            ))}
+      {/* 7. COMPARISON MATRIX: THE SPLIT-BLADE SCREEN (White Theme) */}
+      <section className="fswd__section_wrapper ecd-bg-white">
+        <div className="ecd-split-blade-matrix">
+          <div className="section-header-centered">
+            <span className="fswd__label" style={{ color: "var(--color-pink)" }}>Comparative Reality</span>
+            <h2 className="seos__h2">SEO vs AI Search Optimization (Important Difference)</h2>
           </div>
-          <p className="seos__audience_footer">
-            If your customers search online before buying, SEO is essential.
-          </p>
-        </div>
-      </section>
 
-      {/* Problems */}
-      <section className="seos__problems_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">Problems We Solve with SEO</h2>
-          <div className="seos__problems_grid">
-            {problems.map((problem, index) => (
-              <div key={index} className="seos__problem_card">
-                <div className="seos__problem_icon">{problem.icon}</div>
-                <p className="seos__problem_text">{problem.text}</p>
-              </div>
-            ))}
-          </div>
-          <p className="seos__problems_note">
-            We fix what's holding your site back — technically and strategically.
-          </p>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="seos__services_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">Our SEO Services</h2>
-          <p className="seos__subtitle">
-            We offer complete end-to-end SEO services, including:
-          </p>
-          <div className="seos__services_grid">
-            {services.map((service, index) => (
-              <div key={index} className="seos__service_item">
-                <div className="seos__service_check">✓</div>
-                <span>{service}</span>
-              </div>
-            ))}
-          </div>
-          <p className="seos__services_footer">
-            Every SEO campaign is custom-built, not templated.
-          </p>
-        </div>
-      </section>
-
-      {/* Comparison */}
-      <section className="seos__comparison_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">SEO vs AI Search Optimization (Important Difference)</h2>
-          <div className="seos__comparison_wrapper">
-            <div className="seos__comparison_col seos__col_traditional">
-              <h3>Traditional SEO</h3>
+          <div className="ecd-split-blade-table">
+            {/* Left Side: Traditional SEO */}
+            <div className="ecd-blade-col blade-left-basic">
+              <h4 className="seos__h4">Traditional SEO</h4>
               {comparison.map((item, index) => (
-                <div key={index} className="seos__comparison_row">{item.traditional}</div>
+                <div key={index} className="ecd-blade-row">
+                  <span className="blade-icon-cross">✕</span>
+                  <p>{item.basic}</p>
+                </div>
               ))}
             </div>
-            <div className="seos__comparison_vs">VS</div>
-            <div className="seos__comparison_col seos__col_ai">
-              <h3>AI Search Optimization</h3>
+
+            {/* Neon Dividing Bar */}
+            <div className="ecd-blade-center-divider">
+              <div className="blade-neon-dot"></div>
+            </div>
+
+            {/* Right Side: AI Search Optimization */}
+            <div className="ecd-blade-col blade-right-optimized">
+              <h4 className="seos__h4">AI Search Optimization</h4>
               {comparison.map((item, index) => (
-                <div key={index} className="seos__comparison_row">{item.ai}</div>
+                <div key={index} className="ecd-blade-row">
+                  <span className="blade-icon-check">✓</span>
+                  <p>{item.optimized}</p>
+                </div>
               ))}
             </div>
           </div>
-          <div className="seos__comparison_cta">
-             For AI-driven visibility, see our <a href="/ai-search-optimization">AI Search Optimization service</a>.
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="seos__process_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">Our SEO Process</h2>
-          <div className="seos__process_grid">
-            {processSteps.map((step, index) => (
-              <div key={index} className="seos__process_card">
-                <div className="seos__process_badge">{step.number}</div>
-                <h3 className="seos__process_title">{step.title}</h3>
-                <p className="seos__process_desc">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tools */}
-      <section className="seos__tools_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">Tools & Platforms We Use</h2>
-          <div className="seos__tools_grid">
-            {tools.map((tool, index) => (
-              <div key={index} className="seos__tool_badge">{tool}</div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose */}
-      <section className="seos__why_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">Why Choose ZonzocTech for SEO Services?</h2>
-          <div className="seos__why_list">
-            {whyChoose.map((reason, index) => (
-              <div key={index} className="seos__why_item">
-                <span className="seos__why_icon">★</span>
-                <span>{reason}</span>
-              </div>
-            ))}
-          </div>
-          <p className="seos__why_footer">
-            We focus on rankings that convert, not vanity metrics.
+          <p className="ecd__comparison_tagline_dark">
+            For AI-driven visibility, see our <a href="/ai-search-optimization">AI Search Optimization service</a>.
           </p>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="seos__faq_section">
-        <div className="seos__container">
-          <h2 className="seos__heading">Frequently Asked Questions</h2>
-          <div className="seos__faq_list">
-            {faqs.map((faq, index) => (
-              <div key={index} className="seos__faq_item">
-                <h4 className="seos__faq_question">{faq.question}</h4>
-                <p className="seos__faq_answer">{faq.answer}</p>
+      {/* 8. DEVELOPMENT PROCESS: THE ALTERNATING INDUSTRIAL TRACK (Gray Theme) */}
+      <section className="fswd__section_wrapper ecd-bg-gray">
+        <div className="ecd-alternating-track-container">
+          <div className="section-header-centered">
+            <span className="fswd__label" style={{ color: "var(--color-burgundy)" }}>Process Pipeline</span>
+            <h2 className="seos__h2">Our SEO Process</h2>
+          </div>
+
+          <div className="ecd-alternating-timeline">
+            <div className="alternating-spine-track"></div>
+            
+            {processSteps.map((step, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div key={index} className={`timeline-track-node ${isEven ? 'anchor-left' : 'anchor-right'}`} style={{ "--step-color": step.color }}>
+                  {/* Spine Indicator Node */}
+                  <div className="track-spine-bullet">
+                    <span className="spine-bullet-inner"></span>
+                  </div>
+
+                  {/* Structural Alternating Card wrapper */}
+                  <div className="track-floating-card">
+                    <div className="track-card-header">
+                      <span className="track-card-index" style={{ backgroundColor: step.color }}>{step.number}</span>
+                      <div className="track-card-icon">{step.icon}</div>
+                    </div>
+                    <h3 className="seos__h3">{step.title}</h3>
+                    <p>{step.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. WHY CHOOSE US: THE MODERN MINIMALIST MOSAIC */}
+      <section className="fswd__section_wrapper ecd-bg-split">
+        <div className="ecd-modern-mosaic-layout">
+          <div className="section-header-centered">
+            <span className="fswd__label" style={{ color: "var(--color-orange-coral)" }}>System Value</span>
+            <h2 className="seos__h2">Why Choose Vexoweb for SEO?</h2>
+          </div>
+
+          <div className="ecd-mosaic-grid">
+            {whyChooseMosaic.map((mosaic, index) => (
+              <div key={index} className={`ecd-mosaic-tile ${mosaic.size}`} style={{ "--tile-accent": mosaic.color }}>
+                <div className="ecd-mosaic-meta">
+                  <span className="ecd-mosaic-index" style={{ color: mosaic.color, backgroundColor: 'rgba(255,255,255,0.03)' }}>
+                    0{index + 1}
+                  </span>
+                </div>
+                <h3 className="seos__h3">{mosaic.title}</h3>
+                <p>{mosaic.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="seos__cta_section">
-        <div className="seos__container">
-          <h2 className="seos__cta_title">Ready to Grow with SEO?</h2>
-          <p className="seos__cta_text">
-            If you want consistent traffic and leads from search engines, let's start with a clear 
-            SEO strategy.
-          </p>
-          <a href="#contact" className="seos__cta_btn">
-             Get a Free SEO Audit
-          </a>
+      {/* 10. FAQs: THE EDGE-TO-EDGE ARCHITECTURAL LOUVERS (White Theme) */}
+      <section className="fswd__section_wrapper ecd-bg-white">
+        <div className="ecd-louvers-container">
+          <div className="section-header-centered">
+            <span className="fswd__label" style={{ color: "var(--color-warm-yellow)" }}>Knowledge Base</span>
+            <h2 className="seos__h2">Frequently Asked Questions</h2>
+          </div>
+
+          <div className="ecd-louvers-list">
+            {faqs.map((faq, index) => {
+              const isOpen = faqOpenIndex === index;
+              return (
+                <div key={index} className={`ecd-louver-row-bar ${isOpen ? 'active' : ''}`}>
+                  <button className="ecd-louver-header" onClick={() => setFaqOpenIndex(isOpen ? null : index)}>
+                    <h4 className="seos__h4">{faq.question}</h4>
+                    <div className="ecd-louver-toggle-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                    </div>
+                  </button>
+                  <div className="ecd-louver-content">
+                    <div className="ecd-louver-inner-desc">
+                      <p>{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
+
+      <TechnologyStackSection {...SERVICE_TECH_STACK.seo} />
+
+      <ContactSection {...SERVICE_CONTACT.seo} variant="service" />
 
       <Footer />
     </div>

@@ -1,10 +1,24 @@
-import React from 'react';
-import Navbar from '../components//Navbar';
+import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import '../styles/EcommercePage.css';
-import Breadcrumb from "../components/Breadcrumb";
+import ContactSection from '../components/ContactSection';
+import HeroTrustText from '../components/HeroTrustText';
+import TechnologyStackSection from '../components/TechnologyStackSection';
+import { SERVICE_CONTACT } from '../content/serviceContactContent';
+import { SERVICE_TECH_STACK } from '../content/serviceTechStackContent';
+import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
+import aiRobotImage from '../assets/icons/ecd-ai-robot.png';
+
+// Global CSS import removed from here since it is loaded in pages/_app.js [1]
 
 const EcommerceDev = () => {
+  // FAQ Accordion State
+  const [activeFaq, setActiveFaq] = useState(null);
+
+  const toggleFaq = (index) => {
+    setActiveFaq(activeFaq === index ? null : index);
+  };
+
   const targetAudience = [
     "New e-commerce brands launching online",
     "Existing stores with low conversion rates",
@@ -12,7 +26,7 @@ const EcommerceDev = () => {
     "Brands needing custom features or integrations",
     "E-commerce owners scaling operations"
   ];
-
+const colors = ["#0F172A", "#1E293B", "#334155", "#475569", "#64748B"];
   const problems = [
     { icon: "📉", text: "Low conversion rates" },
     { icon: "🛒", text: "Cart abandonment" },
@@ -107,19 +121,21 @@ const EcommerceDev = () => {
   return (
     <div className="ecd__wrapper">
       <Navbar />
-      <Breadcrumb />
 
-
-      {/* Hero Section */}
+      {/* 1️⃣ Hero Section */}
       <section className="ecd__hero">
         <div className="ecd__hero_pattern"></div>
         <div className="ecd__hero_container">
           <div className="ecd__hero_badge">
-            <span className="ecd__badge_icon">🛍️</span>
-            E-commerce Development & Optimization
+            <span className="ecd__badge_dot"></span>
+            <span className="hero-badge-text">
+              <span className="hero-badge-accent">E-commerce Development</span>
+              <span className="hero-badge-light"> — Eastern Province, Sri Lanka</span>
+            </span>
           </div>
-          <h1 className="ecd__hero_title">
-            High-Performance E-commerce Development & Optimization That Increases Sales
+          <h1 className="ecd__h1">
+            High-Performance E-commerce Development &amp; Optimization in{" "}
+            <span className="highlight-text">Eastern Province</span>
           </h1>
           <p className="ecd__hero_text">
             We provide e-commerce development and optimization services designed to help online stores 
@@ -127,55 +143,111 @@ const EcommerceDev = () => {
             to performance, conversion, and automation enhancements, we build e-commerce platforms that 
             are fast, secure, and optimized for sales.
           </p>
-          <a href="#contact" className="ecd__hero_cta">
-            Get a Free E-commerce Growth Audit
-          </a>
+          <div className="ecd__hero_actions">
+            <a href="#contact" className="ecd__hero_cta_primary">
+              Get Free Consultation
+            </a>
+            <a href="#case-studies" className="ecd__hero_cta_secondary">
+              View Portfolio <span className="arrow">→</span>
+            </a>
+          </div>
+          <HeroTrustText text={HERO_TRUST_TEXT.ecommerce} />
         </div>
       </section>
 
-      {/* What Is Section */}
+      {/* What Section */}
       <section className="ecd__what_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading">What Is E-commerce Development & Optimization?</h2>
-          <p className="ecd__description">
-            E-commerce development and optimization involves building and improving online stores so 
-            they load faster, convert better, and scale efficiently. It goes beyond design — focusing 
-            on performance, checkout flow, automation, SEO, and customer experience.
-          </p>
-          <div className="ecd__impact_box">
-            A well-optimized store directly impacts revenue.
+        <div className="ecd__bg_blur ecd__blur1"></div>
+        <div className="ecd__bg_blur ecd__blur2"></div>
+        <div className="ecd__container ecd__what_wrapper">
+          <div className="ecd__content">
+            <span className="ecd__label">Modern E-commerce Solutions</span>
+            <h2 className="ecd__h2">
+              Build Faster.<br />Convert Better.<br />Scale Smarter.
+            </h2>
+            <p className="ecd__description">
+              We create optimized e-commerce experiences focused on speed,
+              conversions, automation, SEO, and long-term scalability.
+            </p>
+            <div className="ecd__impact">
+              Revenue-focused development for modern online brands.
+            </div>
+          </div>
+          <div className="ecd__floating_cards">
+            <div className="ecd__glass_card card1">
+              <h3 className="ecd__h3">⚡ Lightning Speed</h3>
+              <p>Fast-loading storefronts that improve retention.</p>
+            </div>
+            <div className="ecd__glass_card card2">
+              <h3 className="ecd__h3">🛒 Conversion UX</h3>
+              <p>Optimized checkout experiences that increase sales.</p>
+            </div>
+            <div className="ecd__glass_card card3">
+              <h3 className="ecd__h3">📈 SEO Growth</h3>
+              <p>Scalable architecture designed for organic growth.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Target Audience */}
-      <section className="ecd__audience_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading2">Who Is This Service For?</h2>
-          <p className="ecd__subtitle">This service is ideal for:</p>
-          <div className="ecd__audience_list">
-            {targetAudience.map((item, index) => (
-              <div key={index} className="ecd__audience_item">
-                <span className="ecd__audience_bullet">•</span>
-                <span>{item}</span>
-              </div>
-            ))}
+
+      {/* =================================================================
+         REARRANGED SYSTEM SECTIONS (STARTING FROM TARGET AUDIENCE)
+         ================================================================= */}
+
+      {/* 2️⃣ TARGET AUDIENCE: Bento Audience Grid */}
+      <section className="ecd__bento_section">
+        <div className="ecd__page_container">
+          <div className="ecd__sec_header">
+            <span className="ecd__sec_badge yellow">TARGET AUDIENCE</span>
+            <h2 className="ecd__h2">Who Is This Service For?</h2>
+            <p className="ecd__sec_subtitle">Designed for ecommerce brands that want more conversions, more customers, and more revenue.</p>
           </div>
-          <div className="ecd__audience_note">
-            If your store gets traffic but not sales, optimization is the missing link.
+          
+          <div className="ecd__bento_grid">
+            {targetAudience.map((item, idx) => {
+              // Alternating Big vs Small layout types and colors (Yellow, Cyan, Green)
+              const bentoTypes = ['big', 'small', 'small', 'big', 'big'];
+              const bentoColors = ['yellow', 'cyan', 'green', 'cyan', 'green'];
+              const type = bentoTypes[idx % bentoTypes.length];
+              const color = bentoColors[idx % bentoColors.length];
+              
+              return (
+                <div key={idx} className={`ecd__bento_card bento_${type} bento_${color}`}>
+                  <div className="ecd__bento_accent_line"></div>
+                  <span className="ecd__bento_label">AUDIENCE INDEX 0{idx + 1}</span>
+                  <h3 className="ecd__h3">{item}</h3>
+                  <p className="ecd__bento_desc">We structure dedicated design funnels to support this exact audience segment natively, boosting organic conversions.</p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="ecd__bento_bottom_note">
+            <p>If your store gets traffic but not sales, <span className="highlight">optimization is the missing link.</span></p>
           </div>
         </div>
       </section>
 
-      {/* Problems Section */}
-      <section className="ecd__problems_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading">Problems We Solve for E-commerce Businesses</h2>
-          <div className="ecd__problems_grid">
-            {problems.map((problem, index) => (
-              <div key={index} className="ecd__problem_card">
-                <div className="ecd__problem_icon">{problem.icon}</div>
-                <p className="ecd__problem_text">{problem.text}</p>
+
+      {/* 3️⃣ PROBLEMS SECTION: Pain Point Warning Stack */}
+      <section className="ecd__pain_section">
+        <div className="ecd__page_container">
+          <div className="ecd__sec_header">
+            <span className="ecd__sec_badge orange">WARNING SIGNALS</span>
+            <h2 className="ecd__h2">Problems We Solve for E-commerce Businesses</h2>
+            <p className="ecd__sec_subtitle">If your metrics show these symptoms, code adjustments and conversion funnels are required.</p>
+          </div>
+
+          <div className="ecd__pain_stack">
+            {problems.map((problem, idx) => (
+              <div key={idx} className="ecd__pain_item">
+                <div className="ecd__pain_meta">
+                  <span className="ecd__pain_icon">{problem.icon}</span>
+                  <span className="ecd__pain_label">ALERT ISSUE 0{idx + 1}</span>
+                </div>
+                <h3 className="ecd__h3">{problem.text}</h3>
+                <p className="ecd__pain_desc">Unoptimized architectures and default platform structures contribute directly to drop-offs. We resolve this natively.</p>
               </div>
             ))}
           </div>
@@ -185,20 +257,46 @@ const EcommerceDev = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="ecd__services_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading2">Our E-commerce Development & Optimization Services</h2>
-          <p className="ecd__subtitle">
-            We deliver end-to-end e-commerce development and optimization solutions, including:
-          </p>
-          <div className="ecd__services_grid">
-            {services.map((service, index) => (
-              <div key={index} className="ecd__service_card">
-                <div className="ecd__service_number">{String(index + 1).padStart(2, '0')}</div>
-                <p className="ecd__service_text">{service}</p>
-              </div>
-            ))}
+
+      {/* 4️⃣ SERVICES SECTION: Zig-Zag Service Timeline */}
+      <section className="ecd__timeline_section">
+        <div className="ecd__page_container">
+          <div className="ecd__sec_header">
+            <span className="ecd__sec_badge purple">SERVICES</span>
+            <h2 className="ecd__h2">Our E-commerce Development & Optimization Services</h2>
+            <p className="ecd__sec_subtitle">We deliver end-to-end e-commerce development and optimization solutions, including:</p>
+          </div>
+
+          <div className="ecd__timeline_container">
+            <div className="ecd__timeline_line"></div>
+            {services.map((service, idx) => {
+              const isEven = idx % 2 === 0;
+              return (
+                <div key={idx} className={`ecd__timeline_row ${isEven ? 'row_left' : 'row_right'}`}>
+                  {isEven ? (
+                    <>
+                      <div className="ecd__timeline_content">
+                        <span className="ecd__timeline_num">{String(idx + 1).padStart(2, '0')}</span>
+                        <h3 className="ecd__h3">{service}</h3>
+                        <p>Our engineering team designs custom structural layouts to optimize performance, increase stability, and maximize e-commerce checkout flow natively.</p>
+                      </div>
+                      <div className="ecd__timeline_node">◉</div>
+                      <div className="ecd__timeline_spacer"></div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="ecd__timeline_spacer"></div>
+                      <div className="ecd__timeline_node">◉</div>
+                      <div className="ecd__timeline_content">
+                        <span className="ecd__timeline_num">{String(idx + 1).padStart(2, '0')}</span>
+                        <h3 className="ecd__h3">{service}</h3>
+                        <p>We implement automated workflows, custom asset rendering systems, and schema tags configured strictly for performance and conversion scaling.</p>
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })}
           </div>
           <p className="ecd__services_note">
             Each store is built for growth, security, and long-term scalability.
@@ -206,41 +304,164 @@ const EcommerceDev = () => {
         </div>
       </section>
 
-      {/* Platforms Section */}
-      <section className="ecd__platforms_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading">Platforms We Work With</h2>
-          <div className="ecd__platforms_grid">
-            {platforms.map((platform, index) => (
-              <div key={index} className="ecd__platform_box">
-                <div className="ecd__platform_icon">✓</div>
-                <p>{platform}</p>
-              </div>
-            ))}
+
+      
+     {/* 5️⃣ PLATFORMS SECTION: Connected Architecture Diagram */}
+      <section className="ecd__platform_section">
+        <div className="ecd__page_container">
+          <div className="ecd__sec_header">
+            <span className="ecd__sec_badge cyan">ARCHITECTURE</span>
+            <h2 className="ecd__h2">E-commerce System Architecture</h2>
+            <p className="ecd__sec_subtitle">We deploy custom-tailored environments configured for high-performance scale.</p>
           </div>
+
+          <div className="ecd__arch_diagram">
+            {/* Top Bar Label */}
+            <div className="ecd__arch_top_bar">
+              <span>E-COMMERCE PLATFORMS & SYSTEM ENVIRONMENT</span>
+            </div>
+
+            <div className="ecd__arch_grid">
+              
+              {/* COLUMN 1: CUSTOM DEVELOPMENT & HIGH-PERFORMANCE (GREEN THEME) */}
+              <div className="ecd__arch_col col_left">
+                {/* Community/Customers Muted Node */}
+                <div className="ecd__arch_node node_muted">
+                  <div className="node_icon_wrapper">👥</div>
+                  <div className="node_text_content">
+                    <h5 className="ecd__h5">Community</h5>
+                    <p>Results, curation & feedback loop</p>
+                  </div>
+                </div>
+
+                {/* Management Muted Node */}
+                <div className="ecd__arch_node node_muted">
+                  <div className="node_icon_wrapper">👤</div>
+                  <div className="node_text_content">
+                    <h5 className="ecd__h5">Management</h5>
+                    <p>Performance insights & metrics</p>
+                  </div>
+                </div>
+
+                {/* High-Performance Custom Solutions Node */}
+                <div className="ecd__arch_node node_system theme_green">
+                  <div className="node_system_badge">
+                    <span className="badge_icon">⚙️</span>
+                    <span>HPC / SPEED ENGINE</span>
+                  </div>
+                  <h5 className="ecd__h5">{platforms[0]}</h5>
+                </div>
+
+                {/* Computational Scientists (Left-Bottom Actor) */}
+                <div className="ecd__arch_actor actor_green">
+                  <span className="actor_avatar">🟢</span>
+                  <div className="actor_text">
+                    <h5 className="ecd__h5">Computational Scientists</h5>
+                  </div>
+                </div>
+              </div>
+
+              {/* COLUMN 2: CENTRAL APPLICATIONS CORE (ORANGE & PURPLE THEME) */}
+              <div className="ecd__arch_col col_center">
+                {/* Database Node */}
+                <div className="ecd__arch_node node_db theme_purple">
+                  <span className="db_cylinder">🛢️</span>
+                  <h5 className="ecd__h5">E-commerce Database</h5>
+                </div>
+
+                {/* Applications Laptop Node */}
+                <div className="ecd__arch_node node_laptop theme_orange">
+                  <span className="laptop_screen">💻</span>
+                  <h5 className="ecd__h5">Applications Core</h5>
+                </div>
+
+                {/* Central Software Developers Actor */}
+                <div className="ecd__arch_actor actor_orange">
+                  <span className="actor_avatar">🟠</span>
+                  <div className="actor_text">
+                    <h5 className="ecd__h5">Software Developers</h5>
+                    <p>Experimental validation & modeling</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* COLUMN 3: HEADLESS CMS & API LABS (PURPLE & BLUE THEMES) */}
+              <div className="ecd__arch_col col_right">
+                {/* Data Platform / Headless Architecture Node */}
+                <div className="ecd__arch_node node_system theme_purple">
+                  <div className="node_system_badge">
+                    <span className="badge_icon">⚙️</span>
+                    <span>DATA PLATFORM</span>
+                  </div>
+                  <h5 className="ecd__h5">{platforms[2]}</h5>
+                </div>
+
+                {/* Laboratory / Flexible CMS-Based Node */}
+                <div className="ecd__arch_node node_system theme_blue">
+                  <div className="node_system_badge">
+                    <span className="badge_icon">⚙️</span>
+                    <span>LABORATORY</span>
+                  </div>
+                  <h5 className="ecd__h5">{platforms[1]}</h5>
+                  <p className="node_mini_desc">{platforms[3]}</p>
+                </div>
+
+                {/* Experimental Scientists (Right-Bottom Actor) */}
+                <div className="ecd__arch_actor actor_blue">
+                  <span className="actor_avatar">🔵</span>
+                  <div className="actor_text">
+                    <h5 className="ecd__h5">Experimental Scientists</h5>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
           <p className="ecd__platforms_note">
             (We select platforms based on your business goals — not limitations.)
           </p>
         </div>
       </section>
 
-      {/* Comparison Section */}
-      <section className="ecd__comparison_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading">E-commerce Optimization vs Basic Store Setup</h2>
-          <div className="ecd__comparison_wrapper">
-            <div className="ecd__comparison_col ecd__col_basic">
-              <h3>Basic Store Setup</h3>
-              {comparison.map((item, index) => (
-                <div key={index} className="ecd__comparison_item">{item.basic}</div>
-              ))}
+
+      {/* 6️⃣ COMPARISON SECTION: Before vs After Transformation UI */}
+      <section className="ecd__compare_section">
+        <div className="ecd__page_container">
+          <div className="ecd__sec_header">
+            <span className="ecd__sec_badge green">TRANSFORMATION</span>
+            <h2 className="ecd__h2">E-commerce Optimization vs Basic Setup</h2>
+            <p className="ecd__sec_subtitle">See how custom code adjustments and semantic layouts directly translate into checkout revenue.</p>
+          </div>
+
+          <div className="ecd__compare_grid">
+            {/* Before Card */}
+            <div className="ecd__compare_card card_before">
+              <div className="ecd__compare_tag tag_red">❌ BASIC UNOPTIMIZED SETUP</div>
+              <ul className="ecd__compare_list">
+                {comparison.map((item, idx) => (
+                  <li key={idx}>
+                    <span className="label">Structure metric:</span>
+                    <span className="val bad">{item.basic}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="ecd__comparison_divider">→</div>
-            <div className="ecd__comparison_col ecd__col_optimized">
-              <h3>Optimized E-commerce Store</h3>
-              {comparison.map((item, index) => (
-                <div key={index} className="ecd__comparison_item">{item.optimized}</div>
-              ))}
+
+            {/* Transition Indicator */}
+            <div className="ecd__compare_arrow">➜</div>
+
+            {/* After Card */}
+            <div className="ecd__compare_card card_after">
+              <div className="ecd__compare_tag tag_green">✅ OPTIMIZED ACTIVE SETUP</div>
+              <ul className="ecd__compare_list">
+                {comparison.map((item, idx) => (
+                  <li key={idx}>
+                    <span className="label">Optimized metric:</span>
+                    <span className="val good">{item.optimized}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
           <p className="ecd__comparison_tagline">
@@ -249,74 +470,154 @@ const EcommerceDev = () => {
         </div>
       </section>
 
-      {/* Process Section */}
+
+      {/* 7️⃣ PROCESS SECTION: Connected Circular Workflow */}
+   {/* 7️⃣ PROCESS SECTION: Connected Circular Workflow (Infographic Wave Style) */}
       <section className="ecd__process_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading">Our E-commerce Development Process</h2>
-          <div className="ecd__process_timeline">
-            {processSteps.map((step, index) => (
-              <div key={index} className="ecd__process_step">
-                <div className="ecd__step_marker">
-                  <span className="ecd__step_number">{step.number}</span>
+        <div className="ecd__page_container">
+          <div className="ecd__sec_header">
+            <span className="ecd__sec_badge purple">PROCESS SYSTEM</span>
+            <h2 className="ecd__h2">Our E-commerce Development Process</h2>
+            <p className="ecd__sec_subtitle">A transparent, data-backed step methodology from audit diagnostics to live launch.</p>
+          </div>
+
+          <div className="ecd__process_workflow">
+            {processSteps.map((step, idx) => {
+              // Map each step to its exact color theme class from the infographic
+              const stepThemes = ['ecd__step_blue', 'ecd__step_orange', 'ecd__step_green', 'ecd__step_purple', 'ecd__step_pink'];
+              const currentTheme = stepThemes[idx % stepThemes.length];
+
+              // Set matching SVG icons for each process step
+              const stepIcons = [
+                // Step 1: Research & Planning (Blue)
+                <svg className="ecd__node_svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <path d="M11 8v6M8 11h6" />
+                </svg>,
+                // Step 2: Design & Architecture (Orange)
+                <svg className="ecd__node_svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 11 2 15C2 18 5 22 12 22Z" />
+                  <circle cx="7.5" cy="10.5" r="1.5" fill="currentColor" />
+                  <circle cx="11.5" cy="7.5" r="1.5" fill="currentColor" />
+                  <circle cx="16.5" cy="9.5" r="1.5" fill="currentColor" />
+                </svg>,
+                // Step 3: Development & Optimization (Green)
+                <svg className="ecd__node_svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                  <line x1="14" y1="4" x2="10" y2="20" />
+                </svg>,
+                // Step 4: Testing & Quality Assurance (Purple)
+                <svg className="ecd__node_svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <polyline points="16 13 12 17 9 14" />
+                </svg>,
+                // Step 5: Launch & Growth Support (Pink)
+                <svg className="ecd__node_svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.5-2.5 3.5-2.5 5.5C4 22 6 21 7.5 19.5" />
+                  <path d="M12 12l9-9-3 12-6 3-3-6z" />
+                  <path d="M9 15l-3-3" />
+                </svg>
+              ];
+
+              return (
+                <div key={idx} className={`ecd__process_step ${currentTheme}`}>
+                  {/* Outer Wave Arch */}
+                  <div className="ecd__process_arch"></div>
+
+                  {/* Inner Node Circle with Icon */}
+                  <div className="ecd__process_node_circle">
+                    {stepIcons[idx]}
+                  </div>
+
+                  {/* Text Labels */}
+                  <span className="ecd__process_label">STEP 0{idx + 1}</span>
+                  <h4 className="ecd__h4">{step.title}</h4>
+                  <p className="ecd__process_step_desc">{step.description}</p>
                 </div>
-                <div className="ecd__step_content">
-                  <h3 className="ecd__step_title">{step.title}</h3>
-                  <p className="ecd__step_desc">{step.description}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Section */}
-      <section className="ecd__why_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading">Why Choose ZonzocTech for E-commerce Development?</h2>
-          <div className="ecd__why_list">
-            {whyChoose.map((reason, index) => (
-              <div key={index} className="ecd__why_item">
-                <div className="ecd__why_icon">★</div>
-                <p>{reason}</p>
-              </div>
-            ))}
-          </div>
-          <div className="ecd__why_statement">
-            We don't just build online stores — we build e-commerce engines.
-          </div>
-        </div>
-      </section>
 
-      {/* FAQ Section */}
+      {/* 8️⃣ WHY CHOOSE SECTION: Trust Authority Cards */}
+
+      <section className="ecd__split_section">
+  <div className="ecd__page_container ecd__split_layout">
+    
+    {/* Left Column: Sticky Header */}
+    <div className="ecd__split_left">
+      <div className="ecd__header_content">
+        <span className="ecd__sec_badge cyan">WHY WORK WITH US</span>
+        <h2 className="ecd__h2">Why Choose Vexoweb for E-commerce Development?</h2>
+        <p className="ecd__sec_subtitle">We reject basic templates. We focus entirely on checkout conversion, custom code stability, and system speed.</p>
+        <div className="ecd__why_statement_big">
+          We don't just build online stores — we build e-commerce engines.
+        </div>
+        <div className="ecd__why_robot_wrap">
+          <img
+            src={aiRobotImage}
+            alt="AI-powered e-commerce automation"
+            className="ecd__why_robot_img"
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Right Column: Seamless Color-Coded Blocks */}
+    <div className="ecd__split_right_seamless">
+      {whyChoose.map((reason, idx) => (
+        <div 
+          key={idx} 
+          className="ecd__feature_block_seamless"
+          style={{ backgroundColor: colors[idx % colors.length] }}
+        >
+          <span className="ecd__feature_index">0{idx + 1}</span>
+          <p className="ecd__feature_text">{reason}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+      {/* 9️⃣ FAQ SECTION: Glass Accordion Knowledge Base */}
       <section className="ecd__faq_section">
-        <div className="ecd__container">
-          <h2 className="ecd__heading2">Frequently Asked Questions</h2>
-          <div className="ecd__faq_container">
-            {faqs.map((faq, index) => (
-              <div key={index} className="ecd__faq_card">
-                <h4 className="ecd__faq_q">{faq.question}</h4>
-                <p className="ecd__faq_a">{faq.answer}</p>
+        <div className="ecd__page_container">
+          <div className="ecd__sec_header">
+            <span className="ecd__sec_badge blue">FAQ</span>
+            <h2 className="ecd__h2">Frequently Asked Questions</h2>
+            <p className="ecd__sec_subtitle">Everything you need to know about our e-commerce audit, design, and performance optimizations.</p>
+          </div>
+
+          <div className="ecd__faq_accordion_container">
+            {faqs.map((faq, idx) => (
+              <div 
+                key={idx} 
+                className={`ecd__faq_item ${activeFaq === idx ? 'faq_active' : ''}`}
+                onClick={() => toggleFaq(idx)}
+              >
+                <div className="ecd__faq_trigger">
+                  <h4 className="ecd__h4">{faq.question}</h4>
+                  <span className="ecd__faq_icon_status">{activeFaq === idx ? '−' : '+'}</span>
+                </div>
+                <div className="ecd__faq_panel">
+                  <p>{faq.answer}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="ecd__cta_section">
-        <div className="ecd__container">
-          <div className="ecd__cta_box">
-            <h2 className="ecd__cta_title">Ready to Grow Your E-commerce Revenue?</h2>
-            <p className="ecd__cta_text">
-              If your online store needs better performance, higher conversions, or scalable 
-              development, let's talk.
-            </p>
-            <a href="#contact" className="ecd__cta_btn">
-              Get a Free E-commerce Growth Audit
-            </a>
-          </div>
-        </div>
-      </section>
+
+      <TechnologyStackSection {...SERVICE_TECH_STACK.ecommerce} />
+
+      <ContactSection {...SERVICE_CONTACT.ecommerce} variant="service" />
 
       <Footer />
     </div>

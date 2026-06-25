@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import "../styles/publishSection.css";
 import wpIcon from "../assets/icons/wp.png";
 import webflowIcon from "../assets/icons/webflow.png";
 import notionIcon from "../assets/icons/notion.png";

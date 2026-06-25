@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/growNow.css";
 
 const GrowNowSection = () => {
   return (

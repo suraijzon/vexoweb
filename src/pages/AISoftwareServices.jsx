@@ -1,317 +1,357 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import '../styles/AISoftwareServices.css';
-import Breadcrumb from "../components/Breadcrumb";
+import ContactSection from '../components/ContactSection';
+import HeroTrustText from '../components/HeroTrustText';
+import TechnologyStackSection from '../components/TechnologyStackSection';
+import { SERVICE_CONTACT } from '../content/serviceContactContent';
+import { SERVICE_TECH_STACK } from '../content/serviceTechStackContent';
+import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
 
 const AISoftwareServices = () => {
   const targetAudience = [
-    "Businesses looking to automate complex processes",
-    "Companies with large data sets needing intelligent insights",
-    "Enterprises building internal AI tools",
-    "Startups developing AI-powered products",
-    "Organizations replacing manual or inefficient systems"
+    { num: "01.", title: "Startups", desc: "Replacing Manual Systems" },
+    { num: "02.", title: "Enterprises", desc: "Scaling Content Pipelines" },
+    { num: "03.", title: "Logistics", desc: "Optimizing Route Efficiency" },
+    { num: "04.", title: "Fintech", desc: "Reducing Fraud Detection Lag" },
+    { num: "05.", title: "E-commerce", desc: "Customizing User Flows" }
   ];
 
-  const problems = [
-    { icon: "⏰", text: "Manual workflows consuming time and resources" },
-    { icon: "🔌", text: "Disconnected systems and data silos" },
-    { icon: "📊", text: "Limited insights from existing data" },
-    { icon: "👥", text: "Human-dependent processes that don't scale" },
-    { icon: "📈", text: "Software that cannot adapt to growth" }
+  const painPoints = [
+    { name: "Legacy Code Redundancy", status: "RESOLVED" },
+    { name: "API Pipeline Latency", status: "OPTIMIZED" },
+    { name: "Distributed Data Silos", status: "INTEGRATED" },
+    { name: "System Scaling Bottlenecks", status: "SECURED" }
   ];
 
   const services = [
-    { title: "Custom AI Software Solutions", icon: "💡" },
-    { title: "Business Process Automation with AI", icon: "⚙️" },
-    { title: "AI-Powered Data Analysis & Insights", icon: "📊" },
-    { title: "GPT & LLM-Based Software Systems", icon: "🤖" },
-    { title: "Predictive Analytics & Forecasting Tools", icon: "🔮" },
-    { title: "AI Decision-Support Systems", icon: "🎯" },
-    { title: "Integration with Existing Business Software", icon: "🔗" },
-    { title: "Secure APIs & Data Pipelines", icon: "🔐" }
+    { type: "ENGINEERING", title: "Replacing Manual Systems", desc: "Monolithic to microservice transition embedded with cognitive decision layers." },
+    { type: "COGNITIVE", title: "Optimizing Redundant Efficiency", desc: "Agentic pipelines executing workflows autonomously across endpoints." },
+    { type: "COGNITIVE", title: "Decision Support & Fraud Detection", desc: "High-speed reasoning models acting as secondary assurance loops." }
   ];
 
   const comparison = [
-    { traditional: "Manual rules", ai: "Intelligent decision-making" },
-    { traditional: "Static workflows", ai: "Adaptive automation" },
-    { traditional: "Limited insights", ai: "Predictive analytics" },
-    { traditional: "Human-dependent", ai: "Scales with data" }
-  ];
-
-  const processSteps = [
-    {
-      number: "01",
-      title: "Business & Data Analysis",
-      description: "We identify high-impact AI opportunities based on your workflows and data."
-    },
-    {
-      number: "02",
-      title: "Solution Design",
-      description: "We design software architecture, AI logic, and integrations aligned with your goals."
-    },
-    {
-      number: "03",
-      title: "Development & Integration",
-      description: "We build the AI software and integrate it with your existing systems."
-    },
-    {
-      number: "04",
-      title: "Testing & Optimization",
-      description: "We test for accuracy, performance, security, and real-world usage."
-    },
-    {
-      number: "05",
-      title: "Deployment & Support",
-      description: "We deploy, monitor, and continuously optimize your AI software."
-    }
-  ];
-
-  const technologies = [
-    "AI & machine learning frameworks",
-    "GPT & large language model integrations",
-    "Secure backend systems",
-    "Cloud-based infrastructure",
-    "APIs & data processing pipelines"
-  ];
-
-  const whyChoose = [
-    "Proven AI-first development approach",
-    "Strong engineering & automation expertise",
-    "Business-focused problem solving",
-    "Secure and scalable software architecture",
-    "Transparent communication & long-term support"
-  ];
-
-  const faqs = [
-    {
-      question: "What types of AI software do you develop?",
-      answer: "We develop custom AI software including automation systems, analytics platforms, internal tools, and AI-powered business applications."
-    },
-    {
-      question: "Can AI software integrate with existing systems?",
-      answer: "Yes. We specialize in integrating AI software with CRMs, ERPs, databases, and third-party platforms."
-    },
-    {
-      question: "Is AI software development secure?",
-      answer: "Security is built into every stage — from data handling to access control and deployment."
-    },
-    {
-      question: "Do you provide ongoing maintenance?",
-      answer: "Yes. We offer ongoing optimization, monitoring, and enhancements after launch."
-    }
+    { feature: "Rule Logic", traditional: "Manual rules", ai: "Intelligent decision-making" },
+    { feature: "Workflow", traditional: "Static workflows", ai: "Adaptive automation" },
+    { feature: "Data Value", traditional: "Limited insights", ai: "Predictive analytics" },
+    { feature: "Scaling", traditional: "Human-dependent", ai: "Scales with data" }
   ];
 
   return (
     <div className="aiss__wrapper">
       <Navbar />
-      <Breadcrumb />
 
-      {/* Hero Section */}
-      <section className="aiss__hero">
-        <div className="aiss__hero_gradient"></div>
-        <div className="aiss__hero_container">
-          <div className="aiss__hero_label">
-            <span className="aiss__label_icon">🤖</span>
-            AI Software Development Services
-          </div>
-          <h1 className="aiss__hero_title">
-            Custom AI Software Development That Automates, Scales, and Delivers Results
-          </h1>
-          <p className="aiss__hero_text">
-            We provide AI software development services that help businesses automate operations, 
-            improve decision-making, and build intelligent systems tailored to their unique workflows. 
-            From internal AI tools to advanced automation platforms, we develop reliable, secure, and 
-            scalable AI-powered software solutions.
-          </p>
-          <a href="#contact" className="aiss__hero_btn">
-             Get a Free AI Software Consultation
-          </a>
-        </div>
-      </section>
+     {/* 1. HERO SECTION (Centered Single-Column Theme - Matched with Reference Layout) */}
+<section className="aiss__hero_centered_layout">
+  <div className="aiss__hero_overlay_centered"></div>
+  <div className="aiss__hero_container_centered">
+    
+    {/* Centered Pill Badge (Protected Top Spacing) */}
+    <div className="aiss__badge_pill_centered">
+      <span className="badge_dot_indicator">●</span>
+      <span className="hero-badge-text">
+        <span className="hero-badge-accent">AI Software Development</span>
+        <span className="hero-badge-light"> — Eastern Province, Sri Lanka</span>
+      </span>
+    </div>
 
-      {/* What Is Section */}
-      <section className="aiss__what_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading">What Is AI Software Development?</h2>
-          <p className="aiss__description">
-            AI software development involves creating custom software solutions powered by artificial 
-            intelligence to analyze data, automate processes, and enhance business efficiency. Unlike 
-            off-the-shelf tools, custom AI software is designed around your specific data, systems, and goals.
-          </p>
-          <div className="aiss__highlight_banner">
-            Our AI software solutions are built for real-world business use, not experiments.
-          </div>
-        </div>
-      </section>
+    <h1 className="aiss__h1">
+      AI-Powered Software Development for{" "}
+      <span className="highlight-text">Eastern Province</span> Businesses
+    </h1>
 
-      {/* Who Needs Section */}
-      <section className="aiss__audience_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading2">Who Needs AI Software Development?</h2>
-          <p className="aiss__subtitle">This service is ideal for:</p>
-          <div className="aiss__audience_grid">
-            {targetAudience.map((item, index) => (
-              <div key={index} className="aiss__audience_card">
-                <div className="aiss__audience_icon">✓</div>
-                <p>{item}</p>
-              </div>
-            ))}
-          </div>
-          <p className="aiss__audience_footer">
-            If your business relies on repetitive tasks, disconnected systems, or slow decision-making, 
-            AI software development can transform how you operate.
-          </p>
-        </div>
-      </section>
+    {/* Centered Subtitle Description */}
+    <p className="aiss__hero_text_centered">
+      We design high-converting websites, drive targeted organic traffic, and automate your 
+      business with AI — so you grow faster without working harder.
+    </p>
 
-      {/* Problems Section */}
-      <section className="aiss__problems_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading3">Problems We Solve with AI Software</h2>
-          <div className="aiss__problems_grid">
-            {problems.map((problem, index) => (
-              <div key={index} className="aiss__problem_item">
-                <div className="aiss__problem_icon">{problem.icon}</div>
-                <p className="aiss__problem_text">{problem.text}</p>
-              </div>
-            ))}
-          </div>
-          <p className="aiss__problems_note">
-            We build AI-powered software that works quietly in the background to improve efficiency and accuracy.
-          </p>
-        </div>
-      </section>
+    {/* Centered Dual-Button Group */}
+    <div className="aiss__hero_buttons_centered">
+      <a href="#contact" className="aiss__btn_primary_centered">
+        Get Free Growth Plan
+      </a>
+      <a href="#what-is" className="aiss__btn_secondary_centered">
+        See Our Work ↓
+      </a>
+    </div>
 
-      {/* Services Section */}
-      <section className="aiss__services_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading">Our AI Software Development Services</h2>
-          <p className="aiss__subtitle">
-            We deliver end-to-end AI software development solutions, including:
-          </p>
-          <div className="aiss__services_grid">
-            {services.map((service, index) => (
-              <div key={index} className="aiss__service_card">
-                <div className="aiss__service_icon">{service.icon}</div>
-                <h3 className="aiss__service_title">{service.title}</h3>
-              </div>
-            ))}
-          </div>
-          <p className="aiss__services_footer">
-            Each solution is engineered for stability, performance, and long-term value.
-          </p>
-        </div>
-      </section>
+    <HeroTrustText text={HERO_TRUST_TEXT.aiSoftware} />
 
-      {/* Comparison Section */}
-      <section className="aiss__comparison_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading">AI Software vs Traditional Software</h2>
-          <p className="aiss__comparison_intro">AI-powered software goes beyond fixed rules.</p>
-          <div className="aiss__comparison_table">
-            <div className="aiss__comparison_col aiss__col_traditional">
-              <h3>Traditional Software</h3>
-              {comparison.map((item, index) => (
-                <div key={index} className="aiss__comparison_row">{item.traditional}</div>
-              ))}
+  </div>
+</section>
+{/* 2. WHAT IS AI SOFTWARE SECTION */}
+<section id="what-is" className="aiss__section_wrapper">
+  <div className="aiss__dark_card split-layout">
+    
+    {/* Left Side Column - Detailed Core Messaging */}
+    <div className="text-column">
+      <span className="aiss__label">What Is AI Software</span>
+      <h2 className="aiss__h2">
+        Smarter Automation, <br />
+        <span className="text_gradient_tech">Built for Enterprise Scale</span>
+      </h2>
+      <p className="aiss__description">
+        Beyond experimental sandboxes. Vexoweb builds custom AI software for 
+        enterprise systems, prioritizing architectural stability over off-the-shelf wrappers. 
+        We integrate deterministic agentic logic directly into your secure core workflows.
+      </p>
+
+      {/* Dynamic Colored Feature Highlights */}
+      <ul className="aiss__feature_list">
+        <li>
+          <span className="feature_icon purple_glow">✦</span>
+          <span><strong>Custom-Engineered Core:</strong> No reliance on fragile third-party wrappers.</span>
+        </li>
+        <li>
+          <span className="feature_icon cyan_glow">✦</span>
+          <span><strong>Enterprise Vectorization:</strong> Safe, secure private database pipeline integration.</span>
+        </li>
+        <li>
+          <span className="feature_icon gold_glow">✦</span>
+          <span><strong>Deterministic Guardrails:</strong> Rigorously optimized system logic prioritizing uptime.</span>
+        </li>
+      </ul>
+    </div>
+
+    {/* Right Side Column - Interactive Precision Wireframe Graphic */}
+    <div className="visual-column">
+      <div className="wireframe-container">
+        <div className="wireframe-bg-glow"></div>
+        
+        {/* Decorative corner crosshairs representing precision-engineering */}
+        <div className="tech-corner tl"></div>
+        <div className="tech-corner tr"></div>
+        <div className="tech-corner bl"></div>
+        <div className="tech-corner br"></div>
+
+        <svg viewBox="0 0 200 200" fill="none" className="geometric-octahedron">
+          {/* Colored structural wireframe path segments */}
+          <path d="M100 20 L145 65 L100 110 L55 65 Z" stroke="#ebd175" strokeWidth="1.2" />
+          <path d="M100 65 L145 110 L100 155 L55 110 Z" stroke="#89cbf7" strokeWidth="1.2" />
+          <path d="M100 20 L100 155" stroke="#b2a6f2" strokeWidth="1" strokeDasharray="3 3" />
+          <path d="M55 65 L145 110" stroke="#ebd175" strokeWidth="1" strokeDasharray="2 2" />
+          <path d="M55 110 L145 65" stroke="#89cbf7" strokeWidth="1" strokeDasharray="2 2" />
+          
+          {/* Neon keyframe-pulsing glow indicator nodes */}
+          <circle cx="100" cy="20" r="4" fill="#e59fd1" className="glow-node nod-pink" />
+          <circle cx="145" cy="65" r="4" fill="#89cbf7" className="glow-node nod-cyan" />
+          <circle cx="100" cy="110" r="4" fill="#ebd175" className="glow-node nod-gold" />
+          <circle cx="55" cy="65" r="4" fill="#8be4af" className="glow-node nod-green" />
+          <circle cx="100" cy="65" r="4" fill="#ffffff" className="glow-node nod-white" />
+          <circle cx="145" cy="110" r="4" fill="#ebd175" className="glow-node nod-gold" />
+          <circle cx="100" cy="155" r="4" fill="#b2a6f2" className="glow-node nod-purple" />
+          <circle cx="55" cy="110" r="4" fill="#ebd175" className="glow-node nod-gold" />
+        </svg>
+        <div className="wireframe-label">ENGINEERING PRECISION</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+     {/* 3. WHO NEEDS AI SOFTWARE SECTION */}
+<section className="aiss__section_wrapper">
+  {/* Added a custom accent-navy-container class to change the container background color */}
+  <div className="aiss__dark_card split-layout accent-navy-container">
+    
+    {/* Left Column: Heading and Subtitle */}
+    <div className="text-column">
+      <span className="aiss__label">Who Needs AI Software</span>
+      <h2 className="aiss__h2">
+        Does Your Business Suffer From Friction?
+      </h2>
+      <p className="aiss__description_sub">
+        Qualify Your Need for Custom AI.
+      </p>
+    </div>
+
+    {/* Right Column: Interactive Multi-Color Table Rows */}
+    <div className="audience-column">
+      <div className="audience-list">
+        {targetAudience.map((item, index) => {
+          // Dynamic array of colors matching your cyber/engineering theme
+          const rowColors = ['#b2a6f2', '#38bdf8', '#ebd175', '#e59fd1', '#8be4af'];
+          const currentAccent = rowColors[index % rowColors.length];
+
+          return (
+            <div 
+              key={index} 
+              className="audience-row" 
+              style={{ '--row-accent': currentAccent }}
+            >
+              <span className="row-num">{item.num}</span>
+              <span className="row-title">{item.title}</span>
+              <span className="row-desc">{item.desc}</span>
+              <span className="row-arrow">→</span>
             </div>
-            <div className="aiss__comparison_arrow">→</div>
-            <div className="aiss__comparison_col aiss__col_ai">
-              <h3>AI Software</h3>
-              {comparison.map((item, index) => (
-                <div key={index} className="aiss__comparison_row">{item.ai}</div>
-              ))}
+          );
+        })}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{/* 4. FRICTION POINTS SECTION (Light Pastel Theme) */}
+<section className="aiss__section_wrapper">
+  {/* Updated class to light-pastel-container for the soft yellow, pink, and purple background */}
+  <div className="aiss__dark_card friction-layout light-pastel-container">
+    
+    {/* Diagnostic Header Bar */}
+    <div className="friction-header-bar">
+      <span>COMMON OPERATIONAL PAIN POINTS WE RESOLVE →</span>
+      <span className="status-green">SYSTEM DIAGNOSTICS ACTIVE</span>
+    </div>
+
+    {/* Split Screen Layout */}
+    <div className="friction-split">
+      
+      {/* Left Column: Live Terminal Session Mockup */}
+      <div className="terminal-container">
+        <div className="terminal-header">
+          <span className="dot dot-red"></span>
+          <span className="dot dot-yellow"></span>
+          <span className="dot dot-green"></span>
+          <span className="terminal-title">system_diagnostics.sh</span>
+        </div>
+        <div className="terminal-body">
+          <p className="txt-green"><span className="term-prompt">$</span> vexoweb_monitor --status</p>
+          <p className="txt-green">[SYSTEM STATUS: ACTIVE]</p>
+          <p className="txt-red blink"><span className="term-alert">▲</span> LATENCY DETECTED</p>
+          <p className="txt-orange"><span className="term-alert">▲</span> SILOS DETECTED</p>
+          <p className="txt-purple"><span className="term-alert">▲</span> BOTTLENECK DETECTED</p>
+        </div>
+      </div>
+
+      {/* Right Column: Multi-Color Status Indicators (Yellow, Pink, Purple) */}
+      <div className="friction-table">
+        {painPoints.map((point, index) => {
+          // Palette using professional variations of Pink, Yellow, and Purple
+          const painPointColors = ['#db2777', '#d97706', '#7c3aed', '#ec4899', '#6d28d9'];
+          const pointAccent = painPointColors[index % painPointColors.length];
+
+          return (
+            <div 
+              key={index} 
+              className="table-row"
+              style={{ '--point-accent': pointAccent }}
+            >
+              <span className="point-name">{point.name}</span>
+              <div className="point-status-wrapper">
+                <span className="status-dot-mini"></span>
+                <span className="point-status">{point.status}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+    </div>
+  </div>
+</section>
+{/* 5. SERVICE CATALOG SECTION (Light Yellow Theme) */}
+<section className="aiss__section_wrapper">
+  {/* Added light-yellow-container class for the light yellow gradient background */}
+  <div className="aiss__dark_card catalog-layout light-yellow-container">
+    
+    {/* Section Header */}
+    <div className="catalog-header-bar">
+      <span>Service Catalog</span>
+    </div>
+
+    {/* Split Layout */}
+    <div className="catalog-split">
+      
+      {/* Left Column: Dark Terminal Monitor for rich contrast */}
+      <div className="terminal-container mini-terminal">
+        <div className="terminal-header">
+          <span className="terminal-title">ENGINEERING_CONSOLE</span>
+        </div>
+        <div className="terminal-body">
+          <p className="txt-green">→ [SYSTEM STATUS: OK]</p>
+          <p className="txt-red">= LATENCY DETECTED</p>
+          <p className="txt-red">= SILOS DETECTED</p>
+          <p className="txt-red">= BOTTLENECK DETECTED</p>
+        </div>
+      </div>
+
+      {/* Right Column: Stacked Frosted-Glass Cards */}
+      <div className="cognitive-stack">
+        {services.map((service, index) => (
+          <div key={index} className="cognitive-card">
+            <div className="card-badge">{service.type}</div>
+            <div className="card-info">
+              <h4 className="aiss__h4">{service.title}</h4>
+              <p>{service.desc}</p>
             </div>
           </div>
-          <p className="aiss__comparison_note">
-            This is why businesses are moving toward custom AI software development.
-          </p>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      {/* Process Section */}
-      <section className="aiss__process_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading">Our AI Software Development Process</h2>
-          <div className="aiss__process_grid">
-            {processSteps.map((step, index) => (
-              <div key={index} className="aiss__process_card">
-                <div className="aiss__process_number">{step.number}</div>
-                <h3 className="aiss__process_title">{step.title}</h3>
-                <p className="aiss__process_desc">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    </div>
+  </div>
+</section>
 
-      {/* Technologies Section */}
-      <section className="aiss__tech_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading">Technologies We Use</h2>
-          <div className="aiss__tech_list">
-            {technologies.map((tech, index) => (
-              <div key={index} className="aiss__tech_item">
-                <div className="aiss__tech_marker"></div>
-                <span>{tech}</span>
-              </div>
-            ))}
-          </div>
-          <p className="aiss__tech_note">
-            (Technology choices depend on your business needs — not trends.)
-          </p>
-        </div>
-      </section>
+{/* 6. INFINITE TEXT TICKER */}
+<div className="aiss__ticker_wrap">
+  <div className="aiss__ticker_content">
+    <span>AGENTIC WORKFLOWS</span>
+    <span className="ticker-dot">●</span>
+    <span>SECURE ENDPOINT PIPELINES</span>
+    <span className="ticker-dot">●</span>
+    <span>COGNITIVE AUTO-SCALING</span>
+    <span className="ticker-dot">●</span>
+    <span>INTELLIGENT SYSTEMS</span>
+    <span className="ticker-dot">●</span>
+  </div>
+  <div className="aiss__ticker_content" aria-hidden="true">
+    <span>AGENTIC WORKFLOWS</span>
+    <span className="ticker-dot">●</span>
+    <span>SECURE ENDPOINT PIPELINES</span>
+    <span className="ticker-dot">●</span>
+    <span>COGNITIVE AUTO-SCALING</span>
+    <span className="ticker-dot">●</span>
+    <span>INTELLIGENT SYSTEMS</span>
+    <span className="ticker-dot">●</span>
+  </div>
+</div>
+     {/* 7. COMPARISON TABLE SECTION (Dark Purple Theme) */}
+<section className="aiss__section_wrapper">
+  {/* Added accent-purple-container class to change the container background color */}
+  <div className="aiss__dark_card comparison-layout accent-purple-container">
+    
+    {/* Section Header */}
+    <div className="comparison-header">
+      <span>Cyber Split-Terminal</span>
+    </div>
 
-      {/* Why Choose Section */}
-      <section className="aiss__why_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading">Why Choose ZonzocTech for AI Software Development?</h2>
-          <div className="aiss__why_grid">
-            {whyChoose.map((reason, index) => (
-              <div key={index} className="aiss__why_card">
-                <div className="aiss__why_number">{index + 1}</div>
-                <p>{reason}</p>
-              </div>
-            ))}
-          </div>
-          <div className="aiss__why_statement">
-            We build AI software that solves real business problems, not buzzword-driven projects.
-          </div>
-        </div>
-      </section>
+    {/* Symmetrical Comparison Table */}
+    <div className="comparison-grid">
+      
+      {/* Aligned Grid Header Row */}
+      <div className="grid-header-row">
+        <div className="grid-header">Feature</div>
+        <div className="grid-header">Traditional</div>
+        <div className="grid-header">AI-First</div>
+      </div>
 
-      {/* FAQ Section */}
-      <section className="aiss__faq_section">
-        <div className="aiss__container">
-          <h2 className="aiss__heading">Frequently Asked Questions</h2>
-          <div className="aiss__faq_list">
-            {faqs.map((faq, index) => (
-              <div key={index} className="aiss__faq_item">
-                <h4 className="aiss__faq_question">{faq.question}</h4>
-                <p className="aiss__faq_answer">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
+      {/* Dynamic Symmetrical Rows */}
+      {comparison.map((row, index) => (
+        <div key={index} className="comparison-row">
+          <div className="grid-cell cell-feature">{row.feature}</div>
+          <div className="grid-cell cell-traditional">{row.traditional}</div>
+          <div className="grid-cell cell-ai">{row.ai}</div>
         </div>
-      </section>
+      ))}
 
-      {/* Final CTA */}
-      <section className="aiss__cta_section">
-        <div className="aiss__container">
-          <div className="aiss__cta_content">
-            <h2 className="aiss__cta_title">Ready to Build Intelligent AI Software?</h2>
-            <p className="aiss__cta_text">
-              If you're planning to build custom AI software or upgrade your existing systems with 
-              artificial intelligence, let's discuss your goals.
-            </p>
-            <a href="#contact" className="aiss__cta_button">
-               Get a Free AI Software Consultation
-            </a>
-          </div>
-        </div>
-      </section>
+    </div>
+  </div>
+</section>
+
+      <TechnologyStackSection {...SERVICE_TECH_STACK.aiSoftware} />
+
+      <ContactSection {...SERVICE_CONTACT.aiSoftware} variant="service" />
 
       <Footer />
     </div>

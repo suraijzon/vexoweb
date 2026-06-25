@@ -2,7 +2,10 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
-const API = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API =
+  process.env.NEXT_PUBLIC_API_URL ||
+  process.env.REACT_APP_API_URL ||
+  'http://localhost:5000';
 
 const AuthContext = createContext();
 
@@ -13,17 +16,28 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const storedUser = localStorage.getItem('user');
+    const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+    if (parsedUser) {
+      setUser(parsedUser);
+    }
+
     const token = localStorage.getItem('token');
-    if (token && !user) loadUser(token);
-    else setLoading(false);
+    if (token && !parsedUser) {
+      loadUser(token);
+      return;
+    }
+
+    setLoading(false);
   }, []);
 
   const loadUser = async (token) => {

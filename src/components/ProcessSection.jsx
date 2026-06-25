@@ -1,5 +1,4 @@
 import React from "react";
-import '../styles/process.css';
 import DiscoverIcon from "../assets/icons/discover.svg";
 import StrategyIcon from "../assets/icons/strategy.svg";
 import DevelopmentIcon from "../assets/icons/launch.svg";
@@ -9,71 +8,99 @@ import SupportIcon from "../assets/icons/support.svg";
 const ProcessSection = () => {
   const steps = [
     {
-      number: "1",
+      number: "01",
       title: "Discovery",
-      description:
-        "We listen to your goals and gather key requirements",
+      description: "We listen to your goals, audience, and requirements to map the right solution.",
       icon: DiscoverIcon,
+      color: "#38bdf8",
     },
     {
-      number: "2",
+      number: "02",
       title: "Design",
-      description:
-        "UI/UX designs and system architecture tailored to your needs.",
+      description: "UI/UX wireframes and system architecture tailored to your brand and users.",
       icon: StrategyIcon,
+      color: "#6366f1",
     },
     {
-      number: "3",
+      number: "03",
       title: "Development",
-      description:
-        "Agile development of web, mobile, and desktop solutions.",
+      description: "Agile builds for web, mobile, and custom software with regular updates.",
       icon: DevelopmentIcon,
+      color: "#10b981",
     },
     {
-      number: "4",
+      number: "04",
       title: "Launch",
-      description:
-        "Final testing, deployment, and go-live across platforms.",
+      description: "Rigorous testing, deployment, and go-live across all platforms.",
       icon: LaunchIcon,
+      color: "#f59e0b",
     },
     {
-      number: "5",
+      number: "05",
       title: "Support",
-      description:
-        "Continuous maintenance and updates to ensure success.",
+      description: "Ongoing maintenance, updates, and optimization for lasting success.",
       icon: SupportIcon,
+      color: "#ec4899",
     },
   ];
 
   return (
-    <section className="process-section">
-      <div className="process-container">
-        <h2 className="process-title">Proven Process – How It Works</h2>
-        <p className="process-subtitle">Our 5-Step Success Blueprint</p>
+    <section className="home-process" aria-labelledby="home-process-title">
+      <div className="home-process__glow home-process__glow--left" aria-hidden="true" />
+      <div className="home-process__glow home-process__glow--right" aria-hidden="true" />
 
-        <div className="steps-grid">
+      <div className="home-process__container">
+        <header className="home-process__header">
+          <span className="home-process__tag">Proven Process</span>
+          <h2 id="home-process-title" className="home-process__title">
+            How We Deliver <span className="home-process__title-accent">Your Project</span>
+          </h2>
+          <p className="home-process__subtitle">
+            A transparent 5-step blueprint — from first conversation to long-term growth.
+          </p>
+        </header>
+
+        <ol className="home-process__track">
           {steps.map((step, index) => (
-            <div key={index} className="step-card">
-              <div className="step-header">
-                {/* Icon box */}
-                <div className="step-icon-wrapper">
-                  <img
-                    src={step.icon}
-                    alt={step.title}
-                    className="step-icon"
-                    style={{ width: "32px", height: "32px" }}
-                  />
+            <li
+              key={step.number}
+              className="home-process__card"
+              style={{ "--step-color": step.color }}
+            >
+              <div className="home-process__card-inner">
+                <div className="home-process__card-head">
+                  <span className="home-process__step-num">{step.number}</span>
+                  <span className="home-process__step-label">Step {index + 1}</span>
                 </div>
 
-                {/* Step number */}
-                <div className="step-number" style={{color:"white", borderColor:"rgba(255, 255, 255, 0.15)"}}>{step.number}</div>
+                <div className="home-process__icon-ring">
+                  <div className="home-process__icon-core">
+                    <img src={step.icon} alt="" className="home-process__icon" aria-hidden="true" />
+                  </div>
+                </div>
+
+                <div className="home-process__card-body">
+                  <h3 className="home-process__card-title">{step.title}</h3>
+                  <p className="home-process__card-desc">{step.description}</p>
+                </div>
               </div>
 
-              <h3 className="step-title">{step.title}</h3>
-              <p className="step-description">{step.description}</p>
-            </div>
+              {index < steps.length - 1 && (
+                <span className="home-process__connector" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" className="home-process__connector-icon">
+                    <path
+                      d="M5 12h14M13 6l6 6-6 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              )}
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

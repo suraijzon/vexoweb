@@ -1,1046 +1,1345 @@
-.navbar {
-  width: 100%;
-  padding: 20px 0;
-  position: fixed;
-  top: 0;
-  background: #ffffff;
-  z-index: 999;
-  border-bottom: 1px solid #eaeaea;
+
+
+
+
+:root {
+  /* Desktop: topbar (~48px) + nav row (120px logo + padding) */
+  --site-header-height: 180px;
+  --mobile-nav-drawer-top: var(--site-header-height);
+  --hero-top-gap: 24px;
 }
 
-.top-badge {
+@media (max-width: 1024px) {
+  :root {
+    /* Topbar 3 lines (~72px) + nav row (~72px logo + padding) */
+    --site-header-height: 182px;
+    --hero-top-gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --site-header-height: 188px;
+    --hero-top-gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --site-header-height: 192px;
+    --hero-top-gap: 14px;
+  }
+}
+
+/* --- 1. GLOBAL ROOT BASE & WRAPPER RESET --- */
+.navbar-wrapper {
+  width: 100%;
+  max-width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  z-index: 1000;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.navbar-wrapper * {
+  box-sizing: border-box;
+}
+
+/* --- 2. TOPBAR SECTION --- */
+.topbar {
+  width: 100%;
+  background:radial-gradient(circle at 50% 90%, #003d73 0%, #001b3a 60%, #000f21 100%) !important; 
+  color: #cbd5e1;
+  font-size: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1e293b;
+}
+
+.topbar-inner {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  font-family: Poppins;
+  padding: 0 4%; /* Standardized grid padding for perfect vertical alignment */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar-left {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  color: rgb(59, 58, 58);
   font-weight: 500;
-  font-size: 14px;
-  padding: 0 4% 15px 4%;
 }
 
-.top-badge-left {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
-  white-space: nowrap;
+.topbar-left-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  line-height: 1.4;
 }
 
-.top-badge-left span:first-child {
-  font-size: 14px;
+.topbar-tagline-row1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.top-badge .highlight {
-  color: #00448f;
-  font-size: 19px;
+.topbar-tagline-line1,
+.topbar-tagline-line2 {
+  display: inline;
+}
+
+.topbar-globe-icon {
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.topbar-inline-divider {
+  color: rgba(255, 255, 255, 0.55);
+  padding: 0 2px;
+}
+
+.topbar-left svg {
+  color: #38bdf8;
+  margin-right: 0;
+}
+
+.sky-blue {
+  color: #38bdf8;
   font-weight: 600;
 }
 
-.top-badge-right {
+.topbar-right {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 12px;
 }
 
-.top-badge .email-link {
-  color: #1d3752;
+.topbar-divider {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.topbar-link {
+  color: #cbd5e1;
   text-decoration: none;
-  font-weight: 500;
-  font-family: Poppins;
-  font-size: 15px;
-  transition: color 0.3s;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  font-size: 13px;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.top-badge .email-link:hover {
-  color: #0052cc;
+.topbar-link:hover {
+  color: #38bdf8;
+  transform: translateY(-1px);
 }
 
-.top-badge .client-login {
-  color: #205289;
-  text-decoration: none;
-  font-weight: 500;
-  font-family: Poppins;
-  font-size: 16px;
-  transition: color 0.3s;
-  background: none;
-  border: none;
-  cursor: pointer;
+.wa-btn {
+  color: #22c55e; /* Correct brand WhatsApp Green */
 }
 
-.top-badge .client-login:hover {
-  text-decoration: underline;
+.wa-btn:hover {
+  color: #4ade80;
 }
 
-.top-badge .contact-proposal {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.top-badge .contact-proposal img {
-  width: 36px;
-  height: 36px;
-}
-
+/* --- 3. MAIN NAVIGATION CONTAINER --- */
 .nav-container {
-  width: 92%;
+  width: 100%;
   max-width: 1400px;
-  margin: auto;
+  margin: 0 auto;
+  padding: 10px 4%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  overflow: visible;
 }
 
-/* LOGO */
-.nav-logo {
+/* BRAND & TAGLINE ALIGNMENT */
+.nav-brand {
   display: flex;
   align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
-.nav-logo img {
-  height: 48px;
+.nav-logo {
+  flex-shrink: 0;
+  line-height: 0;
   cursor: pointer;
+}
+
+.nav-brand-separator {
+  flex-shrink: 0;
+  width: 2px;
+  height: 52px;
+  background: #0f172a;
+  align-self: center;
+}
+
+.logo-desktop {
+  display: block;
+  object-fit: contain;
+  height: 120px;
+  width: auto;
+  margin-top: -15px;
+  margin-bottom: -15px;
 }
 
 .logo-mobile {
   display: none;
 }
 
+.logo-img {
+  width: 180px; /* Sized to sit naturally on the grid */
+  height: auto;
+  object-fit: contain;
+  margin-left: -5px;  /* Nudges the logo left to align with the topbar globe icon */
+  margin-right: -12px; /* Pulls the vertical separator line closely in, cutting transparent whitespace */
+}
+
 .nav-tagline {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
-  font-family: 'Arial', sans-serif;
-  font-size: 15px;
-  color: #161f3d;
-  font-weight: 700;
-  margin-left: 20px;
-}
-
-/* LINKS */
-.nav-links {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* DROPDOWNS */
-.dropdown {
-  position: static;
-}
-
-.drop-btn {
-  border: none;
-  background: none;
-  font-size: 12px;
-  cursor: pointer;
-  color: #4a5568;
-  font-weight: 500;
-  padding: 10px 5px;
-  transition: color 0.3s;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: #111827;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
   white-space: nowrap;
 }
 
-.drop-btn:hover {
-  color: #0052cc;
+/* LINKS WRAPPER */
+.nav-links {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  z-index: 1001;
+  overflow: visible;
 }
 
-/* DROPDOWN CONTENT - FULL WIDTH WITH GRAY BACKGROUND */
+.nav-actions {
+  position: relative;
+  z-index: 1001;
+  overflow: visible;
+}
+
+/* --- 4. DROPDOWN COMPONENT CONTROLS --- */
+.dropdown {
+  position: relative;
+  z-index: 1002;
+}
+
+.dropdown-wide {
+  position: static; /* Standard static setup for wide panels centering on main container */
+}
+
+/* Dropdown buttons */
+.drop-btn {
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.drop-btn:hover {
+  color: #0284c7;
+}
+
+.arrow-indicator {
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.dropdown:hover .arrow-indicator {
+  transform: rotate(180deg);
+}
+
+/* --- 5. FLOATING COMPONENT CARDS --- */
+
+/* Standard layout properties */
 .dropdown-content {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
-  width: 78%;
-  background: #f5f5f5;
-  padding: 30px 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  animation: slideDown 0.3s ease;
-  flex-wrap: wrap;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  z-index: 1010;
+  animation: slideDown 0.25s ease;
+  padding: 24px;
+}
+
+/* WIDE DROPDOWNS (Software Dev, Website Development) */
+.dropdown-wide .dropdown-content {
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 48px);
+  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  max-width: 2400px;
-  margin: 0 auto;
-  gap: 11px;
-  font-family: poppins;
+  gap: 8px;
 }
 
-
-/* WHITE CARD COLUMNS - Default optimized for all screens */
 .dropdown-column {
-  background: #ffffff;
-  padding: 18px 14px;
-  border-radius: 10px;
-  width: clamp(190px, 16.5vw, 205px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  min-height: 340px;
-  max-height: 375px;
+  width: clamp(200px, 18vw, 240px);
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #f1f5f9;
 }
 
-.dropdown-column:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+.dropdown-column:last-child {
+  border-right: none;
 }
 
 .dropdown-column h4 {
-  margin: 0 0 11px 0;
-  font-size: clamp(12.5px, 1vw, 14.5px);
+  margin: 0 0 14px 0;
+  font-size: 13px;
   font-weight: 700;
-  color: #1a1a1a;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #0f172a;
 }
 
 .dropdown-column a {
   display: block;
-  padding: 4px 0;
-  color: #5a5a5a;
+  padding: 6px 0;
+  color: #475569;
   text-decoration: none;
-  font-size: clamp(12px, 0.88vw, 12.5px);
-  transition: all 0.2s;
-  font-weight: 400;
+  font-size: 13px;
   line-height: 1.4;
+  font-weight: 450;
+  transition: all 0.2s ease;
 }
 
 .dropdown-column a:hover {
-  color: #0052cc;
-  padding-left: 10px;
+  color: #0284c7;
+  padding-left: 6px;
 }
 
-/* LAST COLUMN - BLUE SHOWCASE BOX */
-.dropdown-column-last {
-  background: linear-gradient(180deg, #c8e6f5 0%, #7dc9ed 100%);
-  padding: 18px 14px;
-  border-radius: 10px;
-  text-align: start;
-  width: clamp(190px, 16.5vw, 205px);
-  box-shadow: 0 4px 20px rgba(0, 82, 204, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 340px;
-  max-height: 375px;
+/* COMPACT DROPDOWNS (SEO Marketing, Who We Are) */
+.dropdown-compact .dropdown-content {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  padding: 12px 0;
 }
 
-.dropdown-column-last .last-column,
-.dropdown-column-last .last-column2,
-.dropdown-column-last .last-column3,
-.dropdown-column-last .last-column4 {
-  margin: 0 0 11px 0;
-  font-weight: 700;
-  color: #1a1a1a;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.dropdown-column-last .last-column {
-  font-size: clamp(28px, 2.6vw, 38px);
-  line-height: 0.9;
-  margin-bottom: 5px;
-}
-
-.dropdown-column-last .last-column2 {
-  font-size: clamp(24px, 2.2vw, 30px);
-  line-height: 0.95;
-}
-
-.dropdown-column-last .last-column3 {
-  font-size: clamp(13px, 1.15vw, 16px);
-  line-height: 1.1;
-  margin-top: 5px;
-  text-align: start;
-}
-
-.dropdown-column-last .last-column4 {
-  font-size: clamp(24px, 2.2vw, 30px);
-  line-height: 0.95;
-  padding-bottom: clamp(40px, 4vw, 65px);
-}
-
-.dropdown-column-last .last-column-text,
-.dropdown-column-last .last-column-text2 {
-  font-size: clamp(13px, 1.15vw, 16px);
-  font-weight: 700;
-  line-height: 1.2;
-  color: #1a1a1a;
-  display: block;
-  margin-bottom: 14px;
-}
-
-.dropdown-column-last .last-column-text {
-  padding-top: 14px;
-}
-
-.dropdown-column-last .last-column-text2 {
-  margin-top: 6px;
-  margin-bottom: 14px;
-}
-
-.dropdown-column-last .last-column-text3 {
-  display: block;
-  padding: 4px 0;
-  color: #5a5a5a;
-  text-decoration: none;
-  font-size: clamp(12px, 0.88vw, 12.5px);
-  transition: all 0.2s;
-  font-weight: 400;
-  line-height: 1.6;
-}
-
-.dropdown-column-last .last-column-button {
-  font-size: clamp(13px, 1vw, 15px);
-  background-color: #003d82;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  padding: clamp(10px, 1vw, 13px) clamp(20px, 2vw, 28px);
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(0, 61, 130, 0.4);
-  margin-top: auto;
-}
-
-.dropdown-column-last .last-column-button:hover {
-  background-color: #00325a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 61, 130, 0.5);
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
-  display: flex;
-}
-
-.dropdown.active .dropdown-content {
-  display: flex;
-}
-
-/* WHO WE ARE DROPDOWN - Sleek Floating Card Style */
-.dropdown:nth-child(4) {
-  position: relative;
-}
-
-/* Override the full-width background for Who We Are only */
-.dropdown:nth-child(4) .dropdown-content {
-  width: auto;
-  max-width: 230px;
-  min-width: 230px;
-  left: 10%;
-  background: white;
-  padding: 0;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-/* Single column layout for Who We Are */
-.dropdown:nth-child(4) .dropdown-column {
+.dropdown-compact .dropdown-column {
   width: 100%;
-  background: white;
-  padding: 24px;
-  box-shadow: none;
-  border-radius: 0;
-  min-height: auto;
-  max-height: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  padding: 0;
+  border-right: none;
 }
 
-/* Remove hover lift for Who We Are */
-.dropdown:nth-child(4) .dropdown-column:hover {
-  transform: none;
+.dropdown-compact .dropdown-column a {
+  padding: 10px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13.5px;
 }
 
-/* Remove the header for Who We Are */
-.dropdown:nth-child(4) .dropdown-column h4 {
-  display: none;
-}
-
-/* Style the links as a clean list */
-.dropdown:nth-child(4) .dropdown-column a {
-  padding: 14px 20px;
-  font-size: 15px;
-  color: #4a5568;
-  border-bottom: 1px solid #f0f0f0;
-  margin: 0;
-  transition: all 0.2s;
-  font-weight: 500;
-}
-
-.dropdown:nth-child(4) .dropdown-column a:last-child {
+.dropdown-compact .dropdown-column a:last-child {
   border-bottom: none;
 }
 
-.dropdown:nth-child(4) .dropdown-column a:hover {
-  background: #f8f9fa;
-  color: #0052cc;
-  padding-left: 20px;
+.dropdown-compact .dropdown-column a:hover {
+  background: #f8fafc;
+  padding-left: 24px;
+  color: #0284c7;
 }
 
-/* Hide the blue showcase column for Who We Are */
-.dropdown:nth-child(4) .dropdown-column-last {
-  display: none;
+/* Show Dropdowns on Desktop Hover/Active state */
+@media (min-width: 1025px) {
+  .dropdown:hover .dropdown-content,
+  .dropdown.active .dropdown-content {
+    display: flex;
+  }
 }
 
-/* Position adjustment for better alignment */
-.dropdown:nth-child(4):hover .dropdown-content,
-.dropdown:nth-child(4).active .dropdown-content {
-  display: flex;
-  flex-direction: column;
-}
-
-/* WHO WE ARE – Sleekits Style   */
-
-.who-dropdown {
-  position: relative;
-}
-
-/* Compact floating card */
-.who-dropdown .dropdown-content {
-  width: 100%;
-  max-width: 1100px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: transparent;
-  box-shadow: none;
-  padding: 20px 0px;
-  display: none;
-}
-
-/* Show on hover */
-.who-dropdown:hover .dropdown-content,
-.who-dropdown.active .dropdown-content {
-  display: flex;
-}
-
-/* Card wrapper */
-.who-dropdown .dropdown-content {
-  gap: 18px;
-  justify-content: center;
-}
-
-/* Smaller white cards */
-.who-dropdown .dropdown-column {
-  width: 230px ;          
-  min-height: auto;
-  max-height: none;
-  padding: 20px 22px;    
-}
-
-
-/* Remove hover lift for cleaner look */
-.who-dropdown .dropdown-column:hover {
-  transform: none;
-}
-
-/* Highlight blue card */
-.who-dropdown .dropdown-column-last {
-  width: 270px;
-  min-height: auto;
-  padding: 20px;
-  background: linear-gradient(180deg, #d7ecfb 0%, #9fd2f2 100%);
-  box-shadow: 0 20px 45px rgba(0,82,204,0.25);
-}
-
-/* Big title like Sleekits */
-.who-dropdown .last-column4 {
-  font-size: 26px;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-/* Button */
-.who-dropdown .last-column-button {
-  margin-top: auto;
-  align-self: flex-start;
-}
-
-/* CONTACT BUTTON */
+/* --- 6. CALL TO ACTION (Get a Proposal) --- */
 .contact-btn {
-  background: #00448f;
-  color: #fff;
-  padding: 9px 14px;
+  background: #0284c7;
+  color: #ffffff;
+  padding: 10px 18px;
   border: none;
   border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.3s;
+  font-size: 13px;
   font-weight: 600;
-  margin-left: 5px;
+  cursor: pointer;
   white-space: nowrap;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.contact-btn-icon {
+  font-size: 13px;
+  flex-shrink: 0;
 }
 
 .contact-btn:hover {
-  background: #003d99;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+  background: #0369a1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
 }
 
-/* HAMBURGER ICON */
+/* --- 7. HAMBURGER TOGGLE MENU --- */
 .hamburger {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
   cursor: pointer;
+  z-index: 1001;
 }
 
 .bar {
-  width: 28px;
-  height: 3px;
-  background: #333;
-  transition: 0.3s;
+  width: 100%;
+  height: 2.5px;
+  background-color: #0f172a;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* Hamburger animations */
 .rotate1 {
-  transform: rotate(45deg) translate(5px, 7px);
+  transform: translateY(8px) rotate(45deg);
 }
 
 .rotate2 {
-  transform: rotate(-45deg) translate(5px, -7px);
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 .hide {
   opacity: 0;
 }
 
-.mobile-client-login-inside {
-  display: none;
-}
-
+/* --- 8. KEYFRAMES --- */
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translate(-50%, -10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, 0);
   }
 }
 
-/*RESPONSIVE BREAKPOINTS*/
-
-/* Small-Medium Desktop (1025px - 1199px) - Compact Professional View */
-@media (min-width: 1025px) and (max-width: 1199px) {
-  .nav-links {
-    gap: 9px;
-  }
-  
-  
-  .drop-btn {
-    font-size: 12px;
-    padding: 10px 5px;
-  }
-  
-  .dropdown-content {
-    padding: 30px 12px;
-    gap: 11px;
-  }
-  
-  .dropdown-column {
-    width: 195px;
-    padding: 18px 14px;
-    min-height: 340px;
-    max-height: 370px;
-  }
-  
-  .dropdown-column h4 {
-    font-size: 13.5px;
-    margin-bottom: 11px;
-  }
-  
-  .dropdown-column a {
-    font-size: 12px;
-    padding: 4.5px 0;
-  }
-  
-  .dropdown-column-last {
-    width: 195px;
-    padding: 18px 14px;
-    min-height: 340px;
-    max-height: 370px;
-  }
-  
-  .dropdown-column-last .last-column {
-    font-size: 36px;
-  }
-  
-  .dropdown-column-last .last-column2,
-  .dropdown-column-last .last-column4 {
-    font-size: 28px;
-  }
-  
-  .dropdown-column-last .last-column3 {
-    font-size: 15px;
-    line-height: 0.8;
-  }
-  
-  .dropdown-column-last .last-column-text,
-  .dropdown-column-last .last-column-text2 {
-    font-size: 15px;
-  }
-  
-  .dropdown-column-last .last-column-text3 {
-    font-size: 12px;
-  }
-  
-  .dropdown-column-last .last-column-button {
-    font-size: 12.5px;
-    padding: 10px 18px;
-  }
-  
-  .contact-btn {
-    font-size: 12px;
-    padding: 9px 14px;
-    margin-left: 5px;
-  }
-}
-
-/* Medium Desktop (1200px - 1399px) - Balanced Professional View */
-
-@media (min-width: 1025px) {
-  .navbar .who-dropdown .dropdown-content .dropdown-column {
-    width: 300px;
-    max-width: 250px;
-    flex: 0 0 250px;
-  }
-}
-
-@media (min-width: 1200px) and (max-width: 1399px) {
-  .nav-links {
-    gap: 15px;
-  }
-  
-  .drop-btn {
-    font-size: 14px;
-    padding: 10px 5px;
-  }
-  
-  .dropdown-content {
-    padding: 38px 20px;
-    gap: 16px;
-  }
-  
-  .dropdown-column {
-    width: 215px;
-    padding: 24px 20px;
-    min-height: 380px;
-    max-height: 410px;
-  }
-  
-  .dropdown-column h4 {
-    font-size: 15px;
-    margin-bottom: 16px;
-  }
-  
-  .dropdown-column a {
-    font-size: 13.5px;
-    padding: 6px 0;
-  }
-  
-  .dropdown-column-last {
-    width: 215px;
-    padding: 24px 20px;
-    min-height: 380px;
-    max-height: 410px;
-  }
-  
-  .dropdown-column-last .last-column {
-    font-size: 42px;
-  }
-  
-  .dropdown-column-last .last-column2,
-  .dropdown-column-last .last-column4 {
-    font-size: 34px;
-  }
-  
-  .dropdown-column-last .last-column3 {
-    font-size: 17px;
-  }
-  
-  .dropdown-column-last .last-column-text3 {
-    font-size: 13.5px;
-  }
-  
-  .contact-btn {
-    font-size: 14px;
-    padding: 10px 20px;
-  }
-}
-
-/* Large Desktop (1400px and above) - Premium Experience */
-@media (min-width: 1400px) {
-  .top-badge {
-    padding: 0 0% 15px 0%;
-    gap: 40px;
-  }
-  
-  .nav-container {
-    width: 84%;
-    padding: 0;
-  }
-  
-  .nav-links {
-    gap: 20px;
-  }
-  
-  .drop-btn {
-    font-size: 14px;
-    padding: 10px 10px;
-  }
-  
-  .dropdown-content {
-    padding: 42px 20px;
-    gap: 18px;
-  }
-  
-  .dropdown-column {
-    width: 245px;
-    padding: 28px 24px;
-    min-height: 410px;
-    max-height: 430px;
-  }
-  
-  .dropdown-column h4 {
-    font-size: 16px;
-    margin-bottom: 18px;
-  }
-  
-  .dropdown-column a {
-    font-size: 14.5px;
-    padding: 7px 0;
-  }
-  
-  .dropdown-column-last {
-    width: 245px;
-    padding: 28px 24px;
-    min-height: 410px;
-    max-height: 430px;
-  }
-  
-  .dropdown-column-last .last-column {
-    font-size: 48px;
-  }
-  
-  .dropdown-column-last .last-column2,
-  .dropdown-column-last .last-column4 {
-    font-size: 38px;
-  }
-  
-  .dropdown-column-last .last-column3 {
-    font-size: 19px;
-  }
-  
-  .dropdown-column-last .last-column-text,
-  .dropdown-column-last .last-column-text2 {
-    font-size: 19px;
-  }
-  
-  .dropdown-column-last .last-column-text3 {
-    font-size: 14.5px;
-  }
-  
-  .dropdown-column-last .last-column-button {
-    font-size: 15px;
-    padding: 13px 28px;
-  }
-  
-  .contact-btn {
-    padding: 11px 24px;
-    font-size: 15px;
-    margin-left: 12px;
-  }
-}
-
-/* Extra Large Desktop (1600px and above) - Maximum Premium */
-@media (min-width: 1600px) {
-  .nav-links {
-    gap: 25px;
-  }
-  
-  .drop-btn {
-    font-size: 15px;
-    padding: 10px 18px;
-  }
-  
-  .dropdown-content {
-    padding: 45px 20px;
-    gap: 20px;
-  }
-  
-  .dropdown-column {
-    width: 260px;
-    padding: 30px 26px;
-    min-height: 420px;
-    max-height: 440px;
-  }
-  
-  .dropdown-column h4 {
-    font-size: 17px;
-    margin-bottom: 20px;
-  }
-  
-  .dropdown-column a {
-    font-size: 15.5px;
-    padding: 7px 0;
-  }
-  
-  .dropdown-column-last {
-    width: 260px;
-    padding: 30px 26px;
-    min-height: 420px;
-    max-height: 440px;
-  }
-  
-  .dropdown-column-last .last-column {
-    font-size: 52px;
-  }
-  
-  .dropdown-column-last .last-column2,
-  .dropdown-column-last .last-column4 {
-    font-size: 42px;
-  }
-  
-  .dropdown-column-last .last-column3 {
-    font-size: 20px;
-  }
-  
-  .dropdown-column-last .last-column-text,
-  .dropdown-column-last .last-column-text2 {
-    font-size: 20px;
-  }
-  
-  .dropdown-column-last .last-column-text3 {
-    font-size: 15.5px;
-  }
-  
-  .contact-btn {
-    font-size: 16px;
-    padding: 12px 26px;
-  }
-}
-
-/* Tablets and Mobile (1024px and below) */
-@media (max-width: 1024px) {
-  .navbar {
-    padding: 14px 0;
-    width: 100%; 
-  }
-
+/* --- 9. RESPONSIVE BREAKPOINTS (Desktop sizing variants) --- */
+@media (min-width: 1025px) and (max-width: 1200px) {
   .nav-container {
     width: 95%;
-    padding: 0 10px;
+    padding: 12px 2.5%;
   }
-  
-  .top-badge {
+  .nav-tagline,
+  .nav-brand-separator {
+    display: none;
+  }
+  .drop-btn {
+    font-size: 12px;
+    padding: 8px;
+  }
+  .contact-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}
+
+/* --- 10. MOBILE & TABLET LAYOUTS (1024px and Below) --- */
+@media (max-width: 1024px) {
+  .nav-container {
+    width: 100%;
+    padding: 12px 20px;
+  }
+
+  /* Structural adjustment */
+  .logo-desktop, .nav-brand-separator, .nav-tagline {
     display: none;
   }
 
-  /* Hide desktop elements */
-  .logo-desktop,
-  .nav-tagline {
-    display: none;
-  }
-
-  /* Show mobile logo */
   .logo-mobile {
     display: block;
-    height: 34px;
+    height: 42px;
+    width: auto;
   }
 
-  /* Hamburger */
   .hamburger {
     display: flex;
-    margin-right: 10px;
   }
 
-  .bar {
-    width: 30px;
-  }
-
-  /* Mobile menu */
+  /* Slide-out drawer menu panel — full screen width */
   .nav-links {
     position: fixed;
-    top: 65px;
+    top: var(--mobile-nav-drawer-top, var(--site-header-height));
     left: -100%;
-    width: 280px;
-    height: calc(100vh - 70px);
+    width: 100%;
+    max-width: 100vw;
+    height: calc(100dvh - var(--mobile-nav-drawer-top, var(--site-header-height)));
+    max-height: calc(100dvh - var(--mobile-nav-drawer-top, var(--site-header-height)));
     background: #ffffff;
-    padding: 20px;
-    display: flex;
+    box-shadow: none;
     flex-direction: column;
-    gap: 12px;
-    transition: left 0.35s ease;
-    border-right: 1px solid #e5e5e5;
+    align-items: stretch;
+    gap: 0;
+    padding: 20px 16px 32px;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
-    z-index: 999;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1010;
+    box-sizing: border-box;
   }
 
   .nav-links.open {
     left: 0;
   }
 
-  /* Disable hover dropdown on mobile */
-  .dropdown:hover .dropdown-content {
-    display: none;
-  }
-
+  /* Standardizing Accordions inside Mobile drawer */
   .dropdown {
     width: 100%;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
   }
 
   .drop-btn {
     width: 100%;
-    text-align: left;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 10px 5px;
+    justify-content: space-between;
+    padding: 16px 4px;
+    font-size: 14px;
+    color: #0f172a;
+  }
+
+  /* Toggle Accordion Content Panel */
+  .dropdown .dropdown-content {
+    display: none;
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 16px 0;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+    animation: none;
+  }
+
+  .dropdown.open .dropdown-content {
+    display: flex;
+  }
+
+  .dropdown-wide .dropdown-content {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    left: auto !important;
+    transform: none !important;
+    padding: 0 0 16px 0 !important;
+    gap: 0 !important;
+  }
+
+  .dropdown-wide .dropdown-column {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    border-right: none !important;
+  }
+
+  .dropdown-column {
+    width: 100%;
+    padding: 0;
+    border-right: none;
+  }
+
+  .dropdown-column h4 {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 14px 0 6px 0;
+  }
+
+  .dropdown-column a {
+    padding: 8px 12px;
+    font-size: 13.5px;
+    background: #f8fafc;
+    border-radius: 6px;
+    margin-bottom: 4px;
+  }
+
+  .dropdown-column a:hover {
+    padding-left: 16px;
+    background: #f1f5f9;
+  }
+
+  /* Compact dropdown adjustments inside drawer */
+  .dropdown-compact .dropdown-content {
+    width: 100%;
+    padding: 0 0 16px 0;
+  }
+
+  .dropdown-compact .dropdown-column a {
+    border-bottom: none;
+  }
+
+}
+
+
+/* --- 10. MOBILE & TABLET LAYOUTS (1024px and Below) --- */
+@media (max-width: 1024px) {
+  
+  /* ... other rules ... */
+
+  .logo-mobile {
+    display: block;
+    height: 70px;
+    width: auto;
+  }
+
+  /* ... other rules ... */
+}
+
+/* --- 7. HAMBURGER TOGGLE MENU --- */
+.hamburger {
+  display: none; /* Hidden on desktop by default */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.bar {
+  width: 100%;
+  height: 3px;
+  background-color: #0284c7; /* Bright brand blue for high visibility */
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hamburger animations */
+.rotate1 {
+  transform: translateY(9.5px) rotate(45deg);
+}
+
+.rotate2 {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+.hide {
+  opacity: 0;
+}
+/* Hamburger animations - updated offsets to align with the new 22px height */
+.rotate1 {
+  transform: translateY(9.5px) rotate(45deg); /* Adjusted from 8px */
+}
+
+.rotate2 {
+  transform: translateY(-9.5px) rotate(-45deg); /* Adjusted from -8px */
+}
+
+.hide {
+  opacity: 0;
+}
+
+
+
+
+/* --- 10. MOBILE & TABLET LAYOUTS (1024px and Below) --- */
+@media (max-width: 1024px) {
+
+  /* ... other mobile styles ... */
+
+  .hamburger {
+    display: flex !important; /* Forces the hamburger to be visible on mobile */
+  }
+
+  /* ... other mobile styles ... */
+}
+
+
+
+
+/* --- New Global Rule for the Mail Button --- */
+.mobile-mail-btn {
+  display: none; /* Hidden on desktop view */
+}
+
+/* --- 10. MOBILE & TABLET LAYOUTS (1024px and Below) --- */
+@media (max-width: 1024px) {
+  .nav-container {
+    width: 100%;
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
+  /* Structural adjustment */
+  .logo-desktop, .nav-brand-separator, .nav-tagline {
+    display: none;
+  }
+
+  .logo-mobile {
+    display: block;
+    height: 70px;
+    width: auto;
+  }
+
+  .hamburger {
+    display: flex !important; /* Force visibility */
+  }
+
+  /* Slide-out drawer menu panel — full screen width */
+  .nav-links {
+    position: fixed;
+    top: var(--mobile-nav-drawer-top, var(--site-header-height));
+    left: -100%;
+    width: 100%;
+    max-width: 100vw;
+    height: calc(100dvh - var(--mobile-nav-drawer-top, var(--site-header-height)));
+    max-height: calc(100dvh - var(--mobile-nav-drawer-top, var(--site-header-height)));
+    background: #ffffff;
+    box-shadow: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 20px 16px 32px;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1010;
+    box-sizing: border-box;
+  }
+
+  .nav-links.open {
+    left: 0;
+  }
+
+  /* Standardizing Accordions inside Mobile drawer */
+  .dropdown {
+    width: 100%;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .drop-btn {
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px 4px;
+    font-size: 14px;
+    color: #0f172a;
+  }
+
+  /* Toggle Accordion Content Panel */
+  .dropdown .dropdown-content {
+    display: none;
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 16px 0;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+    animation: none;
+  }
+
   .dropdown.open .dropdown-content {
     display: flex;
-    position: static;
-    flex-direction: column;
-    background: #f3f3f3;
-    padding: 10px;
-    border-radius: 10px;
-    gap: 10px;
-    box-shadow: none;
-    width: 100%;
+  }
+
+  .dropdown-wide .dropdown-content {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    left: auto !important;
+    transform: none !important;
+    padding: 0 0 16px 0 !important;
+    gap: 0 !important;
+  }
+
+  .dropdown-wide .dropdown-column {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    border-right: none !important;
   }
 
   .dropdown-column {
     width: 100%;
-    padding: 15px;
-    height: auto;
-    min-height: 280px;
-    max-height: none;
+    padding: 0;
+    border-right: none;
   }
 
   .dropdown-column h4 {
-    font-size: 15px;
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 14px 0 6px 0;
   }
 
   .dropdown-column a {
-    font-size: 14px;
+    padding: 8px 12px;
+    font-size: 13.5px;
+    background: #f8fafc;
+    border-radius: 6px;
+    margin-bottom: 4px;
   }
 
-  .dropdown-column-last {
+  .dropdown-column a:hover {
+    padding-left: 16px;
+    background: #f1f5f9;
+  }
+
+  /* Compact dropdown adjustments inside drawer */
+  .dropdown-compact .dropdown-content {
     width: 100%;
-    padding: 20px;
-    height: auto;
-    min-height: 240px;
-    max-height: none;
+    padding: 0 0 16px 0;
   }
 
-  .dropdown-column-last .last-column2,
-  .dropdown-column-last .last-column4 {
-    font-size: 30px !important;
+  .dropdown-compact .dropdown-column a {
+    border-bottom: none;
   }
 
-  .dropdown-column-last .last-column-text2 {
-    font-size: 16px !important;
+  /* Proposal button in the mobile header bar (outside the drawer) */
+  .nav-actions > .contact-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    margin: 0 12px 0 auto !important;
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+    width: auto !important;
+    white-space: nowrap;
+    line-height: 1.2;
+    flex-shrink: 0;
   }
 
-  .dropdown-column-last .last-column-text3 {
-    font-size: 14px;
+  .nav-actions > .contact-btn .contact-btn-icon {
+    font-size: 11px;
+    line-height: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .contact-btn {
-    width: 100%;
-    text-align: center;
-    padding: 12px 0;
-    margin: 10px 0 0 0;
-  }
-
-  .mobile-client-login-inside {
+  /* Styles the new mail button at the bottom of your mobile menu drawer */
+  .mobile-mail-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0284c7; /* Brand Blue */
+    color: #ffffff;
+    margin: 24px 0 0 0;
     width: 100%;
     padding: 12px;
-    border-radius: 8px;
-    background: #111;
-    color: #fff;
-    font-weight: 600;
-    font-size: 15px;
-    display: block;
     text-align: center;
-    border: none;
-    cursor: pointer;
-  }
-
-  .mobile-client-login-inside:hover {
-    opacity: 0.9;
-  }
-
-  /* Who We Are mobile adjustments */
-  .dropdown:nth-child(4).open .dropdown-content {
-    position: static;
-    max-width: 100%;
-    left: 0;
-    transform: none;
-    border-radius: 8px;
-    margin-top: 8px;
-    background: #f3f3f3;
-  }
-  
-  .dropdown:nth-child(4) .dropdown-column {
-    background: white;
-  }
-  
-  .dropdown:nth-child(4) .dropdown-column a {
     font-size: 14px;
-    padding: 10px 12px;
-    border-bottom: 1px solid #f0f0f0;
-  }
-}
-
-/* Mobile (768px and below) */
-@media (max-width: 768px) {
-  .nav-links {
-    width: 260px;
-  }
-
-  .logo-mobile {
-    height: 28px;
-  }
-  .contact-btn {
-    font-size: 15px;        /* SAME as Client Login */
     font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  
+  .mobile-mail-btn:hover {
+    background: #0369a1;
   }
 }
 
-/* Small Mobile (480px and below) */
-@media (max-width: 480px) {
-  .navbar {
-    padding: 8px 0;
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+
+
+/* ==========================================
+   DESKTOP ONLY STYLES (1025px and up)
+   ========================================== */
+@media (min-width: 1025px) {
+  .nav-brand {
+    margin-left: 6px;
   }
 
-  .nav-container {
-    width: 98%;
-    padding: 0 5px;
-  }
-
-  .logo-mobile {
-    height: 24px;
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: auto;
+    flex-shrink: 0;
   }
 
   .nav-links {
-    width: 240px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .contact-btn {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
+
+/* ==========================================
+   MOBILE & TABLET STYLES (1024px and below)
+   ========================================== */
+@media (max-width: 1024px) {
+  /* 
+     1. Hide the tagline on mobile. 
+     There is not enough horizontal space next to the logo, button, and menu.
+  */
+  .nav-tagline,
+  .nav-brand-separator {
+    display: none !important;
+  }
+
+  /* 
+     2. Reset any desktop translation or margins 
+     to prevent the logo from shifting off-screen.
+  */
+  .nav-brand {
+    transform: none !important;
+    margin-left: 0 !important;
+    display: flex;
+    align-items: center;
+    padding-left: 4px; /* Safe padding from the left edge */
+  }
+
+  .nav-logo {
+    transform: none !important;
+    margin-left: 0 !important;
+    display: block;
+  }
+
+  /* 
+     3. Ensure the parent navbar container is padded 
+     and spaces items symmetrically.
+  */
+  .nav-container {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   CONDITIONAL HOME BUTTON STYLING
+   ========================================== */
+.nav-home-btn {
+  background: transparent;
+  border: none;
+  font-family: inherit; /* Inherits main body sans-serif font */
+  font-weight: 700;
+  font-size: 13.5px; /* Matches dropdown buttons */
+  color: #1e293b; /* Premium slate color used in your menus */
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover styling on desktop when active as a link */
+.nav-home-btn:hover {
+  color: #2d7bc7; /* Your brand blue hover color */
+}
+
+/* 
+   Active unlinked style (span) when currently on the Home page.
+   Indicates current position and prevents clicking/reload actions.
+*/
+.nav-home-btn.active {
+  color: #2d7bc7; /* Matches brand blue color to indicate active state */
+  cursor: default; /* Changes cursor to standard pointer to indicate non-clickability */
+}
+
+/* Symmetrical desktop spacing */
+@media (min-width: 1025px) {
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+}
+
+/* Mobile drawer navigation spacing adjustments */
+@media (max-width: 1024px) {
+  .nav-home-btn {
+    width: 100%;
+    padding: 14px 20px; /* Adapts to full drawer width on mobile */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Mobile divider look */
+    box-sizing: border-box;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Small gap */
+.city-name {
+  margin-left: 4px;
+}
+
+/* Medium gap */
+.city-name {
+  margin-left: 8px;
+}
+
+/* Large gap */
+.city-name {
+  margin-left: 16px;
+}
+
+
+
+
+
+
+/* ==========================================================================
+   8. TOPBAR LAYOUT - DESKTOP ONLY (HIDDEN ON MOBILE)
+   ========================================================================== */
+.topbar {
+  background: linear-gradient(135deg, #003070 0%, #00448f 100%);
+  color: #fff;
+  font-size: 13px;
+  width: 100% !important;
+  z-index: 10005 !important;
+  display: block !important; /* Visible on desktop by default */
+}
+.topbar-inner {
+  max-width: 1400px !important;
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px 4% !important;
+  display: flex !important;
+  justify-content: space-between !important; 
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.topbar-left { 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+}
+
+.topbar-right { 
+  display: flex !important; 
+  align-items: center !important; 
+  gap: 12px; 
+  flex-shrink: 0; 
+}
+
+.sky-blue { 
+  color: #00aeef; 
+  font-weight: 600; 
+}
+
+.topbar-link {
+  color: #fff;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer !important;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  font-size: 13px;
+  transition: opacity 0.25s ease;
+}
+
+.topbar-link:hover {
+  opacity: 0.8;
+}
+
+/* Official brand color for WhatsApp */
+.topbar-link.wa-btn {
+  color: #25d366 !important; 
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   8. TOPBAR LAYOUT - desktop default
+   ========================================================================== */
+.topbar {
+  background: linear-gradient(135deg, #003070 0%, #00448f 100%);
+  color: #fff;
+  font-size: 13px;
+  width: 100%;
+  z-index: 10005;
+  display: block;
+}
+
+.topbar-inner {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px 4%;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.topbar-left { 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+}
+
+.topbar-right { 
+  display: flex !important; 
+  align-items: center !important; 
+  gap: 12px; 
+  flex-shrink: 0; 
+}
+
+.topbar-link {
+  color: #fff;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer !important;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  font-size: 13px;
+  transition: opacity 0.25s ease;
+}
+
+.topbar-link:hover {
+  opacity: 0.8;
+}
+
+/* Official brand color for WhatsApp */
+.topbar-link.wa-btn {
+  color: #25d366 !important; 
+}
+
+
+
+
+
+
+/* Ensure the logo image scales correctly within its container */
+.nav-logo img {
+  object-fit: contain; /* Prevents stretching */
+  transition: all 0.3s ease;
+}
+
+/* If your navbar is feeling crowded, add some padding to the nav-brand */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Adjust spacing between logo and tagline */
+}
+
+/* Ensure the container is a flexbox and centers everything vertically */
+.nav-container {
+  display: flex;
+  align-items: center;    /* Keeps everything centered vertically */
+  justify-content: space-between; /* Pushes brand left, nav/button right */
+  padding: 10px 4%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Ensure the nav-brand (logo + tagline) doesn't shrink */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;         /* Prevents the logo from getting squashed */
+  gap: 15px;
+}
+
+/* Ensure the nav-links take available space but don't overflow */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;              /* Adjust gap to ensure it fits */
+  flex-wrap: nowrap;      /* Prevents items from wrapping to a new line */
+}
+
+/* Ensure the button stays on the right */
+.contact-btn {
+  white-space: nowrap;    /* Prevents button text from wrapping */
+  margin-left: 20px;      /* Ensures space between nav items and button */
+}
+
+
+
+
+
+
+/* Container: ensure it stays a clean flex row */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes brand to left, nav items/btn to right */
+  padding: 10px 4%;
+  flex-wrap: nowrap; /* CRITICAL: Prevents items from breaking to a new line */
+}
+
+/* Brand: keep logo and tagline together, don't let them shrink */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* Prevents the brand from squishing */
+  gap: 10px;      /* Tighten the gap here */
+}
+
+/* Nav links: let them fill the middle space but remain centered */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;      /* Slightly reduce gap to fit more items */
+  flex-shrink: 1; /* Allow to shrink if necessary */
+}
+
+/* Ensure the button doesn't wrap or shrink */
+.contact-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+
+
+
+
+
+
+
+
+
+.nav-logo {
+  line-height: 0;
+}
+
+
+
+
+
+
+/* Increase logo size specifically for mobile view */
+@media (max-width: 1024px) {
+  .logo-mobile {
+    height: 72px !important;
+    width: auto !important;
+    display: block !important;
+    margin-top: -10px !important;
+    margin-bottom: -10px !important;
+  }
+}
+
+
+
+
+
+@media (max-width: 1024px) {
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  /* 1. Prevent the logo wrapper from hogging the middle space */
+  .nav-brand {
+    flex: none !important;
+    width: auto !important;
+  }
+
+  /* 2. Ensure the tagline is completely removed from layout space */
+  .nav-tagline,
+  .nav-brand-separator {
+    display: none !important;
+  }
+
+  /* 3. Group the button and hamburger on the right with a clean gap */
+  .nav-actions > .contact-btn {
+    margin-left: auto !important;
+    margin-right: 14px !important;
+  }
+}
+
+/* ==========================================================================
+   FINAL MOBILE — drawer offset (topbar layout in mobile-responsive.css)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .nav-links {
+    top: var(--mobile-nav-drawer-top, var(--site-header-height)) !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: calc(100dvh - var(--mobile-nav-drawer-top, var(--site-header-height))) !important;
+    max-height: calc(100dvh - var(--mobile-nav-drawer-top, var(--site-header-height))) !important;
+    box-sizing: border-box !important;
+  }
+}
+
+
+
+
+
+
+

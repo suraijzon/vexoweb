@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/WebsiteGrowthSlider.css';
 
 const WebsiteGrowthSlider = ({ onOpenPopup }) => {
   const handleAuditClick = () => {

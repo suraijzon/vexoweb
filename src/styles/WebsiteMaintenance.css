@@ -18,7 +18,7 @@
 .wm__hero {
   position: relative;
   background: linear-gradient(135deg, #0087fc 0%, #004480 50%, #0361b4 100%);
-  padding: 5rem 2rem 3rem;
+  padding: 10rem 2rem 3rem;
   overflow: hidden;
   min-height: 700px;
   display: flex;
