@@ -57,7 +57,7 @@
   margin: 0 auto;
   padding: 0 4%;
   display: grid;
-  grid-template-columns: minmax(300px, 1.15fr) repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(280px, 1.1fr) repeat(5, minmax(0, 1fr));
   column-gap: 28px;
   row-gap: 0;
   align-items: start;
@@ -256,6 +256,14 @@
   color: #00448f;
 }
 
+.footer-area-item {
+  color: #475569;
+  font-weight: 400;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  display: inline-block;
+}
+
 .footer-divider {
   position: relative;
   z-index: 1;
@@ -287,7 +295,7 @@
 }
 
 .copyright {
-  color: #94a3b8;
+  color: #ffffff;
   font-size: 0.85rem;
   margin: 0;
 }
@@ -300,22 +308,22 @@
 .social-icon {
   width: 36px;
   height: 36px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #ffffff;
+  border: 1px solid #ffffff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #cbd5e1;
+  color: #00448f;
   text-decoration: none;
   transition: all 0.22s ease;
   font-size: 0.95rem;
 }
 
 .social-icon:hover {
-  background: #38bdf8;
-  border-color: #38bdf8;
-  color: #0a1628;
+  background: #00448f;
+  border-color: #00448f;
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -378,18 +386,19 @@
     row-gap: 32px;
   }
 
-  /* Brand block — centered */
+  /* Brand block — logo centered, contact left-aligned */
   .footer-brand {
     grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: stretch;
+    text-align: left;
     gap: 14px;
   }
 
   .footer-logo {
     justify-content: center;
+    align-self: center;
     margin-top: 0;
   }
 
@@ -399,16 +408,18 @@
 
   .footer-contact-box {
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
     margin-top: 0;
+    text-align: left;
+    align-self: stretch;
   }
 
   .footer-contact-list {
-    align-items: center;
+    align-items: flex-start;
   }
 
   .footer-contact-row {
-    justify-content: center;
+    justify-content: flex-start;
     max-width: 100%;
   }
 
@@ -443,10 +454,14 @@
     row-gap: 28px;
   }
 
-  /* Keep brand centered, columns left on single column stack */
+  /* Keep logo centered, contact + columns left on single column stack */
   .footer-brand {
-    align-items: center;
-    text-align: center;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .footer-logo {
+    align-self: center;
   }
 
   .footer-column {

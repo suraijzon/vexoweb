@@ -43,6 +43,24 @@ video {
   height: auto;
 }
 
+/* Anchor targets — clear fixed header when scrolling to sections */
+[id="contact"],
+[id="audit"],
+[id="work"],
+[id="results"],
+[id="case-studies"],
+[id="services"],
+[id="what-is"],
+[id="help"] {
+  scroll-margin-top: calc(var(--site-header-height) + 16px);
+}
+
+a.primary-btn,
+a.secondary-btn,
+a.link-btn {
+  text-decoration: none;
+}
+
 /* --- Fixed header clearance for centered service heroes (all breakpoints) --- */
 .ecd__hero_centered_layout,
 .aiss__hero_centered_layout {
@@ -228,10 +246,10 @@ video {
 
   header.navbar-wrapper + section.hero .hero-desc {
     font-size: 15px !important;
-    line-height: 1.6 !important;
+    line-height: 1.5 !important;
     max-width: 100% !important;
-    margin-bottom: 28px !important;
-    padding: 0 4px;
+    margin-bottom: 32px !important;
+    padding: 0 6px;
   }
 
   header.navbar-wrapper + section.hero .hero-buttons {
@@ -240,7 +258,7 @@ video {
     width: 100% !important;
     max-width: 300px !important;
     gap: 12px !important;
-    margin: 0 auto 28px auto !important;
+    margin: 0 auto 0 auto !important;
   }
 
   header.navbar-wrapper + section.hero .primary-btn,
@@ -297,9 +315,10 @@ video {
   .software-page .hero-desc {
     text-align: center !important;
     font-size: 15px !important;
-    line-height: 1.6 !important;
+    line-height: 1.5 !important;
     max-width: 100% !important;
-    margin-bottom: 28px !important;
+    margin-bottom: 32px !important;
+    padding: 0 6px;
   }
 
   .software-page .hero-buttons {
@@ -308,7 +327,7 @@ video {
     width: 100% !important;
     max-width: 300px !important;
     gap: 12px !important;
-    margin: 0 auto 28px auto !important;
+    margin: 0 auto 0 auto !important;
   }
 
   .software-page .hero-badge {
@@ -350,8 +369,10 @@ video {
   .ecd__hero_text_centered,
   .aiss__hero_text_centered {
     font-size: 15px !important;
-    line-height: 1.6 !important;
+    line-height: 1.5 !important;
     text-align: center !important;
+    margin-bottom: 32px !important;
+    padding: 0 6px;
   }
 
   .ecd__hero_buttons_centered,
@@ -452,6 +473,9 @@ video {
 
   .fswd__hero_description {
     font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 32px !important;
+    padding: 0 6px;
     text-align: center !important;
   }
 
@@ -459,7 +483,7 @@ video {
   .fswd__cta_primary {
     width: 100% !important;
     max-width: 300px !important;
-    margin: 0 auto !important;
+    margin: 0 auto 0 auto !important;
     justify-content: center !important;
     box-sizing: border-box;
   }
@@ -481,6 +505,9 @@ video {
 
   .ecd__hero_text {
     font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 32px !important;
+    padding: 0 6px;
     text-align: center !important;
   }
 
@@ -489,7 +516,7 @@ video {
     align-items: center !important;
     width: 100% !important;
     max-width: 300px !important;
-    margin: 0 auto !important;
+    margin: 0 auto 0 auto !important;
     gap: 12px !important;
   }
 
@@ -888,16 +915,32 @@ video {
 
   .footer-brand {
     grid-column: 1 / -1 !important;
-    align-items: center !important;
-    text-align: center !important;
+    align-items: stretch !important;
+    text-align: left !important;
   }
 
   .footer-logo {
     justify-content: center !important;
+    align-self: center !important;
+  }
+
+  .footer-contact-box {
+    text-align: left !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .footer-contact-list {
+    align-items: flex-start !important;
+  }
+
+  .footer-contact-row {
+    justify-content: flex-start !important;
   }
 
   .footer-contact-icons {
-    justify-content: center !important;
+    justify-content: flex-start !important;
   }
 
   .footer-column {
@@ -1090,7 +1133,7 @@ video {
   }
 
   .contactus-page {
-    padding: 90px 12px 32px 12px !important;
+    padding: calc(var(--site-header-height) + var(--hero-top-gap) + 8px) 12px 32px 12px !important;
   }
 
   .abt__who_section,
@@ -1236,13 +1279,14 @@ header.navbar-wrapper + section.hero .hero-badge-light {
 .ecd__hero_text,
 .fswd__hero_description,
 .ecd__hero_text_centered,
-.aiss__hero_text_centered {
+.aiss__hero_text_centered,
+header.navbar-wrapper + section.hero .hero-desc {
   font-family: 'Poppins', sans-serif !important;
-  font-size: 19px !important;
+  font-size: 18px !important;
   font-weight: 400 !important;
-  line-height: 1.65 !important;
-  margin: 0 0 40px 0 !important;
-  max-width: 720px !important;
+  line-height: 1.6 !important;
+  margin: 0 0 36px 0 !important;
+  max-width: 700px !important;
 }
 
 /* Hero badges — match homepage compact pill (13px desktop / 11px mobile) */
@@ -1372,10 +1416,12 @@ header.navbar-wrapper + section.hero .hero-badge .badge-dot,
   .ecd__hero_text,
   .fswd__hero_description,
   .ecd__hero_text_centered,
-  .aiss__hero_text_centered {
+  .aiss__hero_text_centered,
+  header.navbar-wrapper + section.hero .hero-desc {
     font-size: 15px !important;
-    line-height: 1.6 !important;
-    margin-bottom: 28px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 32px !important;
+    padding: 0 6px;
   }
 
   .software-page .hero-trust-text,
@@ -1572,11 +1618,32 @@ body,
     height: calc(100dvh - var(--mobile-nav-drawer-top, var(--site-header-height))) !important;
     max-height: calc(100dvh - var(--mobile-nav-drawer-top, var(--site-header-height))) !important;
     box-sizing: border-box !important;
-    padding: 20px 16px 32px !important;
+    padding: 0 !important;
+    align-items: stretch !important;
+    flex-shrink: 0 !important;
   }
 
   .nav-links.open {
     left: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-nav-drawer {
+    display: flex !important;
+    flex-direction: column;
+    width: 100% !important;
+    min-height: auto !important;
+    flex: 1;
+  }
+
+  .mobile-nav-drawer__primary {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    flex-shrink: 0;
   }
 
   .dropdown-wide .dropdown-content {
@@ -1690,4 +1757,67 @@ body,
     line-height: 1 !important;
     flex-shrink: 0 !important;
   }
+}
+
+/* --- Hamburger: equal-width lines (loaded last) --- */
+@media (max-width: 1024px) {
+  header.navbar-wrapper .nav-container .nav-actions .hamburger {
+    display: flex !important;
+    width: 30px !important;
+    height: 18px !important;
+    min-width: 30px !important;
+    flex-shrink: 0 !important;
+  }
+
+  header.navbar-wrapper .nav-container .nav-actions .hamburger svg {
+    display: block !important;
+    width: 30px !important;
+    height: 18px !important;
+  }
+
+  header.navbar-wrapper .nav-container .nav-actions .hamburger .hamburger-line {
+    fill: #00448f !important;
+  }
+}
+
+/* ==========================================================================
+   HERO CTA → TRUST TEXT GAP (all service pages)
+   ========================================================================== */
+.software-page .hero-buttons,
+.ecd__hero_actions,
+.ecd__hero_buttons_centered,
+.aiss__hero_buttons_centered,
+.fswd__cta_primary {
+  margin-bottom: 0 !important;
+}
+
+.hero-trust-text.hero-trust-text--centered,
+.ecd__hero_trust_text_centered,
+.aiss__hero_trust_text_centered,
+.software-page .hero-trust-text {
+  margin-top: 28px !important;
+  margin-bottom: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Hero descriptions — match homepage (18px desktop / 15px mobile) */
+@media (max-width: 768px) {
+  .software-page .hero-desc,
+  .fswd__hero_description,
+  .ecd__hero_text,
+  .ecd__hero_text_centered,
+  .aiss__hero_text_centered,
+  header.navbar-wrapper + section.hero .hero-desc {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 32px !important;
+    padding: 0 6px !important;
+  }
+}
+
+/* Homepage hero — tighter gap between buttons and trust text */
+header.navbar-wrapper + section.hero .hero-trust-text.hero-trust-text--centered,
+header.navbar-wrapper + section.hero .hero-trust-text--centered {
+  margin-top: 16px !important;
 }

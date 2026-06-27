@@ -3,7 +3,9 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ContactSection from '../components/ContactSection';
 import HeroTrustText from '../components/HeroTrustText';
+import Breadcrumb from '../components/Breadcrumb';
 import TechnologyStackSection from '../components/TechnologyStackSection';
+import { PAGE_BREADCRUMBS } from '../content/pageBreadcrumbs';
 import { SERVICE_CONTACT } from '../content/serviceContactContent';
 import { SERVICE_TECH_STACK } from '../content/serviceTechStackContent';
 import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
@@ -234,6 +236,7 @@ const SEOServices = () => {
       >
         <div className="ecd__hero_overlay_centered"></div>
         <div className="ecd__hero_container_centered">
+          <Breadcrumb items={PAGE_BREADCRUMBS.seoServices} className="breadcrumb--centered breadcrumb--on-dark" />
           
           {/* Local SEO Eyebrow */}
           <div className="ecd__badge_pill_centered">
@@ -258,7 +261,7 @@ const SEOServices = () => {
 
           {/* Buttons */}
           <div className="ecd__hero_buttons_centered">
-            <a href="#audit" className="ecd__btn_primary_centered">
+            <a href="#contact" className="ecd__btn_primary_centered">
               Get Free SEO Audit
             </a>
             <a href="#work" className="ecd__btn_secondary_centered">
@@ -272,7 +275,7 @@ const SEOServices = () => {
       </section>
 
       {/* 2. OVERVIEW: THE BRUTALIST GALLERY BLOCK (White Theme) */}
-      <section className="fswd__section_wrapper ecd-bg-white ecd-brutalist-section">
+      <section id="work" className="fswd__section_wrapper ecd-bg-white ecd-brutalist-section">
         <div className="ecd-brutalist-ticker">
           <div className="ticker-wrapper">
             <span>INDEX MATRICES ● ORGANIC TRAFFIC GROWTH ● SEMANTIC ENTITIES ● CORE PERFORMANCE SCHEMAS ● </span>
@@ -450,7 +453,7 @@ const SEOServices = () => {
             </div>
           </div>
           <p className="ecd__comparison_tagline_dark">
-            For AI-driven visibility, see our <a href="/ai-search-optimization">AI Search Optimization service</a>.
+            For AI-driven visibility, see our <a href="/ai-software-development">AI Software Development service</a>.
           </p>
         </div>
       </section>

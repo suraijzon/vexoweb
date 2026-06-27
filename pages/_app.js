@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import Script from 'next/script';
+import { Poppins } from 'next/font/google';
 
-import { AuthProvider } from '../src/context/AuthContext';
+import { AuthProvider } from '../src/context/AuthContext.jsx';
+import Chatbot from '../src/components/Chatbot';
 
 import '../src/index.css';
 import '../src/App.css';
@@ -11,6 +13,10 @@ import '../src/styles/footer.css';
 import '../src/styles/growNow.css';
 import '../src/styles/navbar.css';
 import '../src/styles/hero-main.css';
+import '../src/styles/homeServices.css';
+import '../src/styles/homeAreas.css';
+import '../src/styles/breadcrumb.css';
+import '../src/styles/cityPage.css';
 import '../src/styles/process.css';
 import '../src/styles/publishSection.css';
 import '../src/styles/Review.css';
@@ -42,10 +48,19 @@ import '../src/styles/TermsConditions.css';
 import '../src/styles/UserProfile.css';
 import '../src/styles/WebsiteMaintenance.css';
 import '../src/styles/mobile-responsive.css';
+import '../src/styles/chatbot.css';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-poppins',
+});
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
+      <div className={poppins.className}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
@@ -65,6 +80,8 @@ export default function MyApp({ Component, pageProps }) {
         `}
       </Script>
       <Component {...pageProps} />
+      <Chatbot />
+      </div>
     </AuthProvider>
   );
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HeroTrustText from '../components/HeroTrustText';
+import Breadcrumb from '../components/Breadcrumb';
+import { PAGE_BREADCRUMBS } from '../content/pageBreadcrumbs';
 import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
 
 const ContactPage = () => {
@@ -42,6 +44,7 @@ const ContactPage = () => {
       <section className="cp__hero">
         <div className="cp__hero_pattern"></div>
         <div className="cp__hero_container">
+          <Breadcrumb items={PAGE_BREADCRUMBS.contact} className="breadcrumb--centered breadcrumb--on-dark" />
           
           {/* Glowing Pill Badge */}
           <div className="cp__hero_badge">
@@ -82,7 +85,7 @@ const ContactPage = () => {
 
       {/* How Can We Help */}
      {/* How Can We Help (Restructured to 3 Pillared Columns with Connecting Line [1]) */}
-      <section className="cp__help_section">
+      <section className="cp__help_section" id="help">
         <div className="cp__container">
           <span className="cp__section_badge cyan">CAPABILITIES</span>
           <h2 className="cp__heading">How Can We Help You?</h2>
@@ -158,7 +161,7 @@ const ContactPage = () => {
 
       {/* Request Consultation */}
      {/* 3️⃣ REQUEST CONSULTATION (Split-Background Card Redesign [1]) */}
-      <section className="cp__consult_section">
+      <section className="cp__consult_section" id="audit">
         <div className="cp__container">
           
           <span className="cp__section_badge yellow">WORKFLOW</span>
@@ -216,7 +219,7 @@ const ContactPage = () => {
 
       {/* Contact Details */}
    {/* Contact Details (3 Colorful, Compact Containers [1]) */}
-      <section className="cp__details_section">
+      <section className="cp__details_section" id="contact">
         <div className="cp__container">
           <span className="cp__section_badge blue">DIRECT ACCESS</span>
           <h2 className="cp__heading">Contact Details</h2>
@@ -236,7 +239,7 @@ const ContactPage = () => {
             </a>
 
             {/* Card 2: Whatsapp Us (Ecosystem Green Theme) */}
-            <a href="https://wa.me/94770000000" target="_blank" rel="noopener noreferrer" className="cp__details_card card_whatsapp">
+            <a href="https://wa.me/94740309534" target="_blank" rel="noopener noreferrer" className="cp__details_card card_whatsapp">
               <span className="details_icon_circle">
                 <svg className="cp__details_svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
