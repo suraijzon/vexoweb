@@ -207,7 +207,7 @@ const PrivacyPolicy = () => {
                         <span className="pp__contact_icon">🌐</span>
                         <div>
                           <strong>Website:</strong>
-                          <a href="https://vexoweb.lk">vexoweb.lk</a>
+                          <a href="https://www.vexoweb.lk">www.vexoweb.lk</a>
                         </div>
                       </div>
                     </div>
