@@ -6,6 +6,7 @@ import HeroTrustText from '../components/HeroTrustText';
 import Breadcrumb from '../components/Breadcrumb';
 import TechnologyStackSection from '../components/TechnologyStackSection';
 import { PAGE_BREADCRUMBS } from '../content/pageBreadcrumbs';
+import { MAIN_SERVICE_SEO } from '../content/servicePagesConfig';
 import { SERVICE_CONTACT } from '../content/serviceContactContent';
 import { SERVICE_TECH_STACK } from '../content/serviceTechStackContent';
 import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
@@ -202,8 +203,7 @@ const FullStackWebDev = () => {
       </span>
     </div>
     <h1 className="fswd__h1">
-      Professional Website Design &amp; Development in{" "}
-      <span className="highlight-text">Eastern Province</span>
+      {MAIN_SERVICE_SEO.websiteDevelopment.h1}
     </h1>
     <p className="fswd__hero_description">
       We build fast, mobile-friendly websites for shops, clinics, schools, and businesses 

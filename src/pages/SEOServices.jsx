@@ -6,6 +6,7 @@ import HeroTrustText from '../components/HeroTrustText';
 import Breadcrumb from '../components/Breadcrumb';
 import TechnologyStackSection from '../components/TechnologyStackSection';
 import { PAGE_BREADCRUMBS } from '../content/pageBreadcrumbs';
+import { MAIN_SERVICE_SEO } from '../content/servicePagesConfig';
 import { SERVICE_CONTACT } from '../content/serviceContactContent';
 import { SERVICE_TECH_STACK } from '../content/serviceTechStackContent';
 import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
@@ -248,8 +249,7 @@ const SEOServices = () => {
           </div>
 
           <h1 className="seos__h1">
-            SEO Services for Businesses in{" "}
-            <span className="highlight-text">Eastern Province</span>
+            {MAIN_SERVICE_SEO.seoServices.h1}
           </h1>
 
           {/* Localized Subtitle */}

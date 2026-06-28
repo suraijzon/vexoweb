@@ -129,6 +129,31 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* Light pill bar — city pages (reference: Home › Services › Service › City) */
+.breadcrumb--pill-light {
+  background: linear-gradient(90deg, #fef9f3 0%, #fffbeb 50%, #fef9f3 100%);
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+}
+
+.breadcrumb--pill-light .breadcrumb__link {
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.breadcrumb--pill-light .breadcrumb__link:hover {
+  color: #1d4ed8;
+}
+
+.breadcrumb--pill-light .breadcrumb__current {
+  color: #334155;
+  font-weight: 600;
+}
+
+.breadcrumb--pill-light .breadcrumb__sep {
+  color: #94a3b8;
+}
+
 .fswd__hero_content .breadcrumb,
 .aiss__hero_container_centered .breadcrumb,
 .ecd__hero_container_centered .breadcrumb,

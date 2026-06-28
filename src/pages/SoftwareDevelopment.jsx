@@ -6,6 +6,7 @@ import HeroTrustText from '../components/HeroTrustText';
 import Breadcrumb from '../components/Breadcrumb';
 import TechnologyStackSection from '../components/TechnologyStackSection';
 import { PAGE_BREADCRUMBS } from '../content/pageBreadcrumbs';
+import { MAIN_SERVICE_SEO } from '../content/servicePagesConfig';
 import { SERVICE_CONTACT } from '../content/serviceContactContent';
 import { SERVICE_TECH_STACK } from '../content/serviceTechStackContent';
 import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
@@ -180,8 +181,7 @@ const SoftwareDevelopment = () => {
               </span>
             </span>
             <h1 className="software__h1">
-              Custom Software Development for{" "}
-              <span className="highlight-text">Eastern Province</span> Businesses
+              {MAIN_SERVICE_SEO.softwareDevelopment.h1}
             </h1>
             <p className="hero-desc">
               Business POS, billing apps, inventory tools — we build software that solves
