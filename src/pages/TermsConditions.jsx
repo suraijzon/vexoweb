@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import ContactSection from '../components/ContactSection';
+import HomeTechStackSection from '../components/HomeTechStackSection';
 import Breadcrumb from '../components/Breadcrumb';
 import { PAGE_BREADCRUMBS } from '../content/pageBreadcrumbs';
 
@@ -219,7 +221,7 @@ const TermsConditions = () => {
                         <span className="tc__contact_icon">🌐</span>
                         <div>
                           <strong>Website:</strong>
-                          <a href="https://www.vexoweb.lk">www.vexoweb.lk</a>
+                          <a href="https://vexoweb.lk">vexoweb.lk</a>
                         </div>
                       </div>
                     </div>
@@ -244,6 +246,8 @@ const TermsConditions = () => {
         </div>
       </section>
 
+      <HomeTechStackSection />
+      <ContactSection />
       <Footer />
     </div>
   );

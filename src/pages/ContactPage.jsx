@@ -5,6 +5,8 @@ import HeroTrustText from '../components/HeroTrustText';
 import Breadcrumb from '../components/Breadcrumb';
 import { PAGE_BREADCRUMBS } from '../content/pageBreadcrumbs';
 import { HERO_TRUST_TEXT } from '../content/heroTrustContent';
+import HomeTechStackSection from '../components/HomeTechStackSection';
+import ContactSection from '../components/ContactSection';
 
 const ContactPage = () => {
   // FAQ Accordion State
@@ -66,8 +68,8 @@ const ContactPage = () => {
           </p>
 
           {/* Action Buttons [1] */}
-          <div className="cp__hero_actions">
-            <a href="#contact" className="cp__hero_cta_primary">
+          <div className="cp__hero_actions hero-cta-wrap">
+            <a href="#contact" className="cp__hero_cta_primary hero-cta-btn">
               Get Free Consultation
             </a>
             <a href="#audit" className="cp__hero_cta_secondary">
@@ -219,7 +221,7 @@ const ContactPage = () => {
 
       {/* Contact Details */}
    {/* Contact Details (3 Colorful, Compact Containers [1]) */}
-      <section className="cp__details_section" id="contact">
+      <section className="cp__details_section" id="contact-info">
         <div className="cp__container">
           <span className="cp__section_badge blue">DIRECT ACCESS</span>
           <h2 className="cp__heading">Contact Details</h2>
@@ -358,6 +360,10 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
+
+      <HomeTechStackSection />
+
+      <ContactSection />
 
       {/* Final CTA (Vibrant Gradient Banner) */}
       <section className="cp__cta_section">
