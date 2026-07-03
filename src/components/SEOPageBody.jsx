@@ -1,206 +1,233 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
-  HiOutlineMapPin,
-  HiOutlineWrenchScrewdriver,
-  HiOutlineDocumentText,
-  HiOutlineBuildingStorefront,
   HiOutlineMagnifyingGlass,
-  HiOutlinePencilSquare,
-  HiOutlineShoppingCart,
-  HiOutlineClipboardDocumentCheck,
-  HiOutlineArrowTrendingUp,
-  HiOutlineGlobeAlt,
-  HiOutlineUserGroup,
-  HiOutlineShieldCheck,
-  HiOutlineChartBar,
   HiOutlineCheckCircle,
-  HiOutlineHeart,
-  HiOutlineBuildingOffice2,
-  HiOutlineAcademicCap,
-  HiOutlineBriefcase,
+  HiOutlineMapPin,
+  HiOutlineArrowRightCircle,
+  HiOutlineQuestionMarkCircle,
+  HiOutlineCpuChip,
+  HiOutlineShieldCheck,
+  HiOutlineWrenchScrewdriver,
+  HiOutlineChartBar,
 } from 'react-icons/hi2';
-import ServiceProcessSection from './ServiceProcessSection';
 import {
-  SEO_METRICS,
-  SEO_SERVICES,
-  SEO_BENEFITS,
-  SEO_PROCESS,
-  SEO_INDUSTRIES,
+  SEO_DETAILS_LABEL,
+  SEO_INTRO,
+  SEO_WHY_INVEST,
+  SEO_EASTERN_PROVINCE,
+  SEO_WHY_CHOOSE,
   SEO_AREAS,
   SEO_FAQ,
-  SEO_WHY,
+  SEO_CTA,
 } from '../content/seoPageContent';
+import seoDetailsVisual from '../assets/seo/seo-details-visual.jpg';
+import PageBodyCtaSection from './shared/PageBodyCtaSection';
 
-const serviceIcons = {
-  local: HiOutlineMapPin,
-  technical: HiOutlineWrenchScrewdriver,
-  onpage: HiOutlineDocumentText,
-  gbp: HiOutlineBuildingStorefront,
-  keyword: HiOutlineMagnifyingGlass,
-  content: HiOutlinePencilSquare,
-  ecommerce: HiOutlineShoppingCart,
-  audit: HiOutlineClipboardDocumentCheck,
+const whyChooseIcons = {
+  'Experienced SEO Specialists': HiOutlineMagnifyingGlass,
+  'Local SEO Expertise': HiOutlineMapPin,
+  'Ethical White Hat SEO': HiOutlineShieldCheck,
+  'Technical SEO Professionals': HiOutlineWrenchScrewdriver,
+  'Transparent SEO Reporting': HiOutlineChartBar,
+  'Data-Driven SEO Strategies': HiOutlineChartBar,
+  'AI Search Optimisation': HiOutlineCpuChip,
+  'Long-Term Growth Focus': HiOutlineArrowRightCircle,
 };
 
-const benefitIcons = {
-  rank: HiOutlineArrowTrendingUp,
-  traffic: HiOutlineGlobeAlt,
-  leads: HiOutlineUserGroup,
-  trust: HiOutlineShieldCheck,
-  growth: HiOutlineChartBar,
-  local: HiOutlineMapPin,
-};
+const shipAccents = ['#2563eb', '#16a34a', '#9333ea', '#ea580c', '#0891b2'];
 
-const industryIcons = {
-  local: HiOutlineMapPin,
-  ecommerce: HiOutlineShoppingCart,
-  health: HiOutlineHeart,
-  hotel: HiOutlineBuildingOffice2,
-  services: HiOutlineBriefcase,
-  education: HiOutlineAcademicCap,
-};
-
-const RankingChart = () => (
-  <div className="seo-ref__chart" aria-hidden="true">
-    <div className="seo-ref__chart_header">
-      <span>Organic Traffic Growth</span>
-      <strong>+186%</strong>
-    </div>
-    <div className="seo-ref__chart_bars">
-      {[30, 45, 55, 70, 85, 100].map((h, i) => (
-        <div key={i} className="seo-ref__chart_bar" style={{ height: `${h}%` }} />
-      ))}
-    </div>
-    <div className="seo-ref__chart_labels">
-      <span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span>
-    </div>
+const SectionVisual = ({ src, alt, className = '', width = 420, height = 340 }) => (
+  <div className={`ecd-v2__section_visual${className ? ` ${className}` : ''}`}>
+    <Image src={src} alt={alt} width={width} height={height} className="ecd-v2__section_visual_img" />
   </div>
 );
 
-const Header = ({ title, subtitle, light }) => (
-  <div className={`seo-ref__header${light ? ' seo-ref__header--light' : ''}`}>
-    <h2 className="seo-ref__title">{title}</h2>
-    {subtitle && <p className="seo-ref__subtitle">{subtitle}</p>}
+const SectionShell = ({
+  icon: Icon,
+  title,
+  titleAccent,
+  subtitle,
+  children,
+  variant = 'default',
+  titleClassName = 'ecd-h4',
+  TitleTag = 'h4',
+}) => (
+  <section
+    className={[
+      'ecd-v2__section',
+      variant === 'alt' && 'ecd-v2__section--alt',
+      variant === 'hero' && 'ecd-v2__section--hero',
+    ]
+      .filter(Boolean)
+      .join(' ')}
+  >
+    <div className="ecd-v2__container">
+      <div className="ecd-v2__section_head">
+        <div className="ecd-v2__section_head_copy">
+          {Icon && (
+            <div className="ecd-v2__section_icon_wrap" aria-hidden="true">
+              <Icon />
+            </div>
+          )}
+          <div>
+            <TitleTag className={titleClassName}>
+              {title}
+              {titleAccent && (
+                <>
+                  {' '}
+                  <span className="ecd-v2__title_accent">{titleAccent}</span>
+                </>
+              )}
+            </TitleTag>
+            {subtitle && <p className="ecd-v2__subtitle">{subtitle}</p>}
+          </div>
+        </div>
+      </div>
+      {children}
+    </div>
+  </section>
+);
+
+const Prose = ({ paragraphs, className = '' }) => (
+  <div className={`ecd-v2__prose${className ? ` ${className}` : ''}`}>
+    {paragraphs.map((p) => (
+      <p key={p.slice(0, 48)}>{p}</p>
+    ))}
+  </div>
+);
+
+const IconPointsCard = ({ item, index, iconMap, fallbackIcon, accents = shipAccents }) => {
+  const Icon = iconMap[item.title] || fallbackIcon;
+  const accent = accents[index % accents.length];
+  return (
+    <article className="ecd-v2__ship_card" style={{ '--ship-accent': accent }}>
+      <span className="ecd-v2__ship_num" style={{ background: accent }}>{index + 1}</span>
+      <div className="ecd-v2__ship_icon" style={{ color: accent }}>
+        <Icon />
+      </div>
+      <h5 className="ecd-h5">{item.title}</h5>
+      <ul className="ecd-v2__ship_points">
+        {item.points.map((point) => (
+          <li key={point}>
+            <HiOutlineCheckCircle aria-hidden="true" />
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+};
+
+const IconPointsRow = ({ items, iconMap, fallbackIcon, cols }) => (
+  <div
+    className={`ecd-v2__ship_row${cols ? ` ecd-v2__ship_row--cols-${cols}` : ' ecd-v2__ship_row--wrap'}`}
+    style={cols ? { '--ship-cols': cols } : undefined}
+  >
+    {items.map((item, index) => (
+      <IconPointsCard
+        key={item.title}
+        item={item}
+        index={index}
+        iconMap={iconMap}
+        fallbackIcon={fallbackIcon}
+      />
+    ))}
   </div>
 );
 
 const SEOPageBody = () => (
-  <div className="seo-ref">
-    <section className="seo-ref__metrics">
-      <div className="seo-ref__container">
-        <div className="seo-ref__metrics_row">
-          {SEO_METRICS.map((m) => (
-            <div key={m.label} className="seo-ref__metric">
-              <strong style={{ color: m.color }}>{m.value}</strong>
-              <span>{m.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section className="seo-ref__section">
-      <div className="seo-ref__container">
-        <Header title="Our SEO Services" subtitle="Comprehensive search engine optimisation for sustainable growth." />
-        <div className="seo-ref__services">
-          {SEO_SERVICES.map((s) => {
-            const Icon = serviceIcons[s.icon];
-            return (
-              <article key={s.title} className="seo-ref__service">
-                <div className="seo-ref__service_icon" style={{ backgroundColor: `${s.color}14`, color: s.color }}><Icon /></div>
-                <h3>{s.title}</h3>
-                <p>{s.description}</p>
-                <a href="#contact" className="seo-ref__link" style={{ color: s.color }}>Learn More →</a>
-              </article>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-
-    <section className="seo-ref__benefits">
-      <div className="seo-ref__container">
-        <Header title="Why Invest in SEO?" subtitle="More customers search online before choosing a product or service." light />
-        <div className="seo-ref__benefits_grid">
-          {SEO_BENEFITS.map((b) => {
-            const Icon = benefitIcons[b.icon];
-            return (
-              <div key={b.title} className="seo-ref__benefit">
-                <div className="seo-ref__benefit_icon"><Icon /></div>
-                <h3>{b.title}</h3>
-                <p>{b.description}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-
-    <section className="seo-ref__section seo-ref__section--alt">
-      <div className="seo-ref__container">
-        <div className="seo-ref__split">
-          <div>
-            <Header title="Data-Driven SEO Results" subtitle="Track measurable improvements in traffic, rankings and leads." />
-            <RankingChart />
+  <div className="ecd-v2 ecd-v2--details">
+    <div className="ecd-v2__details_label">
+      <div className="ecd-v2__container">
+        <div className="ecd-v2__details_label_inner">
+          <div className="ecd-v2__details_label_copy">
+            <span>{SEO_DETAILS_LABEL.badge}</span>
+            <h4 className="ecd-h4">{SEO_DETAILS_LABEL.title}</h4>
+            <p>{SEO_DETAILS_LABEL.subtitle}</p>
           </div>
-          <div>
-            <Header title="Why Choose Vexoweb?" subtitle="Ethical SEO strategies that deliver long-term business growth." />
-            <ul className="seo-ref__why_list">
-              {SEO_WHY.map((item) => (
-                <li key={item}>
-                  <HiOutlineCheckCircle className="seo-ref__why_check" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <SectionVisual
+            src={seoDetailsVisual}
+            alt="Professional SEO services and Google ranking growth by Vexoweb in Eastern Province, Sri Lanka"
+            className="ecd-v2__section_visual--website-details"
+            width={1024}
+            height={769}
+          />
         </div>
       </div>
-    </section>
+    </div>
 
-    <ServiceProcessSection
-      title="Our SEO Process"
-      subtitle="A systematic approach to improving your search visibility."
-      steps={SEO_PROCESS}
+    <PageBodyCtaSection
+      cta={SEO_CTA}
+      service="SEO"
+      intro={{
+        icon: <HiOutlineMagnifyingGlass />,
+        children: (
+          <>
+            <p>{SEO_INTRO.summary}</p>
+            <p>{SEO_INTRO.closing}</p>
+          </>
+        ),
+      }}
     />
 
-    <section className="seo-ref__section seo-ref__section--alt">
-      <div className="seo-ref__container">
-        <Header title="Industries We Work With" />
-        <div className="seo-ref__industries">
-          {SEO_INDUSTRIES.map((ind) => {
-            const Icon = industryIcons[ind.icon];
-            return (
-              <div key={ind.title} className="seo-ref__industry">
-                <div style={{ color: ind.color }}><Icon /></div>
-                <span>{ind.title}</span>
-              </div>
-            );
-          })}
-        </div>
-        <Header title="SEO Services Across the Eastern Province" subtitle="Explore our SEO services in nearby locations." />
-        <div className="seo-ref__areas">
-          {SEO_AREAS.map((area) => (
-            <Link key={area.href} href={area.href} className="seo-ref__area_pill">{area.label}</Link>
-          ))}
-        </div>
-      </div>
-    </section>
+    <SectionShell icon={HiOutlineChartBar} title={SEO_WHY_INVEST.title} variant="alt">
+      <Prose paragraphs={SEO_WHY_INVEST.intro} className="ecd-v2__prose--center" />
+      <p className="ecd-v2__center_lead">{SEO_WHY_INVEST.subtitle}</p>
+    </SectionShell>
 
-    <section className="seo-ref__section">
-      <div className="seo-ref__container seo-ref__container--narrow">
-        <Header title="Frequently Asked Questions" />
-        <div className="seo-ref__faq">
-          {SEO_FAQ.map((item) => (
-            <details key={item.q} className="seo-ref__faq_item">
-              <summary>{item.q}</summary>
-              <p>{item.a}</p>
-            </details>
-          ))}
-        </div>
+    <SectionShell icon={HiOutlineMapPin} title={SEO_EASTERN_PROVINCE.title}>
+      <Prose paragraphs={SEO_EASTERN_PROVINCE.intro} className="ecd-v2__prose--center" />
+    </SectionShell>
+
+    <SectionShell
+      icon={HiOutlineShieldCheck}
+      title={SEO_WHY_CHOOSE.title}
+      titleAccent={SEO_WHY_CHOOSE.titleAccent}
+      variant="hero"
+    >
+      <p className="ecd-v2__center_lead ecd-v2__center_lead--light">{SEO_WHY_CHOOSE.subtitle}</p>
+      <IconPointsRow
+        items={SEO_WHY_CHOOSE.items}
+        iconMap={whyChooseIcons}
+        fallbackIcon={HiOutlineMagnifyingGlass}
+        cols={4}
+      />
+    </SectionShell>
+
+    <SectionShell icon={HiOutlineMapPin} title="Areas We Serve" variant="alt">
+      <p className="ecd-v2__center_lead">
+        Our SEO services are available throughout the Eastern Province, including:
+      </p>
+      <div className="ecd-v2__related_row" style={{ '--related-cols': SEO_AREAS.length }}>
+        {SEO_AREAS.map((area) => (
+          <Link key={area.href} href={area.href} className="ecd-v2__related_tile">
+            <div className="ecd-v2__related_tile_icon">
+              <HiOutlineMapPin />
+            </div>
+            <span className="ecd-v2__related_tile_label">{area.label}</span>
+            <HiOutlineArrowRightCircle className="ecd-v2__related_tile_arrow" aria-hidden="true" />
+          </Link>
+        ))}
       </div>
-    </section>
+    </SectionShell>
+
+    <SectionShell
+      icon={HiOutlineQuestionMarkCircle}
+      title="Frequently Asked Questions"
+      titleClassName="ecd-h6"
+      TitleTag="h6"
+    >
+      <div className="ecd-v2__faq">
+        {SEO_FAQ.map((item) => (
+          <details key={item.q} className="ecd-v2__faq_item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </SectionShell>
   </div>
 );
 

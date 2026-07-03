@@ -1,4 +1,5 @@
 import React from "react";
+import { processStepAlt } from "../lib/imageAlt";
 import DiscoverIcon from "../assets/icons/discover.svg";
 import StrategyIcon from "../assets/icons/strategy.svg";
 import DevelopmentIcon from "../assets/icons/launch.svg";
@@ -53,7 +54,8 @@ const ProcessSection = () => {
         <header className="home-process__header">
           <span className="home-process__tag">Proven Process</span>
           <h2 id="home-process-title" className="home-process__title">
-            How We Deliver <span className="home-process__title-accent">Your Project</span>
+            <span className="home-process__title-main">How We Deliver Your</span>{' '}
+            <span className="home-process__title-accent">Project</span>
           </h2>
           <p className="home-process__subtitle">
             A transparent 5-step blueprint — from first conversation to long-term growth.
@@ -75,7 +77,11 @@ const ProcessSection = () => {
 
                 <div className="home-process__icon-ring">
                   <div className="home-process__icon-core">
-                    <img src={step.icon} alt="" className="home-process__icon" aria-hidden="true" />
+                    <img
+                      src={step.icon}
+                      alt={processStepAlt(step.title)}
+                      className="home-process__icon"
+                    />
                   </div>
                 </div>
 

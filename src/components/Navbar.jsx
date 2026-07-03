@@ -3,13 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation"; // Next.js route hook
 import Image from "next/image";
 import Link from "next/link";
-import ExpertPopup from "./ExpertPopup";
+import dynamic from 'next/dynamic';
 import MobileNavDrawer from "./MobileNavDrawer";
 import ServicesMegaMenuIcon from "./ServicesMegaMenuIcon";
 import { FaHome, FaPaperPlane } from "react-icons/fa";
 import { SERVICES_MENU_ITEMS } from "../data/servicesMenuData";
 import { NAV_PRIMARY_LINKS } from "../data/navLinks";
+import { SITE_LOGO_ALT } from '../lib/imageAlt';
 import logo from "../assets/logonew.png";
+
+const ExpertPopup = dynamic(() => import('./ExpertPopup'), { ssr: false });
 
 const DESKTOP_BREAKPOINT = 1024;
 const CLOSE_DELAY_MS = 180;
@@ -24,6 +27,7 @@ const Navbar = () => {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null); // Desktop dropdown active state
   const [isPopupOpen, setIsPopupOpen] = useState(false); // Proposal popup state
+  const [popupService, setPopupService] = useState("");
   const navRef = useRef(null);
   const headerRef = useRef(null);
   const navLinksRef = useRef(null);
@@ -92,6 +96,24 @@ const Navbar = () => {
   const handleOpenConsultation = () => {
     closeMobileMenu();
     setIsPopupOpen(true);
+  };
+
+  useEffect(() => {
+    const handleOpenProposal = (event) => {
+      const service = event?.detail?.service;
+      if (service) {
+        setPopupService(service);
+      }
+      setIsPopupOpen(true);
+    };
+
+    window.addEventListener("vexoweb:open-proposal", handleOpenProposal);
+    return () => window.removeEventListener("vexoweb:open-proposal", handleOpenProposal);
+  }, []);
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setPopupService("");
   };
 
   const handleLogoClick = () => {
@@ -238,7 +260,7 @@ const Navbar = () => {
 <div className="nav-logo" onClick={handleLogoClick}>
   <Image
     src={logo}
-    alt="Vexoweb Logo"
+    alt={SITE_LOGO_ALT}
     width={280}
     height={145}
     className="logo-desktop"
@@ -246,9 +268,9 @@ const Navbar = () => {
   />
   <Image
     src={logo}
-    alt="Vexoweb Logo"
-    width={200}
-    height={100}
+    alt={SITE_LOGO_ALT}
+    width={142}
+    height={36}
     className="logo-mobile"
     priority
   />
@@ -301,12 +323,18 @@ const Navbar = () => {
             <div className="dropdown-content services-mega-menu" {...dropdownContentHoverProps}>
               {SERVICES_MENU_ITEMS.map((service) => (
                 <div key={service.id} className="services-mega-menu__item">
-                  <div
-                    className="services-mega-menu__icon"
-                    style={{ backgroundColor: service.accentBg, color: service.accent }}
+                  <Link
+                    href={service.href}
+                    className="services-mega-menu__icon-link"
+                    aria-label={`${service.title} — view service page`}
                   >
-                    <ServicesMegaMenuIcon name={service.icon} />
-                  </div>
+                    <span
+                      className="services-mega-menu__icon"
+                      style={{ backgroundColor: service.accentBg, color: service.accent }}
+                    >
+                      <ServicesMegaMenuIcon name={service.icon} />
+                    </span>
+                  </Link>
                   <h4 className="services-mega-menu__title">{service.title}</h4>
                   <p className="services-mega-menu__desc">{service.description}</p>
                   <Link
@@ -322,10 +350,7 @@ const Navbar = () => {
           </div>
 
           {NAV_PRIMARY_LINKS.map((item) => {
-            const isActive =
-              item.href === '/#results'
-                ? pathname === '/'
-                : pathname === item.href;
+            const isActive = pathname === item.href;
 
             return isActive ? (
               <span key={item.href} className="nav-primary-link active" aria-current="page">
@@ -355,7 +380,8 @@ const Navbar = () => {
         {/* Proposal button */}
         <button className="contact-btn" onClick={() => setIsPopupOpen(true)}>
           <FaPaperPlane className="contact-btn-icon" aria-hidden="true" />
-          <span className="contact-btn-label">Get a Proposal</span>
+          <span className="contact-btn-label contact-btn-label--full">Get a Proposal</span>
+          <span className="contact-btn-label contact-btn-label--short">Free Proposal</span>
         </button>
 
         {/* Mobile Hamburger toggle */}
@@ -375,7 +401,11 @@ const Navbar = () => {
         </div>
 
         {/* Modal Popup Connection */}
-        <ExpertPopup open={isPopupOpen} onClose={() => setIsPopupOpen(false)}/>
+        <ExpertPopup
+          open={isPopupOpen}
+          onClose={handleClosePopup}
+          preSelectedService={popupService || undefined}
+        />
       </div>
     </header>
   );

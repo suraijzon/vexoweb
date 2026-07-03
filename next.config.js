@@ -2,10 +2,23 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compress: true,
+  poweredByHeader: false,
   images: {
     disableStaticImages: true,
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+    ],
   },
   outputFileTracingRoot: __dirname,
+  experimental: {
+    optimizePackageImports: ['react-icons', 'react-icons/fa', 'react-icons/hi2'],
+  },
   async redirects() {
     return [
       {

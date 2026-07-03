@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FaWhatsapp, FaEnvelope, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { SITE_LOGO_ALT } from '../lib/imageAlt';
 import siteLogo from '../assets/logonew.png';
 
 const CONTACT_EMAIL = 'info@vexoweb.lk';
@@ -23,13 +25,6 @@ const Footer = () => {
     { label: 'E-Commerce Growth Optimization', path: '/ecommerce-development' },
     { label: 'Search Visibility & Traffic Growth', path: '/seo-services' },
     { label: 'Website Speed & Performance Fixes', path: '/seo-services' }
-  ];
-
-  const companyLinks = [
-    { label: 'Website Growth Guides', path: '/seo-services' },
-    { label: 'AI for Business', path: '/ai-software-development' },
-    { label: 'Technical SEO Knowledgebase', path: '/seo-services' },
-    { label: 'Case Studies & Results', path: '/about' }
   ];
 
   const exploreLinks = [
@@ -63,10 +58,11 @@ const Footer = () => {
             <div className="footer-logo">
               <Image
                 src={siteLogo}
-                alt="Vexoweb Logo"
+                alt={SITE_LOGO_ALT}
                 className="footer-logo-img"
-                width={280}
-                height={145}
+                width={200}
+                height={100}
+                sizes="(max-width: 768px) 200px, 280px"
                 priority
               />
             </div>
@@ -88,7 +84,7 @@ const Footer = () => {
                   title="Chat on WhatsApp"
                 >
                   <span className="contact-icon-btn whatsapp-color" aria-hidden="true">
-                    <i className="fa-brands fa-whatsapp"></i>
+                    <FaWhatsapp />
                   </span>
                   <span className="footer-contact-text">{CONTACT_PHONE}</span>
                 </a>
@@ -98,7 +94,7 @@ const Footer = () => {
                   title="Email Us"
                 >
                   <span className="contact-icon-btn email-color" aria-hidden="true">
-                    <i className="fa-solid fa-envelope"></i>
+                    <FaEnvelope />
                   </span>
                   <span className="footer-contact-text">{CONTACT_EMAIL}</span>
                 </a>
@@ -107,59 +103,50 @@ const Footer = () => {
           </div>
 
           {/* Columns */}
-          <div className="footer-column">
-            <h4 className="footer-column-title">Core Services</h4>
-            <ul className="footer-links">
-              {servicesLinks.map((link, index) => (
-                <li key={index}>
-                  <Link href={link.path}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="footer-columns">
+            <div className="footer-column">
+              <h4 className="footer-column-title">Core Services</h4>
+              <ul className="footer-links">
+                {servicesLinks.map((link, index) => (
+                  <li key={index}>
+                    <Link href={link.path}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="footer-column">
-            <h4 className="footer-column-title">Solutions by Need</h4>
-            <ul className="footer-links">
-              {knowledgebaseLinks.map((link, index) => (
-                <li key={index}>
-                  <Link href={link.path}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className="footer-column">
+              <h4 className="footer-column-title">Solutions by Need</h4>
+              <ul className="footer-links">
+                {knowledgebaseLinks.map((link, index) => (
+                  <li key={index}>
+                    <Link href={link.path}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="footer-column">
-            <h4 className="footer-column-title">Insights & Resources</h4>
-            <ul className="footer-links">
-              {companyLinks.map((link, index) => (
-                <li key={index}>
-                  <Link href={link.path}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className="footer-column footer-column--company">
+              <h4 className="footer-column-title">Company</h4>
+              <ul className="footer-links">
+                {exploreLinks.map((link, index) => (
+                  <li key={index}>
+                    <Link href={link.path}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="footer-column">
-            <h4 className="footer-column-title">Company</h4>
-            <ul className="footer-links">
-              {exploreLinks.map((link, index) => (
-                <li key={index}>
-                  <Link href={link.path}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="footer-column">
-            <h4 className="footer-column-title">Areas Served</h4>
-            <ul className="footer-links">
-              {areasServed.map((area) => (
-                <li key={area.label}>
-                  <Link href={area.path}>{area.label}</Link>
-                </li>
-              ))}
-            </ul>
+            <div className="footer-column footer-column--areas">
+              <h4 className="footer-column-title">Areas Served</h4>
+              <ul className="footer-links">
+                {areasServed.map((area) => (
+                  <li key={area.label}>
+                    <Link href={area.path}>{area.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -176,10 +163,10 @@ const Footer = () => {
           </p>
           <div className="social-icons">
             <a href="https://x.com" className="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <i className="fa-brands fa-twitter"></i>
+              <FaTwitter />
             </a>
             <a href="https://www.linkedin.com" className="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i className="fa-brands fa-linkedin"></i>
+              <FaLinkedin />
             </a>
           </div>
         </div>
