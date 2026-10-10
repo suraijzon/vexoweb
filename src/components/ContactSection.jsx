@@ -86,10 +86,12 @@ const ContactSection = ({
     phone: '',
     company: '',
     message: '',
+    website: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -102,6 +104,7 @@ const ContactSection = ({
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('');
+    setErrorMessage('');
 
     try {
       const res = await fetch('/api/contact', {
@@ -112,16 +115,18 @@ const ContactSection = ({
 
       if (res.ok) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', company: '', message: '', website: '' });
       } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMessage(data.error || '');
         setSubmitStatus('error');
       }
     } catch (error) {
       console.error(error);
       setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   const sectionClass =
@@ -192,11 +197,22 @@ const ContactSection = ({
 
             {submitStatus === 'error' && (
               <div className="alert alert-error">
-                Something went wrong. Please try again or email info@vexoweb.lk
+                {errorMessage || 'Something went wrong. Please try again or email info@vexoweb.lk'}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="contact-form">
+              {/* Honeypot: hidden from people, bots that fill it are ignored by the API */}
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }}
+              />
               <div className="form-row">
                 <div className="form-group">
                   <svg className="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

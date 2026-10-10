@@ -13,13 +13,15 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
   const [selectedService, setSelectedService] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
     company: "",
     phone: "",
     email: "",
-    project: ""
+    project: "",
+    website: ""
   });
 
   useEffect(() => {
@@ -43,6 +45,8 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("");
+    setErrorMessage("");
 
   const data = {
     ...formData,
@@ -68,7 +72,8 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
           company: "",
           phone: "",
           email: "",
-          project: ""
+          project: "",
+          website: ""
         });
         setSelectedService("");
         setBudget(BUDGET_MIN);
@@ -78,13 +83,15 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
         setSubmitStatus("");
         }, 2500);
       } else {
+        const result = await res.json().catch(() => ({}));
+        setErrorMessage(result.error || "");
         setSubmitStatus("error");
       }
     }catch (error) {
         setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   if (!open) return null;
@@ -182,11 +189,22 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
             )}
             {submitStatus === "error" && (
               <div className="alert alert-error">
-                ✗ Failed to send message. Please try again.
+                ✗ {errorMessage || "Failed to send message. Please try again."}
               </div>
             )}
 
           <form className="popup-form" onSubmit={handleSubmit}>
+            {/* Honeypot: hidden from people, bots that fill it are ignored by the API */}
+            <input
+              type="text"
+              name="website"
+              value={formData.website}
+              onChange={handleInputChange}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-10000px", width: "1px", height: "1px", overflow: "hidden" }}
+            />
 
             <div className="form-grid">
               <input
@@ -271,7 +289,7 @@ const ExpertPopup = ({ open, onClose, preSelectedService }) => {
                 Cancel
               </button>
 
-              <button type="submit" className="submit-btn">
+              <button type="submit" className="submit-btn" disabled={isSubmitting}>
                 {isSubmitting ? "SENDING..." : "Submit"}
               </button>
             </div>
